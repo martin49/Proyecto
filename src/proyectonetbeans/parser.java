@@ -426,6 +426,27 @@ public class parser extends java_cup.runtime.lr_parser {
 
 
     
+    @Override
+    public void report_error(String message, Object info) {
+        StringBuilder m = new StringBuilder("Error");
+        if (info instanceof java_cup.runtime.Symbol) {
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+            if (s.left >= 0) {                
+                m.append(" in line "+(s.left+1));
+                if (s.right >= 0)
+                    m.append(", column "+(s.right+1));
+            }
+        }
+        m.append(" : "+message);
+        System.err.println(m); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void report_fatal_error(String message, Object info) throws Exception {
+        report_error(message, info);
+        System.exit(1); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     /* Metodo main para garantizar la ejecucion del analizador
        lexico y sintactico, ademas que se pase como parametro la tabla
        de simbolos correspondiente. */

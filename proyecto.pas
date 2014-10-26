@@ -1,5 +1,5 @@
 program d;
-var a,b:Integer;
+var a,b:Integer
 procedure h;
 	procedure x
 		begin
