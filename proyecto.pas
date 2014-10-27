@@ -1,7 +1,9 @@
 program d;
-var a,b:Integer
+var a:Integer;
 procedure h;
-	procedure x
+	var B:Integer;
+	procedure x;
+		var C:Integer;
 		begin
 			j:=6+5;
 		end.	
@@ -9,11 +11,12 @@ begin
 	d:=3;
 end.
 function p : Integer;
+var d:Integer;
 begin
 	a:=b+3;
 end.
 begin
-  a := '1234567890';
+  a := a(a);
   for n := 1 to 10 do
       write('hola',a);
   a := 'The quick brown fox';

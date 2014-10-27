@@ -8,13 +8,12 @@ parser code {:
         if (info instanceof java_cup.runtime.Symbol) {
             java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
             if (s.left >= 0) {                
-                m.append(" in line "+(s.left+1));
+                m.append(" en la linea "+(s.left));
                 if (s.right >= 0)
-                    m.append(", column "+(s.right+1));
+                    m.append(", columna "+(s.right));
             }
         }
-        m.append(" : "+message);
-        System.err.println(m); //To change body of generated methods, choose Tools | Templates.
+        System.err.println(m);
     }
 
     @Override
@@ -76,19 +75,17 @@ Programa ::= CP:cp ZD:zd CUP:cup{:GenericTree<String> tree= new GenericTree<Stri
 
                 :};
 
-CP ::= PROGRAM:p ID:i CIERRE:cr{: GenericTreeNode<String> cp= new GenericTreeNode<String>("CP");GenericTreeNode<String> pr= new GenericTreeNode<String>(p);GenericTreeNode<String> id= new GenericTreeNode<String>(i); cp.addChild(pr);cp.addChild(id); RESULT=cp; :}|error;
+CP ::= PROGRAM:p ID:i CIERRE{: GenericTreeNode<String> cp= new GenericTreeNode<String>("CP");GenericTreeNode<String> pr= new GenericTreeNode<String>(p);GenericTreeNode<String> id= new GenericTreeNode<String>(i); cp.addChild(pr);cp.addChild(id); RESULT=cp; :}|error ZDV;
 
-ZD ::= ZDV:zdv ZDSP:zdsp{:GenericTreeNode<String> zd = new GenericTreeNode<String>("ZD"); zd.addChild(zdv); zd.addChild(zdsp); RESULT=zd;:}|error;
+ZD ::= ZDV:zdv ZDSP:zdsp{:GenericTreeNode<String> zd = new GenericTreeNode<String>("ZD"); zd.addChild(zdv); zd.addChild(zdsp); RESULT=zd;:};
 
-ZDV ::= VAR:var DE:de ZDV:z{:GenericTreeNode<String> zdv= new GenericTreeNode<String>("ZDV");GenericTreeNode<String> v= new GenericTreeNode<String>(var); zdv.addChild(v);zdv.addChild(de); zdv.addChild(z); RESULT=zdv; :}|{:GenericTreeNode<String> vacio= new GenericTreeNode<String>("");RESULT=vacio;:};
+ZDV ::= VAR:var DE:de{:GenericTreeNode<String> zdv= new GenericTreeNode<String>("ZDV");GenericTreeNode<String> v= new GenericTreeNode<String>(var); zdv.addChild(v);zdv.addChild(de); RESULT=zdv; :};
 
-DE ::= DEI:dei DECLARACION:dcl TD:td CIERRE:cr DE:d{:GenericTreeNode<String> de= new GenericTreeNode<String>("DE");de.addChild(dei);de.addChild(td); RESULT=de;:}|{:GenericTreeNode<String> de= new GenericTreeNode<String>("DE");RESULT=de;:}|error DE ZDV CUP;
+DE ::= DE:d CIERRE DEI:dei{:GenericTreeNode<String> de= new GenericTreeNode<String>("DE");de.addChild(d);de.addChild(dei); RESULT=de;:}|DEI:dei CIERRE{:GenericTreeNode<String> de= new GenericTreeNode<String>("DE"); de.addChild(dei);RESULT=de;:};
 
-DEI ::= VR:vr{:GenericTreeNode<String> dei= new GenericTreeNode<String>("DEI");dei.addChild(vr); RESULT=dei;:} | DEI:de COMA VR:vr{:GenericTreeNode<String> dei= new GenericTreeNode<String>("DEI");dei.addChild(de); dei.addChild(vr); RESULT=dei;:};
+DEI ::= ID:id COMA DEI:de{:GenericTreeNode<String> dei= new GenericTreeNode<String>("DEI");GenericTreeNode<String> i= new GenericTreeNode<String>(id);dei.addChild(i);dei.addChild(de); RESULT=dei;:} | ID:id DECLARACION TD:td{:GenericTreeNode<String> dei= new GenericTreeNode<String>("DEI");GenericTreeNode<String> i= new GenericTreeNode<String>(id);dei.addChild(i); dei.addChild(td); RESULT=dei;:};
 
-VR ::= ID:i{:GenericTreeNode<String> vr= new GenericTreeNode<String>("VR");GenericTreeNode<String> id= new GenericTreeNode<String>(i); vr.addChild(id); RESULT=vr;:};
-
-TD ::= TS:ss {:GenericTreeNode<String> td = new GenericTreeNode<String>("TD"); td.addChild(ss); RESULT=td;:} | TE:te{: GenericTreeNode<String> td = new GenericTreeNode<String>("TD"); td.addChild(te); RESULT=td; :}|error L CUP;
+TD ::= TS:ss {:GenericTreeNode<String> td = new GenericTreeNode<String>("TD"); td.addChild(ss); RESULT=td;:} | TE:te{: GenericTreeNode<String> td = new GenericTreeNode<String>("TD"); td.addChild(te); RESULT=td; :};
 
 TS ::= INTEGER:in{:GenericTreeNode<String> ts= new GenericTreeNode<String>(in);RESULT= ts;:} | CHAR:c{:GenericTreeNode<String> ts= new GenericTreeNode<String>(c);RESULT= ts;:} | BOOLEAN:b{:GenericTreeNode<String> ts= new GenericTreeNode<String>(b);RESULT= ts;:};
 
@@ -98,7 +95,7 @@ TA ::= ARRAY:ar LLAVEIZQ:li NUM:n PUNTO PUNTO NUM:n1 LLAVEDER:ld OF:o TD:td{:Gen
 
 TST ::= STRING:st LLAVEIZQ:li NUM:n LLAVEDER:ld{:GenericTreeNode<String> tst = new GenericTreeNode<String>("TST");GenericTreeNode<String> s = new GenericTreeNode<String>(st); GenericTreeNode<String> num = new GenericTreeNode<String>("NUM"); tst.addChild(s); tst.addChild(num); RESULT=tst;:};
 
-ZDSP ::= DSP:dsp{:GenericTreeNode<String> zdsp = new GenericTreeNode<String>("ZDSP"); zdsp.addChild(dsp); RESULT=zdsp;:}|{:GenericTreeNode<String> zdsp= new GenericTreeNode<String>("ZDSP");GenericTreeNode<String> vacio= new GenericTreeNode<String>(" ");zdsp.addChild(vacio);RESULT=zdsp;:};
+ZDSP ::= DSP:dsp{:GenericTreeNode<String> zdsp = new GenericTreeNode<String>("ZDSP"); zdsp.addChild(dsp); RESULT=zdsp;:};
 
 DSP ::= DF:df ZDSP:zd{:GenericTreeNode<String> dsp = new GenericTreeNode<String>("DSP"); dsp.addChild(df); dsp.addChild(zd);RESULT=dsp;:} | DP:dp ZDSP:zd{:GenericTreeNode<String> dsp = new GenericTreeNode<String>("DSP"); dsp.addChild(dp); dsp.addChild(zd); RESULT=dsp;:};
 
@@ -108,7 +105,7 @@ CF ::= FUNCTION:ft ID:id DECLARACION TEL:tel CIERRE {:GenericTreeNode<String> pr
 
 TEL ::= TS:ts{:GenericTreeNode<String> tel = new GenericTreeNode<String>("TEL"); tel.addChild(ts); RESULT= tel;:} | TST:tst{:GenericTreeNode<String> tel = new GenericTreeNode<String>("TEL"); tel.addChild(tst); RESULT= tst;:};
 
-PFV ::= DEI:dei DECLARACION:dcl TD:td {:GenericTreeNode<String> pfv= new GenericTreeNode<String>("PFV");pfv.addChild(dei);pfv.addChild(td); RESULT=pfv;:};
+PFV ::= DE:dei {:GenericTreeNode<String> pfv= new GenericTreeNode<String>("PFV");pfv.addChild(dei); RESULT=pfv;:};
 
 CUF ::= SC:sc{:GenericTreeNode<String> cup = new GenericTreeNode<String>("CUF"); cup.addChild(sc); RESULT=cup;:};
 
@@ -119,9 +116,7 @@ CPR ::= PROCEDURE:pc ID:id CIERRE{:GenericTreeNode<String> proce= new GenericTre
 
 PF ::= PFV:pfv {: GenericTreeNode<String> pf = new GenericTreeNode<String>("PF"); pf.addChild(pfv); RESULT= pf;:} | PFVA:pfva {:GenericTreeNode<String> pf = new GenericTreeNode<String>("PF");pf.addChild(pfva); RESULT= pf;:};
 
-PFVA ::= VAR:var PFVADE:de{:GenericTreeNode<String> pfva= new GenericTreeNode<String>("PFVA");GenericTreeNode<String> v= new GenericTreeNode<String>(var); pfva.addChild(v);pfva.addChild(de); RESULT=pfva; :};
-
-PFVADE ::= DEI:dei DECLARACION TD:td {:GenericTreeNode<String> pfvade= new GenericTreeNode<String>("DE");pfvade.addChild(dei);pfvade.addChild(td); RESULT=pfvade;:}|{:GenericTreeNode<String> pfvade= new GenericTreeNode<String>("DE");GenericTreeNode<String> vacio= new GenericTreeNode<String>(" ");pfvade.addChild(vacio);RESULT=pfvade;:};
+PFVA ::= ZDV:zdv{:GenericTreeNode<String> pfva= new GenericTreeNode<String>("PFVA");pfva.addChild(zdv); RESULT=pfva; :};
 
 CUPR ::= SC:sc{:GenericTreeNode<String> cup = new GenericTreeNode<String>("CUPR"); cup.addChild(sc); RESULT=cup;:};
 
