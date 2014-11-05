@@ -481,7 +481,7 @@ class CUP$parser$actions {
                     System.out.println("Hijos:"+tree.Imprimir(i).getChildren());
                     System.out.println("-------------------------------");
                 }
-
+                simbolo.imprimir();
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("Programa",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1178,7 +1178,13 @@ RESULT=sa;
 		int amright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode am = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		GenericTreeNode<String> a= new GenericTreeNode<String>(ar.toString()); a.addChild(ar);a.addChild(am); RESULT=a;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AR",51, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+               
+                //System.out.println(simbolo.buscarTipo(am.toString()));
+//                if((simbolo.buscarTipo(am.toString()).equals(simbolo.buscarTipo(ar.toString()))) && simbolo.buscarTipo(am.toString()).equals(tipov)){
+//                    System.out.println("Correcto");
+//                }
+                
+                CUP$parser$result = parser.getSymbolFactory().newSymbol("AR",51, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 

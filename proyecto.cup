@@ -75,7 +75,7 @@ Programa ::= CP:cp ZD:zd CUP:cup{:GenericTree<String> tree= new GenericTree<Stri
                     System.out.println("Hijos:"+tree.Imprimir(i).getChildren());
                     System.out.println("-------------------------------");
                 }
-
+                simbolo.imprimir();
                 :};
 
 CP ::= PROGRAM:p ID:i CIERRE{: GenericTreeNode<String> cp= new GenericTreeNode<String>("CP");GenericTreeNode<String> pr= new GenericTreeNode<String>(p);GenericTreeNode<String> id= new GenericTreeNode<String>(i); cp.addChild(pr);cp.addChild(id); RESULT=cp; :}|error;

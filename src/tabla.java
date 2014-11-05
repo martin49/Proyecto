@@ -36,11 +36,11 @@ class TablaSimbolos {
         if(simbolo == null) // La variable no existe
         {
             simbolo = new Simbolo(nombre, tipo, ambito);
-            System.out.println("Agregando a tabla de simbolos con nombre: " + nombre);
+            //System.out.println("Agregando a tabla de simbolos con nombre: " + nombre);
             tablaSimbolos.put(nombre, simbolo);            
             //System.out.println("Variable creada exitosamente!!!");
               
-            imprimir();                
+            //imprimir();                
             System.out.println(" ");
             return simbolo;
         }
