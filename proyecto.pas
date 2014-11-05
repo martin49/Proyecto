@@ -5,7 +5,12 @@ procedure h;
 	procedure x;
 		var C:Integer;
 		begin
-			j:=6+5;
+			if a > 6 then
+				begin
+					a:=3;
+				end;
+			else
+				a:=6;
 		end.	
 begin
 	d:=3;
