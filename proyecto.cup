@@ -93,20 +93,40 @@ if(Declaracion == true){
     simbolo.crear(id, simbolo.getTipo(),"Main");
     simbolo.creartipo(simbolo.getTipo());
 }
-RESULT=dei;:} | ID:id DECLARACION TD:td CIERRE{:GenericTreeNode<String> dei= new GenericTreeNode<String>("DEI");GenericTreeNode<String> i= new GenericTreeNode<String>(id);dei.addChild(i); dei.addChild(td); if(Declaracion == true){
+RESULT=dei;:} | ID:id DECLARACION TD:td CIERRE{:GenericTreeNode<String> dei= new GenericTreeNode<String>("DEI");GenericTreeNode<String> i= new GenericTreeNode<String>(id);dei.addChild(i); dei.addChild(td); 
+if(Declaracion == true){
+                   
+                    if(td.toString().equals("Array")){
+                        
+                        
+                        String tipo = simbolo.getTipo();
+                        
+                        simbolo.crear(id, tipo,"Main");
+                        simbolo.creartipo(tipo);
+                    }else if(td.toString().equals("string")){
+                        String tipo = simbolo.getTipo();
+                        System.out.println(tipo);
+                        simbolo.crear(id, tipo,"Main");
+                        simbolo.creartipo(tipo);
+                    }else{
                     simbolo.crear(id, td.toString(),"Main");
                     simbolo.creartipo(td.toString());
+                    }
                 } RESULT=dei;:};
 
-TD ::= TS:ss {:GenericTreeNode<String> td = new GenericTreeNode<String>(ss.toString()); td.addChild(ss); RESULT=td;:} | TE:te{: GenericTreeNode<String> td = new GenericTreeNode<String>("TD"); td.addChild(te); RESULT=td; :};
+TD ::= TS:ss {:GenericTreeNode<String> td = new GenericTreeNode<String>(ss.toString()); td.addChild(ss); RESULT=td;:} | TE:te{: GenericTreeNode<String> td = new GenericTreeNode<String>(te.toString()); td.addChild(te); RESULT=td; :};
 
 TS ::= INTEGER:in{:GenericTreeNode<String> ts= new GenericTreeNode<String>(in);RESULT= ts;:} | CHAR:c{:GenericTreeNode<String> ts= new GenericTreeNode<String>(c);RESULT= ts;:} | BOOLEAN:b{:GenericTreeNode<String> ts= new GenericTreeNode<String>(b);RESULT= ts;:};
 
-TE ::= TA:ta{:GenericTreeNode<String> te = new GenericTreeNode<String>("TE"); te.addChild(ta); RESULT=te;:} | TST:tst{:GenericTreeNode<String> te = new GenericTreeNode<String>("TE"); te.addChild(tst); RESULT=te;:};
+TE ::= TA:ta{:GenericTreeNode<String> te = new GenericTreeNode<String>(ta.toString()); te.addChild(ta); RESULT=te;:} | TST:tst{:GenericTreeNode<String> te = new GenericTreeNode<String>(tst.toString); te.addChild(tst); RESULT=te;:};
 
-TA ::= ARRAY:ar LLAVEIZQ:li NUM:n PUNTO PUNTO NUM:n1 LLAVEDER:ld OF:o TD:td{:GenericTreeNode<String> ta = new GenericTreeNode<String>("TA"); GenericTreeNode<String> s = new GenericTreeNode<String>(ar); GenericTreeNode<String> f = new GenericTreeNode<String>(o); GenericTreeNode<String> num = new GenericTreeNode<String>("NUM"); GenericTreeNode<String> num2 = new GenericTreeNode<String>("NUM2");ta.addChild(s); ta.addChild(num); ta.addChild(num2); ta.addChild(f); RESULT=ta;:};
+TA ::= ARRAY:ar LLAVEIZQ:li NUM:n PUNTO PUNTO NUM:n1 LLAVEDER:ld OF:o TD:td{:GenericTreeNode<String> ta = new GenericTreeNode<String>(ar); GenericTreeNode<String> s = new GenericTreeNode<String>(ar); GenericTreeNode<String> f = new GenericTreeNode<String>(o); GenericTreeNode<String> num = new GenericTreeNode<String>("NUM"); GenericTreeNode<String> num2 = new GenericTreeNode<String>("NUM2");ta.addChild(s); ta.addChild(num); ta.addChild(num2); ta.addChild(f); RESULT=ta;
+simbolo.creartipo(ar+"("+n+".."+n1+","+td.toString()+")");
+:};
 
-TST ::= STRING:st LLAVEIZQ:li NUM:n LLAVEDER:ld{:GenericTreeNode<String> tst = new GenericTreeNode<String>("TST");GenericTreeNode<String> s = new GenericTreeNode<String>(st); GenericTreeNode<String> num = new GenericTreeNode<String>("NUM"); tst.addChild(s); tst.addChild(num); RESULT=tst;:};
+TST ::= STRING:st LLAVEIZQ:li NUM:n LLAVEDER:ld{:GenericTreeNode<String> tst = new GenericTreeNode<String>(st);GenericTreeNode<String> s = new GenericTreeNode<String>(st); GenericTreeNode<String> num = new GenericTreeNode<String>("NUM"); tst.addChild(s); tst.addChild(num); RESULT=tst;
+simbolo.creartipo("Array"+"("+1+".."+n+","+"String"+")");
+:};
 
 ZDSP ::= DSP:dsp{:GenericTreeNode<String> zdsp = new GenericTreeNode<String>("ZDSP"); zdsp.addChild(dsp); RESULT=zdsp;:}|{:GenericTreeNode<String> vacio = new GenericTreeNode<String>(""); RESULT=vacio;:};
 
@@ -141,28 +161,100 @@ SCI ::= BEGIN:bn S:s END:ed CIERRE{:GenericTreeNode<String> sc = new GenericTree
 S ::= SA:sa CIERRE S:s1{: GenericTreeNode<String> s = new GenericTreeNode<String>("S"); s.addChild(sa); s.addChild(s1); RESULT=s;:}|{:GenericTreeNode<String> vacio= new GenericTreeNode<String>("");RESULT=vacio;:}|SCI:sc S:s1{:GenericTreeNode<String> s = new GenericTreeNode<String>("S"); s.addChild(sc); s.addChild(s1); RESULT=s;:}| LP:lp CIERRE S:s1{:GenericTreeNode<String> s = new GenericTreeNode<String>("S"); s.addChild(lp); s.addChild(s1); RESULT=s;:}| EC:ec{:GenericTreeNode<String> s = new GenericTreeNode<String>("S"); s.addChild(ec); RESULT=s; :}| MET:met CIERRE S:s1{: GenericTreeNode<String> s = new GenericTreeNode<String>("S"); s.addChild(met);s.addChild(s1); RESULT=s;:}|error S;
 
 SA ::= ID:id ASSIG AR:ar{: GenericTreeNode<String> sa = new GenericTreeNode<String>("SA");GenericTreeNode<String> i = new GenericTreeNode<String>(id); sa.addChild(i); sa.addChild(ar);
-String tipov = ""; 
-                if(ar.toString()=="VCHAR"){
-                        tipov = "char";
-                }else if(ar.toString()=="NUM"){
-                        tipov = "Integer";
-                }else{
-                    tipov=simbolo.buscarTipo(ar.toString());
-                }
-                
-
-                if(simbolo.buscarTipo(id).equals(tipov))
+if(simbolo.buscarTipo(id).equals(simbolo.getTipo()))
                     System.out.println("correcto");
                 else
                     System.err.println("Esta asignando un tipo distinto a la variable: "+id+","+ " tipo correcto: "+simbolo.buscarTipo(id));
 
 RESULT=sa; :};
 
-AR ::= AR:ar OPSUMA AM:am{:GenericTreeNode<String> a= new GenericTreeNode<String>(ar.toString()); a.addChild(ar);a.addChild(am); RESULT=a;:} | AM:am{:GenericTreeNode<String> a= new GenericTreeNode<String>(am.toString()); a.addChild(am); RESULT=a;:};
+AR ::= AR:ar OPSUMA AM:am{:GenericTreeNode<String> a= new GenericTreeNode<String>(ar.toString()); a.addChild(ar);a.addChild(am); RESULT=a;
+String tipov = "";
+                String tipov2 = "";
+                
+                if(am.toString()=="NUM"){
+                   tipov="Integer";
+                }else{
+                    //System.out.println(simbolo.buscarTipo(am.toString()));
+                    tipov=simbolo.buscarTipo(am.toString());
+                }
+                if(ar.toString()=="NUM"){
+                   tipov2="Integer";
+                }else{
+                    //System.out.println(simbolo.buscarTipo(am.toString()));
+                    tipov2=simbolo.buscarTipo(ar.toString());
+                }
+                //System.out.println(tipov);
+                if(tipov.equals(tipov2) && tipov.equals("Integer")){
+                    simbolo.creartipo(tipov);
+                }else{
+                    System.err.println("Solo se pueden sumar o restar Enteros");
+                }
+:} | AM:am{:GenericTreeNode<String> a= new GenericTreeNode<String>(am.toString()); a.addChild(am); RESULT=a;
 
-AM ::= AM:am OP F:val {:GenericTreeNode<String> a= new GenericTreeNode<String>(am.toString()); a.addChild(am);a.addChild(val); RESULT=a;:} | F:val{:GenericTreeNode<String> a= new GenericTreeNode<String>(val.toString()); a.addChild(val); RESULT=a;:};
+                String tipov="";
+                if(am.toString()=="VCHAR"){
+                        tipov = "char";
+                        simbolo.creartipo(tipov);
+                }else if(am.toString()=="NUM"){
+                        tipov = "Integer";
+                        simbolo.creartipo(tipov);
+                }else{
+                    tipov=simbolo.buscarTipo(am.toString());
+                    simbolo.creartipo(tipov);
+                }
+:};
 
-F ::= EXPRESION:ex{:GenericTreeNode<String> f= new GenericTreeNode<String>(ex.toString()); f.addChild(ex); RESULT=f;:} | PARIZQ AR:ar PARDER{:GenericTreeNode<String> f= new GenericTreeNode<String>("F"); f.addChild(ar); RESULT=f;:};
+AM ::= AM:am OP F:val {:GenericTreeNode<String> a= new GenericTreeNode<String>(am.toString()); a.addChild(am);a.addChild(val); RESULT=a;
+String tipov = "";
+                String tipov2 = "";
+                
+                if(am.toString()=="NUM"){
+                   tipov="Integer";
+                }else{
+                    //System.out.println(simbolo.buscarTipo(am.toString()));
+                    tipov=simbolo.buscarTipo(am.toString());
+                }
+                if(val.toString()=="NUM"){
+                   tipov2="Integer";
+                }else{
+                    //System.out.println(simbolo.buscarTipo(am.toString()));
+                    tipov2=simbolo.buscarTipo(val.toString());
+                }
+                //System.out.println(tipov);
+                if(tipov.equals(tipov2) && tipov.equals("Integer")){
+                    simbolo.creartipo(tipov);
+                }else{
+                    System.err.println("Solo se pueden multiplicar o dividir Enteros");
+                }
+:} | F:val{:GenericTreeNode<String> a= new GenericTreeNode<String>(val.toString()); a.addChild(val); RESULT=a;
+String tipov="";
+                if(val.toString()=="VCHAR"){
+                        tipov = "char";
+                        simbolo.creartipo(tipov);
+                }else if(val.toString()=="NUM"){
+                        tipov = "Integer";
+                        simbolo.creartipo(tipov);
+                }else{
+                    tipov=simbolo.buscarTipo(val.toString());
+                    simbolo.creartipo(tipov);
+                }
+:};
+
+F ::= EXPRESION:ex{:GenericTreeNode<String> f= new GenericTreeNode<String>(ex.toString()); f.addChild(ex); RESULT=f;
+String tipov = "";
+                if(ex.toString()=="VCHAR"){
+                        tipov = "char";
+                        simbolo.creartipo(tipov);
+                }else if(ex.toString()=="NUM"){
+                        tipov = "Integer";
+                        simbolo.creartipo(tipov);
+                }else{
+                    tipov=simbolo.buscarTipo(ex.toString());
+                    simbolo.creartipo(tipov);
+                }
+:} | PARIZQ AR:ar PARDER{:GenericTreeNode<String> f= new GenericTreeNode<String>("F"); f.addChild(ar); RESULT=f;
+:};
 
 OP ::= OPMULT:op{:RESULT=op;:}|DIV:op{:RESULT=op;:}|MOD:op{:RESULT=op;:};
 
