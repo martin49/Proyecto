@@ -31,12 +31,14 @@ public class tablaFunciones {
 class TablaSimbolosFunciones {
     static Map<String, tablaFunciones> tablaSimbolos;
     ArrayList<String> sim;
+    ArrayList<String> idMetodo;
     public static Logger log = Logger.getLogger(TablaSimbolosFunciones.class.getName());            
     
     public TablaSimbolosFunciones()
     {        
         tablaSimbolos = new HashMap<String, tablaFunciones>();  
         sim = new ArrayList<String>();
+        idMetodo = new ArrayList<String>();
     }
     
             
@@ -76,7 +78,21 @@ class TablaSimbolosFunciones {
         return sim.get(0);
     }
    
-        
+    public void crearid(String id){
+        idMetodo.add(id);
+    }
+    
+    public String getId(){
+        int size = idMetodo.size()-1;
+        return idMetodo.get(size);
+    }
+    
+    public String quitarAmbito(String ambito, String id){
+        int size = idMetodo.size()-1;
+        idMetodo.remove(size);
+        String tmp = ambito.replace(id,"");
+        return tmp.substring(0,tmp.length()-1);
+    } 
     
     public tablaFunciones buscar(String nombre)
     {

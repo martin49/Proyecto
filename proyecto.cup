@@ -70,7 +70,13 @@ non terminal GenericTreeNode PFV, TEL, PF, PFVA,LEER;
 non terminal GenericTreeNode DP, DF, DSP, ZDSP, AR, ESCR, MET, PFVADE, PAV, PAVA;
 non terminal String OP,OL,COMENT;
 
-Programa ::= CP:cp ZD:zd CUP:cup{:GenericTree<String> tree= new GenericTree<String>();GenericTreeNode<String> pro= new GenericTreeNode<String>("Programa"); pro.addChild(cp);pro.addChild(zd); pro.addChild(cup); tree.setRoot(pro); System.out.println(tree.toString());
+Programa ::= CP:cp ZD:zd CUP:cup{:GenericTree<String> tree= new GenericTree<String>();
+                GenericTreeNode<String> pro= new GenericTreeNode<String>("Programa"); 
+                pro.addChild(cp);
+                pro.addChild(zd); 
+                pro.addChild(cup); 
+                tree.setRoot(pro); 
+                System.out.println(tree.toString());
                 System.out.println("Raiz:"+tree.getRoot());
                 System.out.println("--------------------------");
                 for (int i = 0; i < tree.list().size(); i++) {
@@ -83,13 +89,29 @@ Programa ::= CP:cp ZD:zd CUP:cup{:GenericTree<String> tree= new GenericTree<Stri
                 tfuncion.imprimir();
                 :};
 
-CP ::= PROGRAM:p ID:i CIERRE{: GenericTreeNode<String> cp= new GenericTreeNode<String>("CP");GenericTreeNode<String> pr= new GenericTreeNode<String>(p);GenericTreeNode<String> id= new GenericTreeNode<String>(i); cp.addChild(pr);cp.addChild(id); RESULT=cp; :}|error;
+CP ::= PROGRAM:p ID:i CIERRE{: GenericTreeNode<String> cp= new GenericTreeNode<String>("CP");
+                GenericTreeNode<String> pr= new GenericTreeNode<String>(p);
+                GenericTreeNode<String> id= new GenericTreeNode<String>(i); 
+                cp.addChild(pr);cp.addChild(id); 
+                RESULT=cp; :}|error;
 
-ZD ::= ZDV:zdv ZDSP:zdsp{:GenericTreeNode<String> zd = new GenericTreeNode<String>("ZD"); zd.addChild(zdv); zd.addChild(zdsp); RESULT=zd;:}|error;
+ZD ::= ZDV:zdv ZDSP:zdsp{:GenericTreeNode<String> zd = new GenericTreeNode<String>("ZD"); 
+                zd.addChild(zdv); 
+                zd.addChild(zdsp); 
+                RESULT=zd;:}|error;
 
-ZDV ::= VAR:var DE:de{:GenericTreeNode<String> zdv= new GenericTreeNode<String>("ZDV");GenericTreeNode<String> v= new GenericTreeNode<String>(var); zdv.addChild(v);zdv.addChild(de); RESULT=zdv; :};
+ZDV ::= VAR:var DE:de{:GenericTreeNode<String> zdv= new GenericTreeNode<String>("ZDV");
+                GenericTreeNode<String> v= new GenericTreeNode<String>(var); 
+                zdv.addChild(v);
+                zdv.addChild(de); 
+                RESULT=zdv; :};
 
-DE ::= DE:d DEI:dei{:GenericTreeNode<String> de= new GenericTreeNode<String>("DE");de.addChild(d);de.addChild(dei); RESULT=de;:}|DEI:dei{:GenericTreeNode<String> de= new GenericTreeNode<String>("DE"); de.addChild(dei);RESULT=de;:};
+DE ::= DE:d DEI:dei{:GenericTreeNode<String> de= new GenericTreeNode<String>("DE");
+                de.addChild(d);de.addChild(dei); 
+                RESULT=de;
+                :}|DEI:dei{:GenericTreeNode<String> de= new GenericTreeNode<String>("DE"); 
+                de.addChild(dei);
+                RESULT=de;:};
 
 DEI ::= ID:id COMA DEI:de{: GenericTreeNode<String> dei= new GenericTreeNode<String>("DEI");
 GenericTreeNode<String> i= new GenericTreeNode<String>(id);
@@ -98,7 +120,7 @@ if(Declaracion == true){
                     simbolo.crear(id, simbolo.getTipo(),ambito);
                     simbolo.creartipo(simbolo.getTipo());
                 }else if(Funcion== true){
-                    tfuncion.crear(id, tfuncion.getTipo(), ambitoF);
+                    tfuncion.crear(id, tfuncion.getTipo(), ambito);
                     tfuncion.creartipo(tfuncion.getTipo());
                 }
 RESULT=dei;:} | ID:id DECLARACION TD:td CIERRE{:GenericTreeNode<String> dei= new GenericTreeNode<String>("DEI");GenericTreeNode<String> i= new GenericTreeNode<String>(id);dei.addChild(i); dei.addChild(td); 
@@ -120,23 +142,20 @@ if(Declaracion == true){
                     simbolo.crear(id, td.toString(),ambito);
                     simbolo.creartipo(td.toString());
                     }
-                } if(Funcion == true){
-                    
-                    if(td.toString().equals("Array")){
+                } 
+                if(Funcion == true){
+                    f(td.toString().equals("Array")){
                         String tipof = tfuncion.getTipo();
-                        System.out.println(tipof);
-                        tfuncion.crear(id, tipof,ambitoF);
+                        tfuncion.crear(id, tipof,ambito);
                         tfuncion.creartipo(tipof);
                     }else if(td.toString().equals("string")){
                         String tipof = tfuncion.getTipo();
                         System.out.println(tipof);
-                        tfuncion.crear(id, tipof,ambitoF);
+                        tfuncion.crear(id, tipof,ambito);
                         tfuncion.creartipo(tipof);
                     }else{
-                        System.out.println(td.toString());
-                        System.out.println(id);
-                    tfuncion.crear(id, td.toString(),ambitoF);
-                    tfuncion.creartipo(td.toString());
+                        tfuncion.crear(id, td.toString(),ambito);
+                        tfuncion.creartipo(td.toString());
                     }
                 }
                 RESULT=dei;:};
@@ -175,9 +194,10 @@ DSP ::= DF:df ZDSP:zd{:GenericTreeNode<String> dsp = new GenericTreeNode<String
 DF ::= CF:fc ZD:zd CUF:sc{:GenericTreeNode<String> df = new GenericTreeNode<String>("DF"); df.addChild(fc); df.addChild(zd); df.addChild(sc);RESULT=df;:};
 
 CF ::= FUNCTION:ft ID:id DECLARACION TEL:tel CIERRE {:GenericTreeNode<String> proce= new GenericTreeNode<String>("FUNCION");GenericTreeNode<String> fc= new GenericTreeNode<String>(ft); GenericTreeNode<String> i= new GenericTreeNode<String>(id); proce.addChild(fc);proce.addChild(i);proce.addChild(tel); 
-Declaracion = false;
+                Declaracion = false;
                 Funcion = true;
                 idMetodo = id;
+                tfuncion.crearid(id);
                 simbolo.crear(id, "void->"+tel.toString(), ambito);
                 ambitoF = ambitoF+"."+idMetodo;
                 ambito = ambitoF;
@@ -189,17 +209,29 @@ TEL ::= TS:ts{:GenericTreeNode<String> tel = new GenericTreeNode<String>(ts.toSt
 
 PFV ::= DE:dei {:GenericTreeNode<String> pfv= new GenericTreeNode<String>("PFV");pfv.addChild(dei); RESULT=pfv;:};
 
-CUF ::= SC:sc{:GenericTreeNode<String> cup = new GenericTreeNode<String>("CUF"); cup.addChild(sc); RESULT=cup;:};
+CUF ::= SC:sc{:GenericTreeNode<String> cup = new GenericTreeNode<String>("CUF"); cup.addChild(sc); 
+ambito=tfuncion.quitarAmbito(ambito,tfuncion.getId());
+RESULT=cup;:};
 
 DP ::= CPR:pc ZD:zd CUPR:sc{:GenericTreeNode<String> dp = new GenericTreeNode<String>("DP"); dp.addChild(pc); dp.addChild(zd); dp.addChild(sc); RESULT=dp;:};
 
 
-CPR ::= PROCEDURE:pc ID:id CIERRE{:  Declaracion=false;
-Funcion=true; GenericTreeNode<String> proce= new GenericTreeNode<String>("PROCEDURE");GenericTreeNode<String> p= new GenericTreeNode<String>(pc); GenericTreeNode<String> i= new GenericTreeNode<String>(id); proce.addChild(p);proce.addChild(i); RESULT=proce;:} | PROCEDURE:pc ID:id PARIZQ PF:pf PARDER CIERRE{:GenericTreeNode<String> proce= new GenericTreeNode<String>("PROCEDURE");GenericTreeNode<String> p= new GenericTreeNode<String>(pc); GenericTreeNode<String> i= new GenericTreeNode<String>(id); GenericTreeNode<String> pa= new GenericTreeNode<String>(pf.toString()); proce.addChild(p);proce.addChild(i);proce.addChild(pa); RESULT=proce;:};
+CPR ::= PROCEDURE:pc ID:id CIERRE{: GenericTreeNode<String> proce= new GenericTreeNode<String>("PROCEDURE");GenericTreeNode<String> p= new GenericTreeNode<String>(pc); GenericTreeNode<String> i= new GenericTreeNode<String>(id); proce.addChild(p);proce.addChild(i); 
+                Declaracion = false;
+                Funcion = true;
+                idMetodo = id;
+                tfuncion.crearid(id);
+                simbolo.crear(id, "void->void", ambito);
+                ambito = ambito+"."+idMetodo;
+
+RESULT=proce;:} | PROCEDURE:pc ID:id PARIZQ PF:pf PARDER CIERRE{:GenericTreeNode<String> proce= new GenericTreeNode<String>("PROCEDURE");GenericTreeNode<String> p= new GenericTreeNode<String>(pc); GenericTreeNode<String> i= new GenericTreeNode<String>(id); GenericTreeNode<String> pa= new GenericTreeNode<String>(pf.toString()); proce.addChild(p);proce.addChild(i);proce.addChild(pa); RESULT=proce;:};
 
 PF ::= PFV:pfv {: GenericTreeNode<String> pf = new GenericTreeNode<String>("PF"); pf.addChild(pfv); RESULT= pf;:};
 
-CUPR ::= SC:sc{:GenericTreeNode<String> cup = new GenericTreeNode<String>("CUPR"); cup.addChild(sc); RESULT=cup;:};
+CUPR ::= SC:sc{:GenericTreeNode<String> cup = new GenericTreeNode<String>("CUPR"); cup.addChild(sc); 
+
+ambito=tfuncion.quitarAmbito(ambito,tfuncion.getId());
+RESULT=cup;:};
 
 CUP ::= SC:sc{:GenericTreeNode<String> cup = new GenericTreeNode<String>("CUP"); cup.addChild(sc); RESULT=cup;:};
 

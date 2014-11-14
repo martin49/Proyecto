@@ -3,17 +3,26 @@ var a,g,t:char;
 	b,c:Integer;
 	h,f:Array[1..4] of Integer;
 	m: string[10];
-	function p : Integer;
-		var d,s,z:char;
-			y:Integer;
-			function j : char;
-				var asd,df:Integer;
-				begin
-					
-				end.
+	procedure Q;
+	var B,k:Integer;
+		procedure x;
+		var C,j,l:Integer;
 		begin
-			a:=b+3;
+			
 		end.
+		procedure L;
+		var ddsa:Integer;
+		begin
+			
+		end.		
+begin
+
+end.
+function p : Integer;
+var d,s,z:char;
+begin
+
+end.
 begin
   a := g;
   b := c*4;
