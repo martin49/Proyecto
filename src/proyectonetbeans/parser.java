@@ -5,6 +5,7 @@
 
 import java_cup.runtime.*;
 import java.io.FileReader;
+import java.util.*;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20140808 (SVN rev 54) generated parser.
@@ -442,13 +443,39 @@ public class parser extends java_cup.runtime.lr_parser {
     String ambito = "main";
     String idMetodo = "";
     String ambitoF = ambito;
+<<<<<<< HEAD
     String dominio="";
     String dominioL="";
+=======
+    TablaIntermedio cuadruTable = new TablaIntermedio();
+>>>>>>> FETCH_HEAD
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$parser$actions {
+
+
+
+    public TablaIntermedio inta(GenericTree arbol){
+      List<GenericTreeNode> nodos = arbol.buscar("SA");
+      TablaIntermedio Table = new TablaIntermedio();
+        System.out.println(nodos.size());
+      for( int i = 0 ; i < nodos.size() ; i++ ){
+        GenericTreeNode nodo = nodos.get(i);
+        int a = nodos.get(i).getNumberOfChildren();
+        switch (a){
+          case 2:
+
+            Table.Ingresar(":=", nodos.get(1).getData().getNombre(), nodos.get(0).getData().getNombre());
+            break;
+        }
+
+      }
+        return Table;
+      //cuadruTable.PrintTabla();
+    }
+
   private final parser parser;
 
   /** Constructor */
@@ -483,6 +510,7 @@ class CUP$parser$actions {
 		int cupleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cupright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode cup = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		GenericTree<String> tree= new GenericTree<String>();
                 GenericTreeNode<String> pro= new GenericTreeNode<String>("Programa"); 
                 pro.addChild(cp);
@@ -501,6 +529,33 @@ class CUP$parser$actions {
                 //simbolo.imprimir();
                 //tfuncion.imprimir();
                 
+=======
+		
+        GenericTree tree= new GenericTree();
+        GenericTreeNode pro= new GenericTreeNode(new Tipo("Programa","Programa"));
+        pro.addChild(cp);
+        pro.addChild(zd);
+        pro.addChild(cup);
+        tree.setRoot(pro);
+
+        System.out.println("Raiz:" +tree.getRoot().getData().getNombre());
+        System.out.println("--------------------------");
+        for (int i = 0; i < tree.list().size(); i++) {
+            System.out.println("Padre:"+tree.list().get(i).getData().getNombre());
+            System.out.println();
+            try{
+                System.out.println("Hijos:" + tree.Imprimir(i));
+            }
+            catch(IndexOutOfBoundsException e){
+                System.out.println("Hijos: ");
+            }
+            System.out.println("-------------------------------");
+        }
+
+        cuadruTable = inta(tree);
+        cuadruTable.PrintTabla();
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("Programa",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -529,11 +584,14 @@ class CUP$parser$actions {
 		int ileft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String i = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		 GenericTreeNode<String> cp= new GenericTreeNode<String>("CP");
-                GenericTreeNode<String> pr= new GenericTreeNode<String>(p);
-                GenericTreeNode<String> id= new GenericTreeNode<String>(i); 
-                cp.addChild(pr);cp.addChild(id); 
-                RESULT=cp; 
+		
+                GenericTreeNode cp= new GenericTreeNode(new Tipo("CP", "CP"));
+                GenericTreeNode pr= new GenericTreeNode(new Tipo(p, p));
+                GenericTreeNode id= new GenericTreeNode(new Tipo(i, i));
+                cp.addChild(pr);
+                cp.addChild(id);
+                RESULT=cp;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CP",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -557,10 +615,12 @@ class CUP$parser$actions {
 		int zdspleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int zdspright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode zdsp = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> zd = new GenericTreeNode<String>("ZD"); 
-                zd.addChild(zdv); 
-                zd.addChild(zdsp); 
-                RESULT=zd;
+		
+        GenericTreeNode zd = new GenericTreeNode(new Tipo("ZD", "ZD"));
+        zd.addChild(zdv);
+        zd.addChild(zdsp);
+        RESULT=zd;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ZD",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -584,11 +644,13 @@ class CUP$parser$actions {
 		int deleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int deright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode de = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> zdv= new GenericTreeNode<String>("ZDV");
-                GenericTreeNode<String> v= new GenericTreeNode<String>(var); 
-                zdv.addChild(v);
-                zdv.addChild(de); 
-                RESULT=zdv; 
+		
+        GenericTreeNode zdv= new GenericTreeNode(new Tipo("ZDV", "ZDV"));
+        GenericTreeNode v= new GenericTreeNode(new Tipo(var, var));
+        zdv.addChild(v);
+        zdv.addChild(de);
+        RESULT=zdv;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ZDV",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -603,10 +665,11 @@ class CUP$parser$actions {
 		int deileft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int deiright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode dei = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> de= new GenericTreeNode<String>("DE");
-                de.addChild(d);de.addChild(dei); 
-                RESULT=de;
-                
+		
+        GenericTreeNode de= new GenericTreeNode(new Tipo("DE", "DE"));
+        de.addChild(d);de.addChild(dei);
+        RESULT=de;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("DE",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -618,9 +681,11 @@ class CUP$parser$actions {
 		int deileft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int deiright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode dei = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> de= new GenericTreeNode<String>("DE"); 
-                de.addChild(dei);
-                RESULT=de;
+		
+        GenericTreeNode de= new GenericTreeNode(new Tipo("DE", "DE"));
+        de.addChild(dei);
+        RESULT=de;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("DE",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -635,6 +700,7 @@ class CUP$parser$actions {
 		int deleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int deright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode de = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		 String tipo= "";
                     if(Declaracion == true){
                         simbolo.crear(id, de.toString(),ambito);
@@ -650,6 +716,21 @@ class CUP$parser$actions {
                 GenericTreeNode<String> i= new GenericTreeNode<String>(id);
                 dei.addChild(i);dei.addChild(de); 
                 RESULT=dei;
+=======
+		
+        GenericTreeNode dei= new GenericTreeNode(new Tipo("DEI", "DEI"));
+        GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
+        dei.addChild(i);dei.addChild(de);
+        /*if(Declaracion == true){
+                    simbolo.crear(id, simbolo.getTipo(),ambito);
+                    simbolo.creartipo(simbolo.getTipo());
+                }else if(Funcion== true){
+                    tfuncion.crear(id, tfuncion.getTipo(), ambito);
+                    tfuncion.creartipo(tfuncion.getTipo());
+                }*/
+        RESULT=dei;
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("DEI",12, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -665,6 +746,7 @@ class CUP$parser$actions {
 		int tdright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode td = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
+<<<<<<< HEAD
                 String tipo="";   
                 if(Declaracion == true){
                     simbolo.crear(id, td.toString(),ambito);
@@ -687,6 +769,49 @@ class CUP$parser$actions {
                     }
 GenericTreeNode<String> dei= new GenericTreeNode<String>(tipo);GenericTreeNode<String> i= new GenericTreeNode<String>(id);dei.addChild(i); dei.addChild(td); 
 RESULT=dei;
+=======
+        GenericTreeNode dei= new GenericTreeNode(new Tipo("DEI", "DEI"));
+        GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
+        dei.addChild(i);
+        dei.addChild(td);
+
+        /*if(Declaracion == true){
+
+              if(td.toString().equals("Array")){
+
+
+                  String tipo = simbolo.getTipo();
+
+                  simbolo.crear(id, tipo,ambito);
+                  simbolo.creartipo(tipo);
+              }else if(td.toString().equals("string")){
+                  String tipo = simbolo.getTipo();
+                  System.out.println(tipo);
+                  simbolo.crear(id, tipo,ambito);
+                  simbolo.creartipo(tipo);
+              }else{
+              simbolo.crear(id, td.toString(),ambito);
+              simbolo.creartipo(td.toString());
+              }
+          }
+          if(Funcion == true){
+              if(td.toString().equals("Array")){
+                  String tipof = tfuncion.getTipo();
+                  tfuncion.crear(id, tipof,ambito);
+                  tfuncion.creartipo(tipof);
+              }else if(td.toString().equals("string")){
+                  String tipof = tfuncion.getTipo();
+                  System.out.println(tipof);
+                  tfuncion.crear(id, tipof,ambito);
+                  tfuncion.creartipo(tipof);
+              }else{
+                  tfuncion.crear(id, td.toString(),ambito);
+                  tfuncion.creartipo(td.toString());
+              }
+          }*/
+        RESULT=dei;
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("DEI",12, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -698,7 +823,11 @@ RESULT=dei;
 		int ssleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ssright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ss = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> td = new GenericTreeNode<String>(ss.toString()); td.addChild(ss); RESULT=td;
+		
+        GenericTreeNode td = new GenericTreeNode(new Tipo("TS", ss.getData().getTipo()));
+        td.addChild(ss);
+        RESULT=td;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TD",9, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -710,7 +839,11 @@ RESULT=dei;
 		int teleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int teright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode te = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> td = new GenericTreeNode<String>(te.toString()); td.addChild(te); RESULT=td; 
+		
+        GenericTreeNode td = new GenericTreeNode(new Tipo("TE", te.getData().getTipo()));
+        td.addChild(te);
+        RESULT=td;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TD",9, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -722,7 +855,10 @@ RESULT=dei;
 		int inleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int inright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String in = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> ts= new GenericTreeNode<String>(in);RESULT= ts;
+		
+        GenericTreeNode ts= new GenericTreeNode(new Tipo(in, in));
+        RESULT= ts;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TS",10, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -734,7 +870,10 @@ RESULT=dei;
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> ts= new GenericTreeNode<String>(c);RESULT= ts;
+		
+        GenericTreeNode ts= new GenericTreeNode(new Tipo(c, c));
+        RESULT= ts;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TS",10, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -746,7 +885,10 @@ RESULT=dei;
 		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String b = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> ts= new GenericTreeNode<String>(b);RESULT= ts;
+		
+    GenericTreeNode ts= new GenericTreeNode(new Tipo(b, b));
+    RESULT= ts;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TS",10, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -758,7 +900,11 @@ RESULT=dei;
 		int taleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int taright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ta = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> te = new GenericTreeNode<String>(ta.toString()); te.addChild(ta); RESULT=te;
+		
+        GenericTreeNode te = new GenericTreeNode(new Tipo("TA", ta.getData().getTipo()));
+        te.addChild(ta);
+        RESULT=te;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TE",13, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -770,7 +916,11 @@ RESULT=dei;
 		int tstleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int tstright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode tst = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> te = new GenericTreeNode<String>(tst.toString()); te.addChild(tst); RESULT=te;
+		
+        GenericTreeNode te = new GenericTreeNode(new Tipo("TST", tst.getData().getTipo()));
+        te.addChild(tst);
+        RESULT=te;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TE",13, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -801,9 +951,31 @@ RESULT=dei;
 		int tdright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode td = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
+<<<<<<< HEAD
 String tipo = ar+"("+n+".."+n1+","+td.toString()+")";
 GenericTreeNode<String> ta = new GenericTreeNode<String>(tipo); GenericTreeNode<String> s = new GenericTreeNode<String>(ar); GenericTreeNode<String> f = new GenericTreeNode<String>(o); GenericTreeNode<String> num = new GenericTreeNode<String>("NUM"); GenericTreeNode<String> num2 = new GenericTreeNode<String>("NUM2");ta.addChild(s); ta.addChild(num); ta.addChild(num2); ta.addChild(f); 
                 RESULT=ta;
+=======
+        GenericTreeNode ta = new GenericTreeNode(new Tipo(ar, ar));
+        GenericTreeNode s = new GenericTreeNode(new Tipo(ar, ar));
+        GenericTreeNode f = new GenericTreeNode(new Tipo(o, o));
+        GenericTreeNode num = new GenericTreeNode(new Tipo("NUM", "NUM"));
+        GenericTreeNode num2 = new GenericTreeNode(new Tipo("NUM2","NUM2"));
+        ta.addChild(s);
+        ta.addChild(num);
+        ta.addChild(num2);
+        ta.addChild(f);
+
+        /*if(Declaracion == true){
+            simbolo.creartipo(ar+"("+n+".."+n1+","+td.toString()+")");
+        }
+
+        if(Funcion == true){
+            tfuncion.creartipo(ar+"("+n+".."+n1+","+td.toString()+")");
+        }*/
+
+        RESULT=ta;
+>>>>>>> FETCH_HEAD
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TA",14, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -826,8 +998,26 @@ GenericTreeNode<String> ta = new GenericTreeNode<String>(tipo); GenericTreeNode<
 		int ldright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String ld = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
+<<<<<<< HEAD
 String tipo = "Array"+"("+1+".."+n+","+"String"+")";
 GenericTreeNode<String> tst = new GenericTreeNode<String>(tipo);GenericTreeNode<String> s = new GenericTreeNode<String>(st); GenericTreeNode<String> num = new GenericTreeNode<String>("NUM"); tst.addChild(s); tst.addChild(num); RESULT=tst;
+=======
+        GenericTreeNode tst = new GenericTreeNode(new Tipo(st, st));
+        GenericTreeNode s = new GenericTreeNode(new Tipo(st, st));
+        GenericTreeNode num = new GenericTreeNode(new Tipo("NUM", "NUM"));
+        tst.addChild(s);
+        tst.addChild(num);
+
+        RESULT=tst;
+
+        /*if(Declaracion == true){
+            simbolo.creartipo("Array"+"("+1+".."+n+","+"String"+")");
+        }
+
+        if(Funcion == true){
+            tfuncion.creartipo("Array"+"("+1+".."+n+","+"String"+")");
+        }*/
+>>>>>>> FETCH_HEAD
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TST",15, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -840,7 +1030,11 @@ GenericTreeNode<String> tst = new GenericTreeNode<String>(tipo);GenericTreeNode<
 		int dspleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int dspright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode dsp = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> zdsp = new GenericTreeNode<String>("ZDSP"); zdsp.addChild(dsp); RESULT=zdsp;
+		
+        GenericTreeNode zdsp = new GenericTreeNode(new Tipo("ZDSP", "ZDSP"));
+        zdsp.addChild(dsp);
+        RESULT=zdsp;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ZDSP",50, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -849,7 +1043,10 @@ GenericTreeNode<String> tst = new GenericTreeNode<String>(tipo);GenericTreeNode<
           case 21: // ZDSP ::= 
             {
               GenericTreeNode RESULT =null;
-		GenericTreeNode<String> vacio = new GenericTreeNode<String>(""); RESULT=vacio;
+		
+        GenericTreeNode vacio = new GenericTreeNode(new Tipo("", ""));
+        RESULT=vacio;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ZDSP",50, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -864,7 +1061,12 @@ GenericTreeNode<String> tst = new GenericTreeNode<String>(tipo);GenericTreeNode<
 		int zdleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int zdright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode zd = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> dsp = new GenericTreeNode<String>("DSP"); dsp.addChild(df); dsp.addChild(zd);RESULT=dsp;
+		
+        GenericTreeNode dsp = new GenericTreeNode(new Tipo("DSP", "DSP"));
+        dsp.addChild(df);
+        dsp.addChild(zd);
+        RESULT=dsp;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("DSP",49, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -879,7 +1081,12 @@ GenericTreeNode<String> tst = new GenericTreeNode<String>(tipo);GenericTreeNode<
 		int zdleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int zdright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode zd = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> dsp = new GenericTreeNode<String>("DSP"); dsp.addChild(dp); dsp.addChild(zd); RESULT=dsp;
+		
+        GenericTreeNode dsp = new GenericTreeNode(new Tipo("DSP", "DSP"));
+        dsp.addChild(dp);
+        dsp.addChild(zd);
+        RESULT=dsp;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("DSP",49, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -897,7 +1104,13 @@ GenericTreeNode<String> tst = new GenericTreeNode<String>(tipo);GenericTreeNode<
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int scright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode sc = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> df = new GenericTreeNode<String>("DF"); df.addChild(fc); df.addChild(zd); df.addChild(sc);RESULT=df;
+		
+        GenericTreeNode df = new GenericTreeNode(new Tipo("DF", "DF")); 
+        df.addChild(fc); 
+        df.addChild(zd); 
+        df.addChild(sc);
+        RESULT=df;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("DF",48, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -915,6 +1128,7 @@ GenericTreeNode<String> tst = new GenericTreeNode<String>(tipo);GenericTreeNode<
 		int telleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int telright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode tel = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+<<<<<<< HEAD
 		GenericTreeNode<String> proce= new GenericTreeNode<String>("FUNCION");GenericTreeNode<String> fc= new GenericTreeNode<String>(ft); GenericTreeNode<String> i= new GenericTreeNode<String>(id); proce.addChild(fc);proce.addChild(i);proce.addChild(tel); 
                 Declaracion = false;
                 Funcion = true;
@@ -924,6 +1138,26 @@ GenericTreeNode<String> tst = new GenericTreeNode<String>(tipo);GenericTreeNode<
                 ambitoF = ambitoF+"."+idMetodo;
                 ambito = ambitoF;
 RESULT=proce;
+=======
+		
+        GenericTreeNode proce= new GenericTreeNode(new Tipo("FUNCION", "FUNCION"));
+        GenericTreeNode fc= new GenericTreeNode(new Tipo(ft, ft)); 
+        GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
+        proce.addChild(fc);
+        proce.addChild(i);
+        proce.addChild(tel);
+              
+       /* Declaracion = false;
+        Funcion = true;
+        idMetodo = id;
+        tfuncion.crearid(id);
+        simbolo.crear(id, "void->"+tel.toString(), ambito);
+        ambitoF = ambitoF+"."+idMetodo;
+        ambito = ambitoF;*/
+        
+    RESULT=proce;
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CF",36, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -963,6 +1197,7 @@ Declaracion = false;
 		int telleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int telright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode tel = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+<<<<<<< HEAD
 		GenericTreeNode<String> proce= new GenericTreeNode<String>("FUNCION");GenericTreeNode<String> fc= new GenericTreeNode<String>(ft); GenericTreeNode<String> i= new GenericTreeNode<String>(id); proce.addChild(fc);proce.addChild(i);proce.addChild(pfv); proce.addChild(tel); RESULT=proce;
                 tfuncion.crearid(id);
                 idMetodo = id;
@@ -975,6 +1210,19 @@ Declaracion = false;
                 dominio="";
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CF",36, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+=======
+		
+        GenericTreeNode proce= new GenericTreeNode(new Tipo("FUNCION", "FUNCION"));
+        GenericTreeNode fc= new GenericTreeNode(new Tipo(ft, ft)); 
+        GenericTreeNode i= new GenericTreeNode(new Tipo(id, id)); 
+        proce.addChild(fc);
+        proce.addChild(i);
+        proce.addChild(pfv); 
+        proce.addChild(tel); 
+        RESULT=proce;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("CF",36, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+>>>>>>> FETCH_HEAD
             }
           return CUP$parser$result;
 
@@ -985,7 +1233,11 @@ Declaracion = false;
 		int tsleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int tsright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ts = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> tel = new GenericTreeNode<String>(ts.toString()); tel.addChild(ts); RESULT= tel;
+		
+        GenericTreeNode tel = new GenericTreeNode(new Tipo("TS", ts.getData().getTipo()));
+        tel.addChild(ts); 
+        RESULT= tel;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TEL",43, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -997,23 +1249,55 @@ Declaracion = false;
 		int tstleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int tstright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode tst = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> tel = new GenericTreeNode<String>(tst.toString()); tel.addChild(tst); RESULT= tst;
+		
+        GenericTreeNode tel = new GenericTreeNode(new Tipo("TST", tst.getData().getTipo()));
+        tel.addChild(tst); 
+        RESULT= tst;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TEL",43, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
+<<<<<<< HEAD
+=======
+          case 29: // PFV ::= DE 
+            {
+              GenericTreeNode RESULT =null;
+		int deileft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int deiright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		GenericTreeNode dei = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+        GenericTreeNode pfv= new GenericTreeNode(new Tipo("PFV", "PFV"));
+        pfv.addChild(dei); 
+        RESULT=pfv;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("PFV",42, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+>>>>>>> FETCH_HEAD
           case 30: // CUF ::= SC 
             {
               GenericTreeNode RESULT =null;
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int scright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode sc = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		GenericTreeNode<String> cup = new GenericTreeNode<String>("CUF"); cup.addChild(sc); 
 
                 ambito=tfuncion.quitarAmbito(ambito,tfuncion.getId());
                 ambitoF=ambito;
 RESULT=cup;
+=======
+		
+        GenericTreeNode cup = new GenericTreeNode(new Tipo("CUF", "CUF")); 
+        cup.addChild(sc);
+        //ambito=tfuncion.quitarAmbito(ambito,tfuncion.getId());
+        RESULT=cup;
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CUF",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1031,7 +1315,13 @@ RESULT=cup;
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int scright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode sc = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> dp = new GenericTreeNode<String>("DP"); dp.addChild(pc); dp.addChild(zd); dp.addChild(sc); RESULT=dp;
+		
+        GenericTreeNode dp = new GenericTreeNode(new Tipo("DP", "DP")); 
+        dp.addChild(pc); 
+        dp.addChild(zd); 
+        dp.addChild(sc); 
+        RESULT=dp;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("DP",47, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1046,6 +1336,7 @@ RESULT=cup;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+<<<<<<< HEAD
 		 GenericTreeNode<String> proce= new GenericTreeNode<String>("PROCEDURE");GenericTreeNode<String> p= new GenericTreeNode<String>(pc); GenericTreeNode<String> i= new GenericTreeNode<String>(id); proce.addChild(p);proce.addChild(i); 
                 Declaracion = false;
                 Funcion = true;
@@ -1055,6 +1346,24 @@ RESULT=cup;
                 ambito = ambito+"."+idMetodo;
 
 RESULT=proce;
+=======
+		 
+        GenericTreeNode proce= new GenericTreeNode(new Tipo("PROCEDURE", "PROCEDURE"));
+        GenericTreeNode p= new GenericTreeNode(new Tipo(pc, pc)); 
+        GenericTreeNode i= new GenericTreeNode(new Tipo(id, id)); 
+        proce.addChild(p);
+        proce.addChild(i);
+        /*Declaracion = false;
+        Funcion = true;
+        idMetodo = id;
+        tfuncion.crearid(id);
+        simbolo.crear(id, "void->void", ambito);
+        ambito = ambito+"."+idMetodo;*/
+
+        RESULT=proce;
+        
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CPR",37, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1063,6 +1372,7 @@ RESULT=proce;
           case 33: // NT$1 ::= 
             {
               GenericTreeNode RESULT =null;
+<<<<<<< HEAD
 		int pcleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int pcright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		String pc = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
@@ -1072,6 +1382,28 @@ RESULT=proce;
 Declaracion = false;
                 Funcion = true; FCParametro =true;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$1",61, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+=======
+		int pcleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
+		int pcright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).right;
+		String pc = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-5)).value;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
+		int pfleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int pfright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		GenericTreeNode pf = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		
+        GenericTreeNode proce= new GenericTreeNode(new Tipo("PROCEDURE", "PROCEDURE"));
+        GenericTreeNode p= new GenericTreeNode(new Tipo(pc, pc)); 
+        GenericTreeNode i= new GenericTreeNode(new Tipo(id, id)); 
+        GenericTreeNode pa= new GenericTreeNode(new Tipo("PF", pf.getData().getTipo()));
+        proce.addChild(p);
+        proce.addChild(i);
+        proce.addChild(pa); 
+        RESULT=proce;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("CPR",37, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+>>>>>>> FETCH_HEAD
             }
           return CUP$parser$result;
 
@@ -1079,6 +1411,7 @@ Declaracion = false;
           case 34: // CPR ::= PROCEDURE ID PARIZQ NT$1 DE PARDER CIERRE 
             {
               GenericTreeNode RESULT =null;
+<<<<<<< HEAD
               // propagate RESULT from NT$1
                 RESULT = (GenericTreeNode) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
 		int pcleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).left;
@@ -1102,6 +1435,17 @@ Declaracion = false;
                 dominio="";
                 RESULT=proce;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CPR",37, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+=======
+		int pfvleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int pfvright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		GenericTreeNode pfv = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 
+        GenericTreeNode pf = new GenericTreeNode(new Tipo("PF", "PF")); 
+        pf.addChild(pfv); 
+        RESULT= pf;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("PF",44, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+>>>>>>> FETCH_HEAD
             }
           return CUP$parser$result;
 
@@ -1112,11 +1456,18 @@ Declaracion = false;
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int scright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode sc = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> cup = new GenericTreeNode<String>("CUPR"); cup.addChild(sc); 
+		
+        GenericTreeNode cup = new GenericTreeNode(new Tipo("CUPR", "CUPR")); 
+        cup.addChild(sc);
+        //ambito=tfuncion.quitarAmbito(ambito,tfuncion.getId());
+        RESULT=cup;
 
+<<<<<<< HEAD
 ambito=tfuncion.quitarAmbito(ambito,tfuncion.getId());
 ambitoF=ambito;
 RESULT=cup;
+=======
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CUPR",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1128,7 +1479,11 @@ RESULT=cup;
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int scright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode sc = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> cup = new GenericTreeNode<String>("CUP"); cup.addChild(sc); RESULT=cup;
+		
+        GenericTreeNode cup = new GenericTreeNode(new Tipo("CUP", "CUP")); 
+        cup.addChild(sc); 
+        RESULT=cup;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CUP",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1146,7 +1501,15 @@ RESULT=cup;
 		int edleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int edright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String ed = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		GenericTreeNode<String> sc = new GenericTreeNode<String>("SC");GenericTreeNode<String> bg = new GenericTreeNode<String>(bn);GenericTreeNode<String> e = new GenericTreeNode<String>(ed); sc.addChild(bg); sc.addChild(s); sc.addChild(e); RESULT=sc;
+		
+        GenericTreeNode sc = new GenericTreeNode(new Tipo("SC", "SC"));
+        GenericTreeNode bg = new GenericTreeNode(new Tipo(bn, bn));
+        GenericTreeNode e = new GenericTreeNode(new Tipo(ed, ed)); 
+        sc.addChild(bg); 
+        sc.addChild(s); 
+        sc.addChild(e); 
+        RESULT=sc;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("SC",16, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1164,7 +1527,15 @@ RESULT=cup;
 		int edleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int edright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String ed = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		GenericTreeNode<String> sc = new GenericTreeNode<String>("SC");GenericTreeNode<String> bg = new GenericTreeNode<String>(bn);GenericTreeNode<String> e = new GenericTreeNode<String>(ed); sc.addChild(bg); sc.addChild(s); sc.addChild(e); RESULT=sc;
+		
+        GenericTreeNode sc = new GenericTreeNode(new Tipo("SC", "SC"));
+        GenericTreeNode bg = new GenericTreeNode(new Tipo(bn, bn));
+        GenericTreeNode e = new GenericTreeNode(new Tipo(ed, ed)); 
+        sc.addChild(bg); 
+        sc.addChild(s); 
+        sc.addChild(e); 
+        RESULT=sc;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("SCI",19, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1179,7 +1550,13 @@ RESULT=cup;
 		int s1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int s1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s1 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> s = new GenericTreeNode<String>("S"); s.addChild(sa); s.addChild(s1); RESULT=s;
+		 
+        GenericTreeNode s = new GenericTreeNode(new Tipo("S", "S")); 
+        s.addChild(sa); 
+        s.addChild(s1); 
+        RESULT=s;
+        
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("S",17, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1188,7 +1565,11 @@ RESULT=cup;
           case 40: // S ::= 
             {
               GenericTreeNode RESULT =null;
-		GenericTreeNode<String> vacio= new GenericTreeNode<String>("");RESULT=vacio;
+		
+        GenericTreeNode vacio= new GenericTreeNode(new Tipo("", ""));
+        RESULT=vacio;
+        
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("S",17, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1203,7 +1584,13 @@ RESULT=cup;
 		int s1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int s1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s1 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> s = new GenericTreeNode<String>("S"); s.addChild(sc); s.addChild(s1); RESULT=s;
+		
+        GenericTreeNode s = new GenericTreeNode(new Tipo("S", "S")); 
+        s.addChild(sc); 
+        s.addChild(s1); 
+        RESULT=s;
+        
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("S",17, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1218,7 +1605,13 @@ RESULT=cup;
 		int s1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int s1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s1 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> s = new GenericTreeNode<String>("S"); s.addChild(lp); s.addChild(s1); RESULT=s;
+		
+        GenericTreeNode s = new GenericTreeNode(new Tipo("S", "S")); 
+        s.addChild(lp); 
+        s.addChild(s1); 
+        RESULT=s;
+        
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("S",17, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1230,7 +1623,12 @@ RESULT=cup;
 		int ecleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ecright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ec = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> s = new GenericTreeNode<String>("S"); s.addChild(ec); RESULT=s; 
+		
+        GenericTreeNode s = new GenericTreeNode(new Tipo("S", "S")); 
+        s.addChild(ec); 
+        RESULT=s; 
+        
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("S",17, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1245,7 +1643,12 @@ RESULT=cup;
 		int s1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int s1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s1 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> s = new GenericTreeNode<String>("S"); s.addChild(met);s.addChild(s1); RESULT=s;
+		 
+        GenericTreeNode s = new GenericTreeNode(new Tipo("S", "S")); 
+        s.addChild(met);
+        s.addChild(s1); 
+        RESULT=s;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("S",17, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1269,6 +1672,7 @@ RESULT=cup;
 		int arleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		 GenericTreeNode<String> sa = new GenericTreeNode<String>("SA");GenericTreeNode<String> i = new GenericTreeNode<String>(id); sa.addChild(i); sa.addChild(ar);
                     if(simbolo.buscar(id)!=null){
                         if(simbolo.prefijo(id, ambito)){
@@ -1293,8 +1697,21 @@ RESULT=cup;
                 }else{
                     System.err.println("La variable "+id+" no esta declarada.");
                 }
+=======
+		 
+        GenericTreeNode sa = new GenericTreeNode(new Tipo("SA", "SA"));
+        GenericTreeNode i = new GenericTreeNode(new Tipo(id, id)); 
+        sa.addChild(i); 
+        sa.addChild(ar);
+        
+        /*if(simbolo.buscarTipo(id).equals(simbolo.getTipo()))
+            System.out.println("correcto");
+        else
+            System.err.println("Esta asignando un tipo distinto a la variable: "+id+","+ " tipo correcto: "+simbolo.buscarTipo(id));*/
 
-RESULT=sa; 
+        RESULT=sa; 
+>>>>>>> FETCH_HEAD
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("SA",18, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1310,6 +1727,7 @@ RESULT=sa;
 		int amright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode am = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
+<<<<<<< HEAD
 String tipo = "";
                 if(ar.toString().equals(am.toString()) && ar.toString().equals("Integer")){
                     tipo=ar.toString();
@@ -1319,6 +1737,36 @@ String tipo = "";
                 }
 GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.addChild(am); RESULT=a;
                 
+=======
+
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AR","AR"));
+        a.addChild(ar);
+        a.addChild(am); 
+        RESULT=a;
+
+        /*String tipov = "";
+        String tipov2 = "";
+
+        if(simbolo.isinteger(am.toString())){
+           tipov="Integer";
+        }else{
+            //System.out.println(simbolo.buscarTipo(am.toString()));
+            tipov=simbolo.buscarTipo(am.toString());
+        }
+        if(simbolo.isinteger(ar.toString())){
+           tipov2="Integer";
+        }else{
+            //System.out.println(simbolo.buscarTipo(am.toString()));
+            tipov2=simbolo.buscarTipo(ar.toString());
+        }
+        //System.out.println(tipov);
+        if(tipov.equals(tipov2) && tipov.equals("Integer")){
+            simbolo.creartipo(tipov);
+        }else{
+            System.err.println("Solo se pueden sumar o restar Enteros");
+        }*/
+        
+>>>>>>> FETCH_HEAD
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("AR",51, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1331,7 +1779,27 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int amleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int amright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode am = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		GenericTreeNode<String> a= new GenericTreeNode<String>(am.toString()); a.addChild(am); RESULT=a;
+=======
+		
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AM", am.getData().getTipo()));
+        a.addChild(am); 
+        RESULT=a;
+
+        /*String tipov="";
+        if(am.toString()=="VCHAR"){
+                tipov = "char";
+                simbolo.creartipo(tipov);
+        }else if(simbolo.isinteger(am.toString())==true){
+                tipov = "Integer";
+                simbolo.creartipo(tipov);
+        }else{
+            tipov=simbolo.buscarTipo(am.toString());
+            simbolo.creartipo(tipov);
+        }*/
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("AR",51, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1347,6 +1815,7 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int valright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode val = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
+<<<<<<< HEAD
                 String tipo = "";
                 if(am.toString().equals(val.toString()) && am.toString().equals("Integer")){
                     tipo=am.toString();
@@ -1355,6 +1824,35 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
                     tipo=am.toString();
                 }
                 GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(am);a.addChild(val); RESULT=a;
+=======
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AM", am.getData().getTipo()));
+        a.addChild(am);
+        a.addChild(val); 
+        RESULT=a;
+
+        /*String tipov = "";
+        String tipov2 = "";
+    
+        if(simbolo.isinteger(am.toString())==true){
+           tipov="Integer";
+        }else{
+            //System.out.println(simbolo.buscarTipo(am.toString()));
+            tipov=simbolo.buscarTipo(am.toString());
+        }
+        if(simbolo.isinteger(val.toString())==true){
+           tipov2="Integer";
+        }else{
+            //System.out.println(simbolo.buscarTipo(am.toString()));
+            tipov2=simbolo.buscarTipo(val.toString());
+        }
+        //System.out.println(tipov);
+        if(tipov.equals(tipov2) && tipov.equals("Integer")){
+            simbolo.creartipo(tipov);
+        }else{
+            System.err.println("Solo se pueden multiplicar o dividir Enteros");
+        }*/
+
+>>>>>>> FETCH_HEAD
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("AM",38, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1367,7 +1865,27 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int valleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int valright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode val = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		GenericTreeNode<String> a= new GenericTreeNode<String>(val.toString()); a.addChild(val); RESULT=a;
+=======
+		
+        GenericTreeNode a= new GenericTreeNode(new Tipo("VAL", val.getData().getNombre()));
+        a.addChild(val); 
+        RESULT=a;
+
+        /*String tipov="";
+        if(val.toString()=="VCHAR"){
+                tipov = "char";
+                simbolo.creartipo(tipov);
+        }else if(simbolo.isinteger(val.toString())==true){
+                tipov = "Integer";
+                simbolo.creartipo(tipov);
+        }else{
+            tipov=simbolo.buscarTipo(val.toString());
+            simbolo.creartipo(tipov);
+        }*/
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("AM",38, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1379,7 +1897,28 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		GenericTreeNode<String> f= new GenericTreeNode<String>(ex.toString()); f.addChild(ex); RESULT=f;
+=======
+		
+        GenericTreeNode f= new GenericTreeNode(new Tipo("EX", ex.getData().getNombre()));
+        f.addChild(ex); 
+        RESULT=f;
+
+        /*String tipov = "";
+        if(ex.toString()=="VCHAR"){
+                tipov = "char";
+                simbolo.creartipo(tipov);
+        }else if(simbolo.isinteger(ex.toString())==true){
+                tipov = "Integer";
+                simbolo.creartipo(tipov);
+        }else{
+            tipov=simbolo.buscarTipo(ex.toString());
+            simbolo.creartipo(tipov);
+        }*/
+
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("F",39, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1391,7 +1930,14 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int arleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+<<<<<<< HEAD
 		GenericTreeNode<String> f= new GenericTreeNode<String>(ar.toString()); f.addChild(ar); RESULT=f;
+=======
+		
+        GenericTreeNode f= new GenericTreeNode(new Tipo("F", "F")); 
+        f.addChild(ar); 
+        RESULT=f;
+>>>>>>> FETCH_HEAD
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("F",39, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1404,7 +1950,10 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		RESULT=op;
+		
+        RESULT=op;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OP",57, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1416,7 +1965,10 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		RESULT=op;
+		
+        RESULT=op;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OP",57, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1428,7 +1980,9 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		RESULT=op;
+		
+        RESULT=op;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OP",57, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1440,7 +1994,10 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		RESULT=op;
+		
+        RESULT=op;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OL",58, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1452,7 +2009,10 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		RESULT=op;
+		
+        RESULT=op;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OL",58, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1464,7 +2024,10 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		RESULT=op;
+		
+        RESULT=op;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OL",58, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1476,7 +2039,9 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		RESULT=op;
+		
+        RESULT=op;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OL",58, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1488,7 +2053,12 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int ltleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ltright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode lt = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> ex = new GenericTreeNode<String>(lt.toString()); ex.addChild(lt); RESULT=ex;
+		
+        GenericTreeNode ex = new GenericTreeNode(new Tipo("LT", lt.getData().getTipo()));
+        ex.addChild(lt);
+        RESULT=ex;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESION",21, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1500,6 +2070,7 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		String tipo = "";
                 if(simbolo.buscar(id)!=null){
                             if(simbolo.prefijo(id, ambito)){
@@ -1523,6 +2094,15 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
                             tipo=tfuncion.buscarTipo(id);
                         }
                         GenericTreeNode<String> ex = new GenericTreeNode<String>(tipo); GenericTreeNode<String> i = new GenericTreeNode<String>(id); ex.addChild(i); RESULT=ex; 
+=======
+		
+        GenericTreeNode ex = new GenericTreeNode(new Tipo(id, id));
+        GenericTreeNode i = new GenericTreeNode(new Tipo(id, id));
+        ex.addChild(i);
+        RESULT=ex;
+
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESION",21, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1534,7 +2114,15 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int lfleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int lfright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode lf = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		 GenericTreeNode<String> ex = new GenericTreeNode<String>(lf.toString()); ex.addChild(lf); RESULT=ex;
+=======
+		
+        GenericTreeNode ex = new GenericTreeNode(new Tipo("FUNCION","FUNCION") );
+        ex.addChild(lf);
+        RESULT=ex;
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESION",21, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1546,7 +2134,16 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Integer n = (Integer)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		 GenericTreeNode<String> lt = new GenericTreeNode<String>("Integer"); RESULT=lt; 
+=======
+		
+        String num = String.valueOf(n);
+        GenericTreeNode lt = new GenericTreeNode(new Tipo(num, num));
+        RESULT=lt;
+
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LITERAL",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1558,7 +2155,15 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int vcleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int vcright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String vc = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		 GenericTreeNode<String> lt = new GenericTreeNode<String>("char"); RESULT=lt; 
+=======
+		
+        GenericTreeNode lt = new GenericTreeNode(new Tipo("VCHAR", "VCHAR"));
+        RESULT=lt;
+
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LITERAL",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1570,7 +2175,11 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int blleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int blright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String bl = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> lt = new GenericTreeNode<String>(bl); RESULT=lt; 
+		
+        GenericTreeNode lt = new GenericTreeNode(new Tipo(bl, bl));
+        RESULT=lt;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LITERAL",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1582,7 +2191,10 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int vsleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int vsright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String vs = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> lt = new GenericTreeNode<String>("VSTRING"); RESULT=lt; 
+		
+        GenericTreeNode lt = new GenericTreeNode(new Tipo("VSTRING", "VSTRING"));
+        RESULT=lt;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LITERAL",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1598,6 +2210,7 @@ GenericTreeNode<String> a= new GenericTreeNode<String>(tipo); a.addChild(ar);a.a
 		int pfvright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode pfv = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
+<<<<<<< HEAD
 String tipo = "";
                 if(fun.buscar(i)!=null){
                     if(fun.prefijo(i, ambito)==true){
@@ -1617,6 +2230,14 @@ String tipo = "";
                 }
                 dominioL = "";
                 GenericTreeNode<String> lf= new GenericTreeNode<String>(tipo);GenericTreeNode<String> id= new GenericTreeNode<String>(i); lf.addChild(id);lf.addChild(pfv); RESULT=lf;
+=======
+        GenericTreeNode lf= new GenericTreeNode(new Tipo("LF", "LF"));
+        GenericTreeNode id= new GenericTreeNode(new Tipo(i, i));
+        lf.addChild(id);
+        lf.addChild(pfv);
+        RESULT=lf;
+
+>>>>>>> FETCH_HEAD
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LF",24, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1660,7 +2281,12 @@ String tipo = "";
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> pav= new GenericTreeNode<String>("PAV"); pav.addChild(pa);pav.addChild(ex); RESULT=pav;
+		
+        GenericTreeNode pav= new GenericTreeNode(new Tipo("PAV", "PAV"));
+        pav.addChild(pa);
+        pav.addChild(ex);
+        RESULT=pav;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("PAV",55, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1672,7 +2298,11 @@ String tipo = "";
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> pav= new GenericTreeNode<String>("PAV"); pav.addChild(ex); RESULT=pav;
+		
+        GenericTreeNode pav= new GenericTreeNode(new Tipo("PAV", "PAV"));
+        pav.addChild(ex);
+        RESULT=pav;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("PAV",55, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1687,7 +2317,13 @@ String tipo = "";
 		int paleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int paright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode pa = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		GenericTreeNode<String> lp = new GenericTreeNode<String>("LP"); GenericTreeNode<String> i= new GenericTreeNode<String>(id); lp.addChild(i);lp.addChild(pa);RESULT=lp;
+		
+        GenericTreeNode lp = new GenericTreeNode(new Tipo("LP", "LP"));
+        GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
+        lp.addChild(i);
+        lp.addChild(pa);
+        RESULT=lp;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LP",25, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1699,7 +2335,12 @@ String tipo = "";
 		int isleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int isright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode is = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> ec = new GenericTreeNode<String>("EC"); ec.addChild(is);RESULT=ec;
+		
+        GenericTreeNode ec = new GenericTreeNode(new Tipo("EC", "EC"));
+        ec.addChild(is);
+        RESULT=ec;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EC",29, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1711,7 +2352,11 @@ String tipo = "";
 		int erleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int erright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode er = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> ec = new GenericTreeNode<String>("EC"); ec.addChild(er);RESULT=ec;
+		
+        GenericTreeNode ec = new GenericTreeNode(new Tipo("EC", "EC"));
+        ec.addChild(er);
+        RESULT=ec;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EC",29, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1723,7 +2368,11 @@ String tipo = "";
 		int isleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int isright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode is = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> ec = new GenericTreeNode<String>("EA"); ec.addChild(is);RESULT=ec;
+		
+        GenericTreeNode ec = new GenericTreeNode(new Tipo("EA", "EA"));
+        ec.addChild(is);
+        RESULT=ec;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EA",31, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1747,7 +2396,17 @@ String tipo = "";
 		int idoleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int idoright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ido = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> is = new GenericTreeNode<String>("IS"); GenericTreeNode<String> fi = new GenericTreeNode<String>(ifc); GenericTreeNode<String> ten = new GenericTreeNode<String>(tn); is.addChild(fi); is.addChild(cd);is.addChild(ten);is.addChild(s); is.addChild(s); RESULT=is; 
+		
+        GenericTreeNode is = new GenericTreeNode(new Tipo("IS", "IS"));
+        GenericTreeNode fi = new GenericTreeNode(new Tipo(ifc, ifc));
+        GenericTreeNode ten = new GenericTreeNode(new Tipo(tn, tn));
+        is.addChild(fi);
+        is.addChild(cd);
+        is.addChild(ten);
+        is.addChild(s);
+        is.addChild(s);
+        RESULT=is;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("IS",27, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1762,7 +2421,13 @@ String tipo = "";
 		int s1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int s1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s1 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> ido = new GenericTreeNode<String>("IDO"); GenericTreeNode<String> els = new GenericTreeNode<String>(el);ido.addChild(els); ido.addChild(s1);RESULT=ido;
+		
+        GenericTreeNode ido = new GenericTreeNode(new Tipo("IDO", "IDO"));
+        GenericTreeNode els = new GenericTreeNode(new Tipo("el", "el"));
+        ido.addChild(els);
+        ido.addChild(s1);
+        RESULT=ido;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("IDO",28, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1774,7 +2439,12 @@ String tipo = "";
 		int rwleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int rwright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode rw = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> er = new GenericTreeNode<String>("ER"); er.addChild(rw);RESULT=er; 
+		
+        GenericTreeNode er = new GenericTreeNode(new Tipo("ER", "ER"));
+        er.addChild(rw);
+        RESULT=er;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ER",30, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1786,7 +2456,12 @@ String tipo = "";
 		int rrleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int rrright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode rr = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> er = new GenericTreeNode<String>("ER"); er.addChild(rr);RESULT=er; 
+		
+        GenericTreeNode er = new GenericTreeNode(new Tipo("ER", "ER"));
+        er.addChild(rr);
+        RESULT=er;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ER",30, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1798,7 +2473,11 @@ String tipo = "";
 		int rfleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int rfright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode rf = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> er = new GenericTreeNode<String>("ER"); er.addChild(rf);RESULT=er; 
+		
+        GenericTreeNode er = new GenericTreeNode(new Tipo("ER", "ER"));
+        er.addChild(rf);
+        RESULT=er;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ER",30, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1819,7 +2498,16 @@ String tipo = "";
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> rw = new GenericTreeNode<String>("RW"); GenericTreeNode<String> f = new GenericTreeNode<String>(wl);GenericTreeNode<String> tt = new GenericTreeNode<String>(d); rw.addChild(f); rw.addChild(cd); rw.addChild(tt); rw.addChild(s); RESULT= rw; 
+		
+        GenericTreeNode rw = new GenericTreeNode(new Tipo("RW", "RW"));
+        GenericTreeNode f = new GenericTreeNode(new Tipo(wl, wl));
+        GenericTreeNode tt = new GenericTreeNode(new Tipo(d, d));
+        rw.addChild(f);
+        rw.addChild(cd);
+        rw.addChild(tt);
+        rw.addChild(s);
+        RESULT= rw;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RW",32, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1840,7 +2528,16 @@ String tipo = "";
 		int cdleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cdright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode cd = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> rr = new GenericTreeNode<String>("RR"); GenericTreeNode<String> f = new GenericTreeNode<String>(rp);GenericTreeNode<String> tt = new GenericTreeNode<String>(ul); rr.addChild(f); rr.addChild(s); rr.addChild(tt); rr.addChild(cd); RESULT= rr; 
+		
+        GenericTreeNode rr = new GenericTreeNode(new Tipo("RR", "RR"));
+        GenericTreeNode f = new GenericTreeNode(new Tipo(rp, rp));
+        GenericTreeNode tt = new GenericTreeNode(new Tipo(ul, ul));
+        rr.addChild(f);
+        rr.addChild(s);
+        rr.addChild(tt);
+        rr.addChild(cd);
+        RESULT= rr;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RR",33, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1867,7 +2564,20 @@ String tipo = "";
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> rf = new GenericTreeNode<String>("RF"); GenericTreeNode<String> f = new GenericTreeNode<String>(fr);GenericTreeNode<String> tt = new GenericTreeNode<String>(t); GenericTreeNode<String> dd = new GenericTreeNode<String>(d);rf.addChild(f); rf.addChild(sa); rf.addChild(tt); rf.addChild(ex); rf.addChild(dd); rf.addChild(s);  RESULT= rf;
+		
+        GenericTreeNode rf = new GenericTreeNode(new Tipo("RF", "RF"));
+        GenericTreeNode f = new GenericTreeNode(new Tipo(fr, fr));
+        GenericTreeNode tt = new GenericTreeNode(new Tipo(t, t));
+        GenericTreeNode dd = new GenericTreeNode(new Tipo(d, d));
+        rf.addChild(f);
+        rf.addChild(sa);
+        rf.addChild(tt);
+        rf.addChild(ex);
+        rf.addChild(dd);
+        rf.addChild(s);
+        RESULT= rf;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RF",34, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1894,7 +2604,19 @@ String tipo = "";
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> rf = new GenericTreeNode<String>("RF"); GenericTreeNode<String> f = new GenericTreeNode<String>(fr);GenericTreeNode<String> tt = new GenericTreeNode<String>(t); GenericTreeNode<String> dd = new GenericTreeNode<String>(d);rf.addChild(f); rf.addChild(sa); rf.addChild(tt); rf.addChild(ex); rf.addChild(dd); rf.addChild(s); RESULT= rf;
+		
+        GenericTreeNode rf = new GenericTreeNode(new Tipo("RF", "RF"));
+        GenericTreeNode f = new GenericTreeNode(new Tipo(fr, fr));
+        GenericTreeNode tt = new GenericTreeNode(new Tipo(t, t));
+        GenericTreeNode dd = new GenericTreeNode(new Tipo(d, d));
+        rf.addChild(f);
+        rf.addChild(sa);
+        rf.addChild(tt);
+        rf.addChild(ex);
+        rf.addChild(dd);
+        rf.addChild(s);
+        RESULT= rf;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RF",34, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1909,7 +2631,13 @@ String tipo = "";
 		int ex2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ex2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex2 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> eb = new GenericTreeNode<String>("CONDICION"); eb.addChild(ex); eb.addChild(ex2); RESULT=eb;
+		
+        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICION", "CONDICION"));
+        eb.addChild(ex);
+        eb.addChild(ex2);
+        RESULT=eb;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CONDICION",22, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1921,7 +2649,11 @@ String tipo = "";
 		int arleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> ex = new GenericTreeNode<String>("EB"); ex.addChild(ar); RESULT=ex; 
+		
+        GenericTreeNode ex = new GenericTreeNode(new Tipo("EB", "EB"));
+        ex.addChild(ar);
+        RESULT=ex;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CONDICION",22, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1933,7 +2665,11 @@ String tipo = "";
 		int arleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 GenericTreeNode<String> ex = new GenericTreeNode<String>("EXPRESION "); ex.addChild(ar); RESULT=ex; 
+		
+        GenericTreeNode ex = new GenericTreeNode(new Tipo("EXPRESION", "EXPRESION"));
+        ex.addChild(ar);
+        RESULT=ex;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EX",40, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1945,7 +2681,11 @@ String tipo = "";
 		int wtleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int wtright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode wt = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> met = new GenericTreeNode<String>("Metodo"); met.addChild(wt);RESULT=met;
+		
+        GenericTreeNode met = new GenericTreeNode(new Tipo("metodo", "metodo"));
+        met.addChild(wt);
+        RESULT=met;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("MET",53, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1963,7 +2703,14 @@ String tipo = "";
 		int wrtleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int wrtright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode wrt = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		GenericTreeNode<String> escr = new GenericTreeNode<String>(wt); GenericTreeNode<String> str = new GenericTreeNode<String>(vs); escr.addChild(str);escr.addChild(wrt);  RESULT=escr;
+		
+        GenericTreeNode escr = new GenericTreeNode(new Tipo(wt, wt));
+        GenericTreeNode str = new GenericTreeNode(new Tipo(vs, vs));
+        escr.addChild(str);
+        escr.addChild(wrt);
+        RESULT=escr;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ESCR",52, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1975,7 +2722,11 @@ String tipo = "";
 		int lrleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int lrright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode lr = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> escr = new GenericTreeNode<String>("READ"); escr.addChild(lr); RESULT=escr;
+		
+        GenericTreeNode escr = new GenericTreeNode(new Tipo("READ", "READ"));
+        escr.addChild(lr);
+        RESULT=escr;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ESCR",52, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1987,7 +2738,13 @@ String tipo = "";
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode<String> wrt= new GenericTreeNode<String>("WRT"); GenericTreeNode<String> i= new GenericTreeNode<String>(id); wrt.addChild(i); RESULT=wrt; 
+		
+        GenericTreeNode wrt= new GenericTreeNode(new Tipo("WRT", "WRT"));
+        GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
+        wrt.addChild(i);
+        RESULT=wrt;
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("WRT",41, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1996,7 +2753,10 @@ String tipo = "";
           case 91: // WRT ::= 
             {
               GenericTreeNode RESULT =null;
-		GenericTreeNode<String> wrt= new GenericTreeNode<String>("WRT"); RESULT=wrt; 
+		
+        GenericTreeNode wrt= new GenericTreeNode(new Tipo("WRT", "WRT"));
+        RESULT=wrt;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("WRT",41, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -2011,7 +2771,12 @@ String tipo = "";
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		GenericTreeNode<String> leer = new GenericTreeNode<String>(rd); GenericTreeNode<String> i = new GenericTreeNode<String>(id); leer.addChild(i);RESULT=leer;
+		
+        GenericTreeNode leer = new GenericTreeNode(new Tipo(rd, rd));
+        GenericTreeNode i = new GenericTreeNode(new Tipo(id, id));
+        leer.addChild(i);
+        RESULT=leer;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LEER",46, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -2023,7 +2788,9 @@ String tipo = "";
 		int cmleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cmright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String cm = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		RESULT=cm;
+		
+        RESULT=cm;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("COMENT",59, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
