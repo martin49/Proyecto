@@ -14,40 +14,42 @@ import java.util.logging.Logger;
  *
  * @author MartinPastora
  */
-public class tablaFunciones {
+public class Funsiones {
     String nombre;
     String tipo;
     String ambito;
+    String dominio;
+    String rango;
     
-    public tablaFunciones(String nombre, String tipo, String ambito) 
+    public Funsiones(String nombre, String tipo, String ambito, String dominio, String rango) 
     {
         this.nombre = nombre;       
         this.tipo = tipo;
         this.ambito = ambito;
+        this.dominio = dominio;
+        this.rango = rango;
     }
     
 }
 
-class TablaSimbolosFunciones {
-    static Map<String, tablaFunciones> tablaSimbolos;
-    ArrayList<String> sim;
-    ArrayList<String> idMetodo;
-    public static Logger log = Logger.getLogger(TablaSimbolosFunciones.class.getName());            
+class TablaFunsiones {
+    static Map<String, Funsiones> tablaSimbolos;
+    static ArrayList<String> sim;
+    public static Logger log = Logger.getLogger(TablaSimbolos.class.getName());            
     
-    public TablaSimbolosFunciones()
+    public TablaFunsiones()
     {        
-        tablaSimbolos = new HashMap<String, tablaFunciones>();  
+        tablaSimbolos = new HashMap<String, Funsiones>();  
         sim = new ArrayList<String>();
-        idMetodo = new ArrayList<String>();
     }
     
             
-    public tablaFunciones crear(String nombre, String tipo, String ambito)
+    public Funsiones crear(String nombre, String tipo, String ambito, String dominio, String rango)
     {        
-        tablaFunciones simbolo = buscar(nombre);                            
+        Funsiones simbolo = buscar(nombre);                            
         if(simbolo == null) // La variable no existe
         {
-            simbolo = new tablaFunciones(nombre, tipo, ambito);
+            simbolo = new Funsiones(nombre, tipo, ambito, dominio, rango);
             //System.out.println("Agregando a tabla de simbolos con nombre: " + nombre);
             tablaSimbolos.put(nombre, simbolo);            
             //System.out.println("Variable creada exitosamente!!!");
@@ -78,25 +80,11 @@ class TablaSimbolosFunciones {
         return sim.get(0);
     }
    
-    public void crearid(String id){
-        idMetodo.add(id);
-    }
+        
     
-    public String getId(){
-        int size = idMetodo.size()-1;
-        return idMetodo.get(size);
-    }
-    
-    public String quitarAmbito(String ambito, String id){
-        int size = idMetodo.size()-1;
-        idMetodo.remove(size);
-        String tmp = ambito.replace(id,"");
-        return tmp.substring(0,tmp.length()-1);
-    } 
-    
-    public tablaFunciones buscar(String nombre)
+    public Funsiones buscar(String nombre)
     {
-        return (tablaFunciones)tablaSimbolos.get(nombre);
+        return (Funsiones)tablaSimbolos.get(nombre);
     }
     
     public String buscarTipo(String nombre)
@@ -104,13 +92,45 @@ class TablaSimbolosFunciones {
         return tablaSimbolos.get(nombre).tipo;
     }
     
-    public void imprimir()
+    public String buscarAmbito(String nombre)
+    {
+        return tablaSimbolos.get(nombre).ambito;
+    }
+    
+    public String buscarDominio(String nombre)
+    {
+        return tablaSimbolos.get(nombre).dominio;
+    }
+    
+    public String buscarRango(String nombre)
+    {
+        return tablaSimbolos.get(nombre).rango;
+    }
+    
+    public boolean prefijo(String nombre, String ambito){
+        String ambitop = tablaSimbolos.get(nombre).ambito;
+        if(ambito.startsWith(ambitop)==true)
+            return true;
+        else
+            return false;
+    }
+    
+    public static void imprimir()
     {
         System.out.println("\nIngresando a imprimir de TablaSimbolos");
         System.out.println("    Valores de la tabla de simbolos:");
-        for (tablaFunciones s : tablaSimbolos.values())
+        for (Funsiones s : tablaSimbolos.values())
             System.out.println(String.format("      "
                     + "Nombre: %s, tipo: %s, ambito: %s",s.nombre, s.tipo, s.ambito));        
         System.out.println("Saliendo de imprimir en TablaSimbolos\n ");        
+    }
+    
+    public boolean isinteger(String n){
+        try{
+            Integer.parseInt(n);
+        }catch(NumberFormatException e){
+            return false;
+        }
+        return true;
     }
 }

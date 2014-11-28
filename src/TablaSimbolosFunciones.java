@@ -1,40 +1,34 @@
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
- class Simbolo
-{  
-    String nombre;
-    String tipo;
-    String ambito;
-    
-    public Simbolo(String nombre, String tipo, String ambito) 
-    {
-        this.nombre = nombre;       
-        this.tipo = tipo;
-        this.ambito = ambito;
-    }
-    
-}
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-class TablaSimbolos {
-    static Map<String, Simbolo> tablaSimbolos;
-    static ArrayList<String> sim;
-    public static Logger log = Logger.getLogger(TablaSimbolos.class.getName());            
+/**
+ *
+ * @author MartinPastora
+ */
+public class TablaSimbolosFunciones {
+    static Map<String, tablaFunciones> tablaSimbolos = new HashMap<String, tablaFunciones>();
+    static ArrayList<String> sim = new ArrayList<String>();
+    static ArrayList<String> idMetodo = new ArrayList<String>();
+    public static Logger log = Logger.getLogger(TablaSimbolosFunciones.class.getName());            
     
-    public TablaSimbolos()
-    {        
-        tablaSimbolos = new HashMap<String, Simbolo>();  
-        sim = new ArrayList<String>();
-    }
+    
     
             
-    public Simbolo crear(String nombre, String tipo, String ambito)
+    public tablaFunciones crear(String nombre, String tipo, String ambito)
     {        
-        Simbolo simbolo = buscar(nombre);                            
+        tablaFunciones simbolo = buscar(nombre);                            
         if(simbolo == null) // La variable no existe
         {
-            simbolo = new Simbolo(nombre, tipo, ambito);
+            simbolo = new tablaFunciones(nombre, tipo, ambito);
             //System.out.println("Agregando a tabla de simbolos con nombre: " + nombre);
             tablaSimbolos.put(nombre, simbolo);            
             //System.out.println("Variable creada exitosamente!!!");
@@ -50,7 +44,7 @@ class TablaSimbolos {
         }
     }
     
-    public void creartipo(String tipo)
+    public static void creartipo(String tipo)
     {        
       if(sim.isEmpty()){
          sim.add(tipo);
@@ -65,11 +59,25 @@ class TablaSimbolos {
         return sim.get(0);
     }
    
-        
+    public static void crearid(String id){
+        idMetodo.add(id);
+    }
     
-    public Simbolo buscar(String nombre)
+    public String getId(){
+        int size = idMetodo.size()-1;
+        return idMetodo.get(size);
+    }
+    
+    public String quitarAmbito(String ambito, String id){
+        int size = idMetodo.size()-1;
+        idMetodo.remove(size);
+        String tmp = ambito.replace(id,"");
+        return tmp.substring(0,tmp.length()-1);
+    } 
+    
+    public tablaFunciones buscar(String nombre)
     {
-        return (Simbolo)tablaSimbolos.get(nombre);
+        return (tablaFunciones)tablaSimbolos.get(nombre);
     }
     
     public String buscarTipo(String nombre)
@@ -94,19 +102,9 @@ class TablaSimbolos {
     {
         System.out.println("\nIngresando a imprimir de TablaSimbolos");
         System.out.println("    Valores de la tabla de simbolos:");
-        for (Simbolo s : tablaSimbolos.values())
+        for (tablaFunciones s : tablaSimbolos.values())
             System.out.println(String.format("      "
                     + "Nombre: %s, tipo: %s, ambito: %s",s.nombre, s.tipo, s.ambito));        
         System.out.println("Saliendo de imprimir en TablaSimbolos\n ");        
     }
-    
-    public boolean isinteger(String n){
-        try{
-            Integer.parseInt(n);
-        }catch(NumberFormatException e){
-            return false;
-        }
-        return true;
-    }
-    
 }
