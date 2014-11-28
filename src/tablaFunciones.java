@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -111,6 +110,6 @@ class TablaSimbolosFunciones {
         for (tablaFunciones s : tablaSimbolos.values())
             System.out.println(String.format("      "
                     + "Nombre: %s, tipo: %s, ambito: %s",s.nombre, s.tipo, s.ambito));        
-        System.out.println("Saliendo de imprimir en TablaSimbolos\n ");        
+        System.out.println("Saliendo de imprimir en TablaSimbolos\n ");
     }
 }

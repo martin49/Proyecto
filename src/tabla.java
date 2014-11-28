@@ -85,7 +85,7 @@ class TablaSimbolos {
         for (Simbolo s : tablaSimbolos.values())
             System.out.println(String.format("      "
                     + "Nombre: %s, tipo: %s, ambito: %s",s.nombre, s.tipo, s.ambito));        
-        System.out.println("Saliendo de imprimir en TablaSimbolos\n ");        
+        System.out.println("Saliendo de imprimir en TablaSimbolos\n ");
     }
     
     public boolean isinteger(String n){
