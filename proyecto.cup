@@ -112,20 +112,20 @@ non terminal GenericTreeNode CP;
 non terminal GenericTreeNode ZD;
 non terminal GenericTreeNode CUP, CUF, CUPR;
 non terminal GenericTreeNode ZDV;
-non terminal GenericTreeNode DE,L;
+non terminal GenericTreeNode DE;
 non terminal GenericTreeNode TD;
-non terminal GenericTreeNode TS, VR, DEI;
+non terminal GenericTreeNode TS, DEI;
 non terminal GenericTreeNode TE;
 non terminal GenericTreeNode TA, TST;
 non terminal GenericTreeNode SC, S, SA, SCI;
 non terminal GenericTreeNode LITERAL, EXPRESION, CONDICION;
-non terminal GenericTreeNode EB, LF,LP, PA, LA;
+non terminal GenericTreeNode LF,LP, LA;
 non terminal GenericTreeNode IS,IDO,EC,ER, EA;
-non terminal GenericTreeNode RW, RR, RF, VARIABLE;
+non terminal GenericTreeNode RW, RR, RF;
 non terminal GenericTreeNode CF, CPR, AM, F, EX, WRT;
-non terminal GenericTreeNode PFV, TEL, PF, PFVA,LEER;
-non terminal GenericTreeNode DP, DF, DSP, ZDSP, AR, ESCR, MET, PFVADE, PAV, PAVA;
-non terminal String OP,OL,COMENT;
+non terminal GenericTreeNode TEL, LEER;
+non terminal GenericTreeNode DP, DF, DSP, ZDSP, AR, ESCR, MET, PAV;
+non terminal String OP,OL;
 
 Programa ::= CP:cp ZD:zd CUP:cup{:
         GenericTree tree= new GenericTree();
@@ -174,10 +174,10 @@ ZDV ::= VAR:var DE:de{:
         RESULT=zdv;
 :};
 
-DE ::= DE:d DEI:dei{:
+DE ::= DEI:dei DE:d {:
         GenericTreeNode de= new GenericTreeNode(new Tipo("DE", "DE"));
-        de.addChild(d);
         de.addChild(dei);
+        de.addChild(d);
         RESULT=de;
 :}
 |DEI:dei{:
@@ -683,7 +683,36 @@ EXPRESION ::= LITERAL:lt {:
 :};
 
 LA ::= ID:id LLAVEIZQ EXPRESION:ex LLAVEDER{:
-        GenericTreeNode la = new GenericTreeNode(new Tipo("LA", "LA"));
+        String tipo = "";
+                if(simbolo.buscar(id)!=null){
+                    if(simbolo.prefijo(id, ambito)==true){
+                        if(ex.getData().getTipo().equals("Integer")){
+                            tipo=simbolo.buscarTipo(id).substring(11, simbolo.buscarTipo(id).length()-1);
+                        }else{
+                            System.err.println("El index de: "+id+" debe ser entero");
+                            tipo=simbolo.buscarTipo(id).substring(11, simbolo.buscarTipo(id).length()-1);
+                        }
+                    }else{
+                        System.err.println("El array "+id+ " no puede ser llamada en este ambito.");
+                        tipo=simbolo.buscarTipo(id).substring(11, simbolo.buscarTipo(id).length()-1);
+                    }
+                    
+                }else if(tfuncion.buscar(id)!=null){
+                    if(tfuncion.prefijo(id, ambito)==true){
+                        if(ex.getData().getTipo().equals("Integer")){
+                            tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
+                            System.out.println(tipo);
+                        }else{
+                            System.err.println("El index de: "+id+" debe ser entero");
+                            tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
+                        }
+                    }else{
+                        System.err.println("El array "+id+ " no puede ser llamada en este ambito.");
+                        tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
+                    }
+                    
+                }
+        GenericTreeNode la = new GenericTreeNode(new Tipo("LA", tipo));
         GenericTreeNode i = new GenericTreeNode(new Tipo(id, id));
         la.addChild(i);
         la.addChild(ex);
@@ -696,7 +725,8 @@ LITERAL ::= NUM:n{:
         RESULT=lt;
 :}
 | VCHAR:vc{:
-        GenericTreeNode lt = new GenericTreeNode(new Tipo(vc, "char"));
+        String cadena = vc.substring(1,vc.length()-1);
+        GenericTreeNode lt = new GenericTreeNode(new Tipo(cadena, "char"));
         RESULT=lt;
 :}
 | BOOL:bl{:
@@ -938,7 +968,3 @@ LEER ::= READ:rd PARIZQ ID:id PARDER{:
         leer.addChild(i);
         RESULT=leer;
 :};
-
-COMENT ::= COMENTARIO:cm{:
-        RESULT=cm;
-:}|;
