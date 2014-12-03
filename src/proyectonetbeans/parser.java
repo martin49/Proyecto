@@ -456,22 +456,44 @@ class CUP$parser$actions {
 
 
 
+    public List<GenericTreeNode> limpiar(GenericTree arbol){
+         List<GenericTreeNode> tree = arbol.list();
+                for (int i = 0; i < tree.size(); i++) {
+
+                    for(int j = 0; j <tree.get(i).getNumberOfChildren(); j++){
+                         if(tree.get(i).getData().getNombre() == tree.get(i).getChildren().get(j).getData().getNombre()) {
+
+
+                           tree.add(i, tree.get(i).getChildren().get(j));
+                           tree.remove(i + 1);
+                           System.out.println("hola");
+                         }
+                    }
+
+                }
+
+                return tree;
+    }
+
     public TablaIntermedio inta(GenericTree arbol){
       List<GenericTreeNode> nodos = arbol.buscar("SA");
       TablaIntermedio Table = new TablaIntermedio();
+      int bandera = 0;
 
       for( int i = 0 ; i < nodos.size() ; i++ ){
         GenericTreeNode nodo = nodos.get(i);
         int a = nodos.get(i).getNumberOfChildren();
 
 
-        if (nodo.hasChildren()){
 
-        }
         switch (a){
           case 2:
-            List temp = nodos.get(i).getChildren();
-            Table.Ingresar(":=", nodo.getChildren().get(1).getData().getNombre(), nodo.getChildren().get(1).getData().getNombre());
+            if (nodo.getChildren().get(1).getData().getNombre() == nodo.getChildren().get(1).getChildren().get(0).getData().getNombre()){
+                String temp = "temp"+String.valueOf(bandera);
+                Table.Ingresar(":=", nodo.getChildren().get(1).getData().getNombre(), temp);
+                Table.Ingresar(":=", temp, nodo.getChildren().get(0).getData().getNombre());
+                bandera ++;
+            }
             break;
         }
 
@@ -522,16 +544,19 @@ class CUP$parser$actions {
         pro.addChild(cup);
         tree.setRoot(pro);
 
-        System.out.println("Raiz:"+tree.getRoot());
-        System.out.println("--------------------------");
-        for (int i = 0; i < tree.list().size(); i++) {
-            System.out.println("Padre:"+tree.list().get(i).getData().getNombre());
-            System.out.println();
-            System.out.println("Hijos:"+tree.Imprimir(i));
-            System.out.println("-------------------------------");
-        }
+        List<GenericTreeNode> arbol = limpiar(tree);
+                System.out.println("Raiz:"+tree.getRoot());
+                System.out.println("--------------------------");
+                for (int i = 0; i < arbol.size(); i++) {
+                    System.out.println("Padre:"+arbol.get(i).getData().getNombre());
+                    System.out.println();
+                    System.out.println("Hijos:"+tree.Imprimir(i));
+                    System.out.println("-------------------------------");
+                }
         //simbolo.imprimir();
         //tfuncion.imprimir();
+        cuadruTable = inta(tree);
+        cuadruTable.PrintTabla();
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("Programa",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

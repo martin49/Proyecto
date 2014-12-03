@@ -6,5 +6,5 @@ var a,g,t:char;
 
 begin
   b := 4;
-  b := (c*4);
+  b := c*4*5;
 end.
