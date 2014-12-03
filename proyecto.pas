@@ -29,6 +29,7 @@ begin
 
   a := g;
   b := h[3];
+  h[4] := b;
   b := (c*4);
   m := 'holhhhhhhhhhhhhh';
 end.

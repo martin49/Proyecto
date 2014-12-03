@@ -64,7 +64,6 @@ action code{:
 
                            tree.add(i, tree.get(i).getChildren().get(j));
                            tree.remove(i + 1);
-                           System.out.println("hola");
                          }
                     }
 
@@ -123,7 +122,7 @@ non terminal GenericTreeNode LF,LP, LA;
 non terminal GenericTreeNode IS,IDO,EC,ER, EA;
 non terminal GenericTreeNode RW, RR, RF;
 non terminal GenericTreeNode CF, CPR, AM, F, EX, WRT;
-non terminal GenericTreeNode TEL, LEER;
+non terminal GenericTreeNode TEL, LEER, IDA;
 non terminal GenericTreeNode DP, DF, DSP, ZDSP, AR, ESCR, MET, PAV;
 non terminal String OP,OL;
 
@@ -512,58 +511,70 @@ S ::= SA:sa CIERRE S:s1{:
         RESULT=s;
 :}|error S;
 
-SA ::= ID:id ASSIG AR:ar{:
+SA ::= IDA:id ASSIG AR:ar{:
         GenericTreeNode sa = new GenericTreeNode(new Tipo("SA", "SA"));
-        GenericTreeNode i = new GenericTreeNode(new Tipo(id, id));
-        sa.addChild(i);
+        sa.addChild(id);
         sa.addChild(ar);
-
-        if(simbolo.buscar(id)!=null){
-            if(simbolo.prefijo(id, ambito)){
-                if(ar.getData().getTipo().equals("VSTRING")){
-                    String tipo = simbolo.buscarTipo(id).substring(9,simbolo.buscarTipo(id).length()-8);
-                 
+        if(ar.getData().getTipo().equals("VSTRING")){
+            if(simbolo.buscarTipo(id.getData().getNombre())!=null){
+               String tipo = simbolo.buscarTipo(id.getData().getNombre()).substring(9,simbolo.buscarTipo(id.getData().getNombre()).length()-8);
                     int m = Integer.parseInt(tipo);
                     if(m>=ar.getData().getNombre().length()){
                        System.out.println("correcto"); 
                     }else{
                         System.err.println("El tamaño del string es mayor al de la variable: "+id);
-                    }
-                }else
-                if(simbolo.buscarTipo(id).equals(ar.getData().getTipo()))
-                    System.out.println("correcto");
-                else
-                    System.err.println("Esta asignando un tipo distinto a la variable: "+id+","+ " tipo correcto: "+simbolo.buscarTipo(id));
-
-            }else{
-                System.err.println("La variable "+id+" no esta en este ambito.");
-            }
-        }else if(tfuncion.buscar(id)!=null){
-            if(tfuncion.prefijo(id, ambito)){
-                if(ar.getData().getTipo().equals("VSTRING")){
-                    
-                    String tipo = simbolo.buscarTipo(id).substring(9,simbolo.buscarTipo(id).length()-8);
-                    System.out.println(tipo);
+                    }  
+            }else if(tfuncion.buscarTipo(id.getData().getNombre())!=null){
+               String tipo = tfuncion.buscarTipo(id.getData().getNombre()).substring(9,tfuncion.buscarTipo(id.getData().getNombre()).length()-8);
                     int m = Integer.parseInt(tipo);
                     if(m>=ar.getData().getNombre().length()){
                        System.out.println("correcto"); 
                     }else{
                         System.err.println("El tamaño del string es mayor al de la variable: "+id);
-                    }
-                }else
-                if(tfuncion.buscarTipo(id).equals(ar.getData().getTipo()))
+                    }  
+            }else{
+                System.err.println("No se encuentra: ");
+            }
+                       
+            }else
+                if(id.getData().getTipo().equals(ar.getData().getTipo()))
                     System.out.println("correcto");
                 else
-                    System.err.println("Esta asignando un tipo distinto a la variable: "+id+","+ " tipo correcto: "+tfuncion.buscarTipo(id));
-            }else{
-                System.err.println("La variable "+id+" no esta en este ambito.");
-            }
-        }else{
-            System.err.println("La variable "+id+" no esta declarada.");
-        }
-
+                    System.err.println("Esta asignando un tipo distinto a la variable: "+id.getData().getNombre()+","+ " tipo correcto: "+id.getData().getTipo());
         RESULT=sa;
 :};
+
+IDA ::= ID:id{:String tipo = "";
+        if(simbolo.buscar(id)!=null){
+            if(simbolo.prefijo(id, ambito)){
+                tipo=simbolo.buscarTipo(id);
+            }else{
+                System.err.println("La variable "+id+ " no esta en este ambito.");
+                tipo=simbolo.buscarTipo(id);
+            }
+
+        }else if(tfuncion.buscar(id)!=null){
+            if(tfuncion.prefijo(id, ambito)){
+                tipo=tfuncion.buscarTipo(id);
+            }else{
+                System.err.println("La variable "+id+ " no esta en este ambito.");
+                tipo=tfuncion.buscarTipo(id);
+            }
+
+        }
+        else{
+            System.err.println("La variable "+id+" no esta declarada");
+            tipo=tfuncion.buscarTipo(id);
+        }
+        GenericTreeNode ida = new GenericTreeNode(new Tipo(id, tipo));
+        GenericTreeNode i = new GenericTreeNode(new Tipo(id, id));
+        ida.addChild(i);
+        RESULT=ida;
+        :}|LA:la{:
+            GenericTreeNode ida = new GenericTreeNode(new Tipo(la.getData().getNombre(), la.getData().getTipo()));
+            ida.addChild(la);
+            RESULT=ida;
+        :};
 
 AR ::= AR:ar OPSUMA AM:am{:
         String tipo = "";
@@ -677,7 +688,7 @@ EXPRESION ::= LITERAL:lt {:
         RESULT=ex;
 :}
 | LA:la{:
-        GenericTreeNode ex = new GenericTreeNode(new Tipo(la.getData().getNombre(), la.getData().getTipo()));
+        GenericTreeNode ex = new GenericTreeNode(new Tipo("LA", la.getData().getTipo()));
         ex.addChild(la);
         RESULT=ex;
 :};
@@ -701,7 +712,7 @@ LA ::= ID:id LLAVEIZQ EXPRESION:ex LLAVEDER{:
                     if(tfuncion.prefijo(id, ambito)==true){
                         if(ex.getData().getTipo().equals("Integer")){
                             tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
-                            System.out.println(tipo);
+                            
                         }else{
                             System.err.println("El index de: "+id+" debe ser entero");
                             tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
@@ -712,7 +723,7 @@ LA ::= ID:id LLAVEIZQ EXPRESION:ex LLAVEDER{:
                     }
                     
                 }
-        GenericTreeNode la = new GenericTreeNode(new Tipo("LA", tipo));
+        GenericTreeNode la = new GenericTreeNode(new Tipo(id, tipo));
         GenericTreeNode i = new GenericTreeNode(new Tipo(id, id));
         la.addChild(i);
         la.addChild(ex);
