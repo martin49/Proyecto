@@ -17,12 +17,14 @@ public class tablaFunciones {
     String nombre;
     String tipo;
     String ambito;
+    int direccion;
     
-    public tablaFunciones(String nombre, String tipo, String ambito) 
+    public tablaFunciones(String nombre, String tipo, String ambito, int direccion) 
     {
         this.nombre = nombre;       
         this.tipo = tipo;
         this.ambito = ambito;
+        this.direccion = direccion;
     }
     
 }

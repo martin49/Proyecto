@@ -13,6 +13,7 @@ parser code {:
                 if (s.right >= 0)
                     m.append(", columna "+(s.right+1));
             }
+            m.append(" "+s.value.toString());
         }
         System.err.println(m);
     }
@@ -45,9 +46,10 @@ parser code {:
     String ambito = "main";
     String idMetodo = "";
     String ambitoF = ambito;
-
+    int contador = 0;
     String dominio="";
     String dominioL="";
+    int num_parametros=0;
 
     TablaIntermedio cuadruTable = new TablaIntermedio();
 :};
@@ -117,14 +119,14 @@ non terminal GenericTreeNode TS, DEI;
 non terminal GenericTreeNode TE;
 non terminal GenericTreeNode TA, TST;
 non terminal GenericTreeNode SC, S, SA, SCI;
-non terminal GenericTreeNode LITERAL, EXPRESION, CONDICION;
+non terminal GenericTreeNode LITERAL, EXPRESION, CONDICION, CONDICIONOPL;
 non terminal GenericTreeNode LF,LP, LA;
 non terminal GenericTreeNode IS,IDO,EC,ER, EA;
 non terminal GenericTreeNode RW, RR, RF;
 non terminal GenericTreeNode CF, CPR, AM, F, EX, WRT;
 non terminal GenericTreeNode TEL, LEER, IDA;
 non terminal GenericTreeNode DP, DF, DSP, ZDSP, AR, ESCR, MET, PAV;
-non terminal String OP,OL;
+non terminal String OP,OL, OPL;
 
 Programa ::= CP:cp ZD:zd CUP:cup{:
         GenericTree tree= new GenericTree();
@@ -156,14 +158,14 @@ CP ::= PROGRAM:p ID:i CIERRE{:
         cp.addChild(pr);
         cp.addChild(id);
         RESULT=cp;
-:}|error;
+:}|error ZD;
 
 ZD ::= ZDV:zdv ZDSP:zdsp{:
         GenericTreeNode zd = new GenericTreeNode(new Tipo("ZD","ZD"));
         zd.addChild(zdv);
         zd.addChild(zdsp);
         RESULT=zd;
-:}|error;
+:};
 
 ZDV ::= VAR:var DE:de{:
         GenericTreeNode zdv= new GenericTreeNode(new Tipo("ZDV", "ZDV"));
@@ -171,7 +173,7 @@ ZDV ::= VAR:var DE:de{:
         zdv.addChild(v);
         zdv.addChild(de);
         RESULT=zdv;
-:};
+:}|error DE;
 
 DE ::= DEI:dei DE:d {:
         GenericTreeNode de= new GenericTreeNode(new Tipo("DE", "DE"));
@@ -191,9 +193,16 @@ DEI ::= ID:id COMA DEI:de{:
             simbolo.crear(id, de.getData().getTipo(),ambito);
             tipo = de.getData().getTipo();
         }else if((Funcion== true)&&(FCParametro==false)){
-            tfuncion.crear(id, de.getData().getTipo(),ambito);
+            
+            if(de.getData().getTipo().equals("Integer")){
+                contador = contador + 4;
+            }else{
+                contador = contador + 1;
+            }
+            tfuncion.crear(id, de.getData().getTipo(),ambito, contador);
             tipo = de.getData().getTipo();
         }else if((Funcion== true)&&(FCParametro==true)){
+            num_parametros = num_parametros + 1;
             dominio = dominio+" X "+de.getData().getTipo();
             tipo = de.getData().getTipo();
         }
@@ -212,9 +221,15 @@ DEI ::= ID:id COMA DEI:de{:
 
         }
         if((Funcion == true) && (FCParametro==false)) {
-            tfuncion.crear(id, td.getData().getTipo(),ambito);
+            if(td.getData().getTipo().equals("Integer")){
+                contador = contador + 4;
+            }else{
+                contador = contador + 1;
+            }
+            tfuncion.crear(id, td.getData().getTipo(),ambito, contador);
             tipo = td.getData().getTipo();
         }else if((Funcion == true) && (FCParametro==true)){
+            num_parametros = num_parametros + 1;
             tipo = td.getData().getTipo();
 
             if(dominio.isEmpty() == true){
@@ -240,7 +255,7 @@ TD ::= TS:ss {:
         GenericTreeNode td = new GenericTreeNode(new Tipo(te.getData().getNombre(), te.getData().getTipo()));
         td.addChild(te);
         RESULT=td;
-:};
+:}|error ZDSP;
 
 TS ::= INTEGER:in{:
         GenericTreeNode ts= new GenericTreeNode(new Tipo(in, in));
@@ -332,11 +347,12 @@ CF ::= FUNCTION:ft ID:id DECLARACION TEL:tel CIERRE {:
         proce.addChild(i);
         proce.addChild(tel);
 
+        contador = 0;
         Declaracion = false;
         Funcion = true;
         idMetodo = id;
         tfuncion.crearid(id);
-        fun.crear(id, "void->"+tel.getData().getTipo(), ambito, "void", tel.getData().getTipo());
+        fun.crear(id, "void->"+tel.getData().getTipo(), ambito, "void", tel.getData().getTipo(), num_parametros);
         ambitoF = ambitoF+"."+idMetodo;
         ambito = ambitoF;
 
@@ -356,16 +372,17 @@ DE:pfv PARDER DECLARACION TEL:tel CIERRE{:
         proce.addChild(pfv);
         proce.addChild(tel);
         RESULT=proce;
-
+        contador=0;
         tfuncion.crearid(id);
         idMetodo = id;
-        fun.crear(id, dominio+"->"+tel.getData().getTipo(), ambito, dominio, tel.getData().getTipo());
+        fun.crear(id, dominio+"->"+tel.getData().getTipo(), ambito, dominio, tel.getData().getTipo(),num_parametros);
         FCParametro = false;
         Declaracion = false;
         Funcion = true;
         ambitoF = ambitoF+"."+idMetodo;
         ambito = ambitoF;
         dominio="";
+        num_parametros = 0;
 :};
 
 TEL ::= TS:ts{:
@@ -386,7 +403,7 @@ CUF ::= SC:sc{:
         ambito=tfuncion.quitarAmbito(ambito,tfuncion.getId());
         ambitoF=ambito;
         RESULT=cup;
-:};
+:}|error CUP;
 
 DP ::= CPR:pc ZD:zd CUPR:sc{:
         GenericTreeNode dp = new GenericTreeNode(new Tipo("DP", "DP"));
@@ -403,14 +420,13 @@ CPR ::= PROCEDURE:pc ID:id CIERRE{:
         GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
         proce.addChild(p);
         proce.addChild(i);
-
+        contador = 0;
         Declaracion = false;
         Funcion = true;
         idMetodo = id;
         tfuncion.crearid(id);
-        fun.crear(id, "void->void", ambito, "void","void");
+        fun.crear(id, "void->void", ambito, "void","void",num_parametros);
         ambito = ambito+"."+idMetodo;
-
         RESULT=proce;
 :}
 | PROCEDURE:pc ID:id PARIZQ{:
@@ -427,16 +443,17 @@ DE:pf PARDER CIERRE{:
         proce.addChild(p);
         proce.addChild(i);
         proce.addChild(pa);
-
+        contador=0;
         tfuncion.crearid(id);
         idMetodo = id;
-        fun.crear(id, dominio+"->void", ambito, dominio, "void");
+        fun.crear(id, dominio+"->void", ambito, dominio, "void",num_parametros);
         FCParametro = false;
         Declaracion = false;
         Funcion = true;
         ambitoF = ambitoF+"."+idMetodo;
         ambito = ambitoF;
         dominio="";
+        num_parametros = 0;
 
         RESULT=proce;
 :};
@@ -449,7 +466,7 @@ CUPR ::= SC:sc{:
         ambitoF=ambito;
 
         RESULT=cup;
-:};
+:}|error CUP;
 
 CUP ::= SC:sc{:
         GenericTreeNode cup = new GenericTreeNode(new Tipo("CUP", "CUP"));
@@ -637,10 +654,11 @@ OP ::= OPMULT:op{:
 
 OL ::= OPLOG:op{:
         RESULT=op;
-:}
-|OR:op{:
+:};
+
+OPL ::= OR:op{:
         RESULT=op;
-:}
+    :}
 |NOT:op{:
         RESULT=op;
 :}
@@ -802,26 +820,77 @@ LF ::= ID:i PARIZQ PAV:pfv PARDER{:
         RESULT=lf;
 :};
 
-PAV ::= PAV:pa CIERRE EXPRESION:ex {:
+PAV ::= PAV:pa COMA EXPRESION:ex{:
         GenericTreeNode pav= new GenericTreeNode(new Tipo("PAV", "PAV"));
         pav.addChild(pa);
         pav.addChild(ex);
+        if(dominioL.isEmpty() == true){
+                dominioL = ex.getData().getTipo();
+            }else{
+                dominioL = dominioL+" X "+ex.getData().getTipo();
+            }
         RESULT=pav;
 :};
 
 PAV ::= EXPRESION:ex {:
         GenericTreeNode pav= new GenericTreeNode(new Tipo("PAV", "PAV"));
+        if(dominioL.isEmpty() == true){
+                dominioL = ex.getData().getTipo();
+            }else{
+                dominioL = dominioL+" X "+ex.getData().getTipo();
+            }
         pav.addChild(ex);
         RESULT=pav;
 :};
 
 LP ::= ID:id PARIZQ PAV:pa PARDER{:
-        GenericTreeNode lp = new GenericTreeNode(new Tipo("LP", "LP"));
+        String tipo = "";
+        if(fun.buscar(id)!=null){
+            if(fun.prefijo(id, ambito)==true){
+                if(fun.buscarDominio(id).equals(dominioL)){
+                    tipo = fun.buscarRango(id);
+                }else{
+                    System.err.println("Los parametros no son compatibles con el procedimiento: "+ id);
+                    tipo = fun.buscarRango(id);
+                }
+            }else{
+                System.err.println("El procedimiento: "+id+ " no puede ser llamada en este ambito.");
+                tipo = fun.buscarRango(id);
+            }
+        }else{
+            System.err.println("El Procedimiento: "+id+" no esta declarada");
+            tipo = fun.buscarRango(id);
+        }
+        dominioL = "";
+        GenericTreeNode lp = new GenericTreeNode(new Tipo("LP", tipo));
         GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
         lp.addChild(i);
         lp.addChild(pa);
         RESULT=lp;
-:};
+:}|ID:id PARIZQ PARDER{:
+    String tipo = "";
+
+        if(fun.buscar(id)!=null){
+            if(fun.prefijo(id, ambito)==true){
+                if(fun.buscarDominio(id).equals("void")){
+                    tipo = fun.buscarRango(id);
+                }else{
+                    System.err.println("Los parametros no son compatibles con el procedimiento: "+ id);
+                    tipo = fun.buscarRango(id);
+                }
+            }else{
+                System.err.println("El procedimiento: "+id+ " no puede ser llamada en este ambito.");
+                tipo = fun.buscarRango(id);
+            }
+        }else{
+            System.err.println("El procedimiento: "+id+" no esta declarada");
+            tipo = fun.buscarRango(id);
+        }
+
+        GenericTreeNode lp= new GenericTreeNode(new Tipo("LP", tipo));
+        GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
+        lp.addChild(i);
+        RESULT=lp;:};
 
 EC ::= EA:is{:
         GenericTreeNode ec = new GenericTreeNode(new Tipo("EC", "EC"));
@@ -925,20 +994,44 @@ RF ::= FOR:fr SA:sa TO:t EXPRESION:ex DO:d S:s {:
         RESULT= rf;
 :};
 
-CONDICION ::= EX:ex OL CONDICION:ex2{:
-        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICION", "CONDICION"));
+CONDICION ::= CONDICION:ex OL CONDICIONOPL:ex2{:
+        String tipo="";
+        if(ex.getData().getTipo().equals("Integer") && ex2.getData().getTipo().equals("Integer")){
+            tipo= ex.getData().getTipo();
+        }else{
+            System.err.println("Las expresiones que esta tratando de comparar tienen tipos distintos");
+            tipo=ex.getData().getTipo();
+        }
+        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICION", tipo));
         eb.addChild(ex);
         eb.addChild(ex2);
         RESULT=eb;
-:}
-| EX:ar{:
-        GenericTreeNode ex = new GenericTreeNode(new Tipo("EB", "EB"));
+:}| CONDICIONOPL:opl{:GenericTreeNode a= new GenericTreeNode(new Tipo(opl.getData().getNombre(), opl.getData().getTipo()));
+        a.addChild(opl);
+        RESULT=a;:};
+
+
+CONDICIONOPL ::= CONDICIONOPL:opl OPL EX:ex{:
+    String tipo="";
+        if(opl.getData().getTipo().equals("Integer") && ex.getData().getTipo().equals("Integer")){
+            tipo= opl.getData().getTipo();
+        }else{
+            System.err.println("Las expresiones que esta tratando de comparar tienen tipos distintos");
+            tipo=opl.getData().getTipo();
+        }
+        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICIONOPL", tipo));
+        eb.addChild(opl);
+        eb.addChild(ex);
+        RESULT=eb;
+
+    :}| EX:ar{:
+        GenericTreeNode ex = new GenericTreeNode(new Tipo(ar.getData().getNombre(), ar.getData().getTipo()));
         ex.addChild(ar);
         RESULT=ex;
 :};
 
 EX ::= AR:ar{:
-        GenericTreeNode ex = new GenericTreeNode(new Tipo("EXPRESION", "EXPRESION"));
+        GenericTreeNode ex = new GenericTreeNode(new Tipo(ar.getData().getNombre(), ar.getData().getTipo()));
         ex.addChild(ar);
         RESULT=ex;
 :};

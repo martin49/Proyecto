@@ -4,9 +4,9 @@ var a,g,t:char;
 	h,f:Array[1..4] of Integer;
 	m: string[100];
 	procedure Q(gsd:Integer; fdas:char;);
-		var B,k:Integer;
+		var j,k:Integer;
 		procedure x;
-			var C,j,l:Integer;
+			var a,m,l:Integer;
 			begin
 				j :=3;
 				b := c+4;
@@ -26,11 +26,18 @@ var a,g,t:char;
 			b:=c*56;
 		end.
 begin
-
-  a := g;
-  b := h[3];
-  h[4] := b;
-  b := (c*4);
-  m := 'holhhhhhhhhhhhhh';
+	if b<4 then
+		begin
+			a := 'c';
+		end;
+	else 
+		begin
+			a := 'b';
+		end;
+	a := g;
+	b := h[3];
+	b := p(3,4,5,6,'b');
+    h[4] := t;
+  	b := (c*4);
+	m := 'holhhhhhhhhhhhhh';
 end.
-
