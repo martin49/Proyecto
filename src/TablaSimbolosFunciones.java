@@ -23,12 +23,12 @@ public class TablaSimbolosFunciones {
     
     
             
-    public tablaFunciones crear(String nombre, String tipo, String ambito)
+    public tablaFunciones crear(String nombre, String tipo, String ambito, int direccion)
     {        
         tablaFunciones simbolo = buscar(nombre);                            
         if(simbolo == null) // La variable no existe
         {
-            simbolo = new tablaFunciones(nombre, tipo, ambito);
+            simbolo = new tablaFunciones(nombre, tipo, ambito, direccion);
             //System.out.println("Agregando a tabla de simbolos con nombre: " + nombre);
             tablaSimbolos.put(nombre, simbolo);            
             //System.out.println("Variable creada exitosamente!!!");
@@ -73,7 +73,7 @@ public class TablaSimbolosFunciones {
         idMetodo.remove(size);
         String tmp = ambito.replace(id,"");
         return tmp.substring(0,tmp.length()-1);
-    } 
+    }
     
     public tablaFunciones buscar(String nombre)
     {
@@ -104,7 +104,7 @@ public class TablaSimbolosFunciones {
         System.out.println("    Valores de la tabla de simbolos:");
         for (tablaFunciones s : tablaSimbolos.values())
             System.out.println(String.format("      "
-                    + "Nombre: %s, tipo: %s, ambito: %s",s.nombre, s.tipo, s.ambito));        
+                    + "Nombre: %s, tipo: %s, ambito: %s, Direccion: %d ",s.nombre, s.tipo, s.ambito, s.direccion));        
         System.out.println("Saliendo de imprimir en TablaSimbolos\n ");        
     }
 }

@@ -20,14 +20,15 @@ public class Funsiones {
     String ambito;
     String dominio;
     String rango;
-    
-    public Funsiones(String nombre, String tipo, String ambito, String dominio, String rango) 
+    int num_parametros;
+    public Funsiones(String nombre, String tipo, String ambito, String dominio, String rango, int num_parametros) 
     {
         this.nombre = nombre;       
         this.tipo = tipo;
         this.ambito = ambito;
         this.dominio = dominio;
         this.rango = rango;
+        this.num_parametros = num_parametros;
     }
     
 }
@@ -44,12 +45,12 @@ class TablaFunsiones {
     }
     
             
-    public Funsiones crear(String nombre, String tipo, String ambito, String dominio, String rango)
+    public Funsiones crear(String nombre, String tipo, String ambito, String dominio, String rango, int num_parametros)
     {        
         Funsiones simbolo = buscar(nombre);                            
         if(simbolo == null) // La variable no existe
         {
-            simbolo = new Funsiones(nombre, tipo, ambito, dominio, rango);
+            simbolo = new Funsiones(nombre, tipo, ambito, dominio, rango, num_parametros);
             //System.out.println("Agregando a tabla de simbolos con nombre: " + nombre);
             tablaSimbolos.put(nombre, simbolo);            
             //System.out.println("Variable creada exitosamente!!!");
@@ -121,7 +122,7 @@ class TablaFunsiones {
         System.out.println("    Valores de la tabla de simbolos:");
         for (Funsiones s : tablaSimbolos.values())
             System.out.println(String.format("      "
-                    + "Nombre: %s, tipo: %s, ambito: %s",s.nombre, s.tipo, s.ambito));        
+                    + "Nombre: %s, tipo: %s, ambito: %s, parametros: %d",s.nombre, s.tipo, s.ambito,s.num_parametros));        
         System.out.println("Saliendo de imprimir en TablaSimbolos\n ");        
     }
     
