@@ -464,29 +464,65 @@ public class parser extends java_cup.runtime.lr_parser {
     TablaIntermedio cuadruTable = new TablaIntermedio();
 
 
+    public ArrayList<Cuadruplo> getCuadruplos(){
+        return action_obj.cuadruplos;
+    }
+
+
+
+
+
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$parser$actions {
 
 
 
-    public List<GenericTreeNode> limpiar(GenericTree arbol){
-         List<GenericTreeNode> tree = arbol.list();
-                for (int i = 0; i < tree.size(); i++) {
+    TablaIntermedio cuadTable = new TablaIntermedio();
+    ArrayList<Cuadrupla> cuadruplas = new ArrayList<Cuadrupla>();
+    int temp = 0;
+    int etq = 0;
+    int sigCuad = 0;
 
-                    for(int j = 0; j <tree.get(i).getNumberOfChildren(); j++){
-                         if(tree.get(i).getData().getNombre() == tree.get(i).getChildren().get(j).getData().getNombre()) {
+    public void gen(String op, String arg1, String arg2, String res){
+        Cuadrupla c = new Cuadrupla(op, arg1, arg2, res);
+        cuadTable.agregarCuad(c);
+        cuadruplas.add(c);
+        sigCuad = cuadTable.tabla.size();
+    }
 
+    public void gen(String op, String arg1, String res){
+        Cuadrupla c = new Cuadrupla(op, arg1, res);
+        cuadTable.agregarCuad(c);
+        cuadruplas.add(c);
+        sigCuad = cuadTable.tabla.size();
+    }
 
-                           tree.add(i, tree.get(i).getChildren().get(j));
-                           tree.remove(i + 1);
-                           System.out.println("hola");
-                         }
-                    }
+    public void gen(String op, String res){
+        Cuadrupla c = new Cuadrupla(op, res);
+        cuadTable.agregarCuad(c);
+        cuadruplas.add(c);
+        sigCuad = cuadTable.tabla.size();
+    }
 
-                }
+    public String newTemp(){
+        return "temp"+(temp++);
+    }
 
-                return tree;
+    public String newEtq(){
+        return "_etq"+(etq++);
+    }
+
+    public String newEtqEx(String valor){
+        return "_etq"+valor;
+    }
+
+    public void completar(Lista lista, String etiqueta){
+        Lista.completar(lista, etiqueta);
+    }
+
+    public void completar(Lista lista1, Lista lista2){
+        return Lista.fusionar(lista1, lista2);
     }
 
     public TablaIntermedio inta(GenericTree arbol){

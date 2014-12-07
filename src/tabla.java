@@ -100,7 +100,7 @@ class TablaSimbolos {
         System.out.println("Saliendo de imprimir en TablaSimbolos\n ");
     }
     
-    public boolean isinteger(String n){
+    public static boolean isinteger(String n){
         try{
             Integer.parseInt(n);
         }catch(NumberFormatException e){

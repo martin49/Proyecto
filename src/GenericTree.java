@@ -234,6 +234,7 @@ public class GenericTree {
 
     }
 
+
     public List<GenericTreeNode> buscar(String dataToFind) {
         List<GenericTreeNode> nodos;
         nodos = null;
@@ -244,6 +245,8 @@ public class GenericTree {
 
         return nodos;
     }
+
+
 
     private List<GenericTreeNode> buscarArreglo(GenericTreeNode currentNode, String dataToFind) {
         List<GenericTreeNode> nodos = new ArrayList<GenericTreeNode>();
@@ -262,6 +265,18 @@ public class GenericTree {
         }
 
         return nodos;
+    }
+
+
+    public  boolean verificar(){
+        boolean valor = false;
+
+        for (int i = 0; i < hijos.size(); i++) {
+            if (hijos.get(i).hasChildren()){
+                valor = true;
+            }
+        }
+        return valor;
     }
 
 

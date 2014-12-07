@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4be8c687-c9eb-4ba7-a1dd-ba2c5550efd2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/EjemploCUP.class" afterPath="$PROJECT_DIR$/build/classes/EjemploCUP.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/GenericTreeTraversalOrderEnum.class" afterPath="$PROJECT_DIR$/build/classes/GenericTreeTraversalOrderEnum.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/parser$CUP$parser$actions.class" afterPath="$PROJECT_DIR$/build/classes/parser$CUP$parser$actions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/parser.class" afterPath="$PROJECT_DIR$/build/classes/parser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GenericTreeTraversalOrderEnum.java" afterPath="$PROJECT_DIR$/src/GenericTreeTraversalOrderEnum.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/GenericTree.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/GenericTree.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/GenericTreeTraversalOrderEnum.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/GenericTreeTraversalOrderEnum.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/TablaIntermedio.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/TablaIntermedio.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/TablaSimbolos.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/TablaSimbolos.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/parser$CUP$parser$actions.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/parser$CUP$parser$actions.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/parser.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/parser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GenericTree.java" afterPath="$PROJECT_DIR$/src/GenericTree.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TablaIntermedio.java" afterPath="$PROJECT_DIR$/src/TablaIntermedio.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/proyectonetbeans/parser.java" afterPath="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proyecto.cup" afterPath="$PROJECT_DIR$/proyecto.cup" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proyecto.pas" afterPath="$PROJECT_DIR$/proyecto.pas" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tabla.java" afterPath="$PROJECT_DIR$/src/tabla.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Proyecto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,40 +40,78 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EjemploCUP.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/EjemploCUP.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="2085">
-              <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#5532#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parser.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="parser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6943" max-vertical-offset="39090">
-              <caret line="481" column="46" selection-start-line="481" selection-start-column="46" selection-end-line="481" selection-end-column="46" />
+            <state vertical-scroll-proportion="5.4611397" vertical-offset="6817" max-vertical-offset="39510">
+              <caret line="605" column="29" selection-start-line="605" selection-start-column="29" selection-end-line="605" selection-end-column="29" />
               <folding>
-                <element signature="e#0#136732#0" expanded="true" />
-                <element signature="e#355#386#0" expanded="false" />
-                <element signature="e#486#487#0" expanded="false" />
-                <element signature="e#510#511#0" expanded="false" />
-                <element signature="e#25533#25587#1" expanded="false" />
+                <element signature="e#25512#25513#0" expanded="true" />
+                <element signature="e#25556#25557#0" expanded="true" />
+                <element signature="e#25631#25685#1" expanded="true" />
+                <element signature="e#25822#25833#0" expanded="true" />
+                <element signature="e#26578#26579#0" expanded="true" />
+                <element signature="e#26616#26617#0" expanded="true" />
+                <element signature="e#26645#26646#0" expanded="true" />
+                <element signature="e#26682#26683#0" expanded="true" />
+                <element signature="e#26725#26726#0" expanded="true" />
+                <element signature="e#26760#26761#0" expanded="true" />
+                <element signature="e#26818#26819#0" expanded="true" />
+                <element signature="e#26866#26867#0" expanded="true" />
+                <element signature="e#26922#26923#0" expanded="true" />
+                <element signature="e#26975#26976#0" expanded="true" />
+                <element signature="e#27968#27969#0" expanded="true" />
+                <element signature="e#27998#27999#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenericTree.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GenericTree.java">
+      <file leaf-file-name="ArrayList.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/util/ArrayList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="26.74074" vertical-offset="932" max-vertical-offset="3975">
-              <caret line="16" column="19" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="5513" max-vertical-offset="16695">
+              <caret line="410" column="0" selection-start-line="410" selection-start-column="0" selection-end-line="410" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tablaFunciones.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tablaFunciones.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="62" max-vertical-offset="480">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TablaSimbolosFunciones.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TablaSimbolosFunciones.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="937" max-vertical-offset="1485">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tabla.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tabla.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="52" max-vertical-offset="1575">
+              <caret line="19" column="19" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TablaIntermedio.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TablaIntermedio.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="930">
+              <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -77,23 +120,23 @@
       <file leaf-file-name="proyecto.pas" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proyecto.pas">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.0" vertical-offset="255" max-vertical-offset="615">
-              <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+            <state vertical-scroll-proportion="-3.0" vertical-offset="0" max-vertical-offset="225">
+              <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="proyecto.cup" pinned="false" current-in-tab="true">
+      <file leaf-file-name="proyecto.cup" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proyecto.cup">
-          <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-38.09621" vertical-offset="13907" max-vertical-offset="14250">
-              <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+            <state vertical-scroll-proportion="1.0344827" vertical-offset="2385" max-vertical-offset="14790">
+              <caret line="157" column="47" selection-start-line="157" selection-start-column="47" selection-end-line="157" selection-end-column="47" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
@@ -123,10 +166,12 @@
         <option value="$PROJECT_DIR$/src/clases/GenericTree.java" />
         <option value="$PROJECT_DIR$/src/Tipo.java" />
         <option value="$PROJECT_DIR$/copia" />
-        <option value="$PROJECT_DIR$/src/GenericTree.java" />
         <option value="$PROJECT_DIR$/proyecto.cup" />
-        <option value="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
+        <option value="$PROJECT_DIR$/src/GenericTree.java" />
+        <option value="$PROJECT_DIR$/src/tabla.java" />
+        <option value="$PROJECT_DIR$/src/TablaIntermedio.java" />
         <option value="$PROJECT_DIR$/proyecto.pas" />
+        <option value="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
       </list>
     </option>
   </component>
@@ -135,9 +180,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="24" />
+    <option name="y" value="-4" />
     <option name="width" value="1301" />
-    <option name="height" value="744" />
+    <option name="height" value="772" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -252,8 +297,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -271,6 +316,7 @@
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
     <property name="FullScreen" value="false" />
+    <property name="full.screen.before.presentation.mode" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -527,7 +573,21 @@
       <workItem from="1417312679575" duration="19000" />
       <workItem from="1417367754056" duration="5424000" />
       <workItem from="1417564897131" duration="13615000" />
-      <workItem from="1417578896341" duration="2152000" />
+      <workItem from="1417578896341" duration="9169000" />
+      <workItem from="1417610114655" duration="2667000" />
+      <workItem from="1417629777569" duration="3338000" />
+      <workItem from="1417634203385" duration="12801000" />
+      <workItem from="1417657944632" duration="6192000" />
+      <workItem from="1417696430123" duration="2617000" />
+      <workItem from="1417706790149" duration="1901000" />
+      <workItem from="1417717541448" duration="2262000" />
+      <workItem from="1417720952374" duration="14430000" />
+      <workItem from="1417741567060" duration="7672000" />
+      <workItem from="1417785675035" duration="865000" />
+      <workItem from="1417809302754" duration="13324000" />
+      <workItem from="1417823214280" duration="20000" />
+      <workItem from="1417826832463" duration="21428000" />
+      <workItem from="1417901627206" duration="19404000" />
     </task>
     <task id="LOCAL-00001" summary="arbol">
       <created>1417155780738</created>
@@ -545,11 +605,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64927000" />
+    <option name="totallyTimeSpent" value="180865000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -572,7 +632,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17294389" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39053255" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32988167" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24980783" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -580,20 +640,20 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17294389" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35798818" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24980783" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39053255" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -602,10 +662,10 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32988167" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -636,14 +696,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/proyecto.pas">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="795" max-vertical-offset="915">
-          <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GenericTree.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3645" max-vertical-offset="3975">
@@ -653,14 +705,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.cup">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="100">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
@@ -668,11 +720,22 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="5917" max-vertical-offset="42525">
           <caret line="557" column="0" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="18" />
           <folding>
-            <element signature="e#0#136732#0" expanded="true" />
-            <element signature="e#355#386#0" expanded="false" />
-            <element signature="e#486#487#0" expanded="false" />
-            <element signature="e#510#511#0" expanded="false" />
-            <element signature="e#25533#25587#1" expanded="false" />
+            <element signature="e#25512#25513#0" expanded="true" />
+            <element signature="e#25556#25557#0" expanded="true" />
+            <element signature="e#25631#25685#1" expanded="true" />
+            <element signature="e#25822#25833#0" expanded="true" />
+            <element signature="e#26578#26579#0" expanded="true" />
+            <element signature="e#26616#26617#0" expanded="true" />
+            <element signature="e#26645#26646#0" expanded="true" />
+            <element signature="e#26682#26683#0" expanded="true" />
+            <element signature="e#26725#26726#0" expanded="true" />
+            <element signature="e#26760#26761#0" expanded="true" />
+            <element signature="e#26818#26819#0" expanded="true" />
+            <element signature="e#26866#26867#0" expanded="true" />
+            <element signature="e#26922#26923#0" expanded="true" />
+            <element signature="e#26975#26976#0" expanded="true" />
+            <element signature="e#27968#27969#0" expanded="true" />
+            <element signature="e#27998#27999#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -708,14 +771,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.cup">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="100">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
@@ -723,11 +786,22 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="5917" max-vertical-offset="42525">
           <caret line="557" column="0" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="18" />
           <folding>
-            <element signature="e#0#136732#0" expanded="true" />
-            <element signature="e#355#386#0" expanded="false" />
-            <element signature="e#486#487#0" expanded="false" />
-            <element signature="e#510#511#0" expanded="false" />
-            <element signature="e#25533#25587#1" expanded="false" />
+            <element signature="e#25512#25513#0" expanded="true" />
+            <element signature="e#25556#25557#0" expanded="true" />
+            <element signature="e#25631#25685#1" expanded="true" />
+            <element signature="e#25822#25833#0" expanded="true" />
+            <element signature="e#26578#26579#0" expanded="true" />
+            <element signature="e#26616#26617#0" expanded="true" />
+            <element signature="e#26645#26646#0" expanded="true" />
+            <element signature="e#26682#26683#0" expanded="true" />
+            <element signature="e#26725#26726#0" expanded="true" />
+            <element signature="e#26760#26761#0" expanded="true" />
+            <element signature="e#26818#26819#0" expanded="true" />
+            <element signature="e#26866#26867#0" expanded="true" />
+            <element signature="e#26922#26923#0" expanded="true" />
+            <element signature="e#26975#26976#0" expanded="true" />
+            <element signature="e#27968#27969#0" expanded="true" />
+            <element signature="e#27998#27999#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -763,14 +837,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.cup">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1260" max-vertical-offset="3945">
           <caret line="84" column="43" selection-start-line="84" selection-start-column="43" selection-end-line="84" selection-end-column="43" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/copia">
@@ -792,11 +866,22 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="2850" max-vertical-offset="9945">
           <caret line="219" column="62" selection-start-line="219" selection-start-column="62" selection-end-line="219" selection-end-column="62" />
           <folding>
-            <element signature="e#0#136732#0" expanded="true" />
-            <element signature="e#355#386#0" expanded="false" />
-            <element signature="e#486#487#0" expanded="false" />
-            <element signature="e#510#511#0" expanded="false" />
-            <element signature="e#25533#25587#1" expanded="false" />
+            <element signature="e#25512#25513#0" expanded="true" />
+            <element signature="e#25556#25557#0" expanded="true" />
+            <element signature="e#25631#25685#1" expanded="true" />
+            <element signature="e#25822#25833#0" expanded="true" />
+            <element signature="e#26578#26579#0" expanded="true" />
+            <element signature="e#26616#26617#0" expanded="true" />
+            <element signature="e#26645#26646#0" expanded="true" />
+            <element signature="e#26682#26683#0" expanded="true" />
+            <element signature="e#26725#26726#0" expanded="true" />
+            <element signature="e#26760#26761#0" expanded="true" />
+            <element signature="e#26818#26819#0" expanded="true" />
+            <element signature="e#26866#26867#0" expanded="true" />
+            <element signature="e#26922#26923#0" expanded="true" />
+            <element signature="e#26975#26976#0" expanded="true" />
+            <element signature="e#27968#27969#0" expanded="true" />
+            <element signature="e#27998#27999#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -832,14 +917,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.cup">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2055" max-vertical-offset="2295">
           <caret line="137" column="69" selection-start-line="137" selection-start-column="69" selection-end-line="137" selection-end-column="69" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Proyecto.flex">
@@ -876,11 +961,22 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="5512" max-vertical-offset="6015">
           <caret line="306" column="20" selection-start-line="306" selection-start-column="20" selection-end-line="306" selection-end-column="20" />
           <folding>
-            <element signature="e#0#136732#0" expanded="true" />
-            <element signature="e#355#386#0" expanded="false" />
-            <element signature="e#486#487#0" expanded="false" />
-            <element signature="e#510#511#0" expanded="false" />
-            <element signature="e#25533#25587#1" expanded="false" />
+            <element signature="e#25512#25513#0" expanded="true" />
+            <element signature="e#25556#25557#0" expanded="true" />
+            <element signature="e#25631#25685#1" expanded="true" />
+            <element signature="e#25822#25833#0" expanded="true" />
+            <element signature="e#26578#26579#0" expanded="true" />
+            <element signature="e#26616#26617#0" expanded="true" />
+            <element signature="e#26645#26646#0" expanded="true" />
+            <element signature="e#26682#26683#0" expanded="true" />
+            <element signature="e#26725#26726#0" expanded="true" />
+            <element signature="e#26760#26761#0" expanded="true" />
+            <element signature="e#26818#26819#0" expanded="true" />
+            <element signature="e#26866#26867#0" expanded="true" />
+            <element signature="e#26922#26923#0" expanded="true" />
+            <element signature="e#26975#26976#0" expanded="true" />
+            <element signature="e#27968#27969#0" expanded="true" />
+            <element signature="e#27998#27999#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -894,14 +990,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.cup">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1560" max-vertical-offset="4230">
           <caret line="104" column="72" selection-start-line="104" selection-start-column="72" selection-end-line="104" selection-end-column="72" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Proyecto.flex">
@@ -938,11 +1034,22 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="5895" max-vertical-offset="9480">
           <caret line="238" column="36" selection-start-line="238" selection-start-column="36" selection-end-line="238" selection-end-column="36" />
           <folding>
-            <element signature="e#0#136732#0" expanded="true" />
-            <element signature="e#355#386#0" expanded="false" />
-            <element signature="e#486#487#0" expanded="false" />
-            <element signature="e#510#511#0" expanded="false" />
-            <element signature="e#25533#25587#1" expanded="false" />
+            <element signature="e#25512#25513#0" expanded="true" />
+            <element signature="e#25556#25557#0" expanded="true" />
+            <element signature="e#25631#25685#1" expanded="true" />
+            <element signature="e#25822#25833#0" expanded="true" />
+            <element signature="e#26578#26579#0" expanded="true" />
+            <element signature="e#26616#26617#0" expanded="true" />
+            <element signature="e#26645#26646#0" expanded="true" />
+            <element signature="e#26682#26683#0" expanded="true" />
+            <element signature="e#26725#26726#0" expanded="true" />
+            <element signature="e#26760#26761#0" expanded="true" />
+            <element signature="e#26818#26819#0" expanded="true" />
+            <element signature="e#26866#26867#0" expanded="true" />
+            <element signature="e#26922#26923#0" expanded="true" />
+            <element signature="e#26975#26976#0" expanded="true" />
+            <element signature="e#27968#27969#0" expanded="true" />
+            <element signature="e#27998#27999#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -968,48 +1075,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cuadrupla.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="365" max-vertical-offset="975">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TablaIntermedio.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="335" max-vertical-offset="720">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TablaSimbolosFunciones.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1042" max-vertical-offset="1485">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tablaFunciones.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21558441" vertical-offset="142" max-vertical-offset="540">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tabla.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-37.74074" vertical-offset="16" max-vertical-offset="1575">
-          <caret line="82" column="5" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Funsiones.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.75418997" vertical-offset="1035" max-vertical-offset="1815">
           <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="108" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1017,13 +1086,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="150">
           <caret line="0" column="12" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GenericTreeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1430" max-vertical-offset="1815">
-          <caret line="114" column="27" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1038,44 +1100,109 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/GenericTreeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1430" max-vertical-offset="1815">
+          <caret line="114" column="27" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cuadrupla.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27272728" vertical-offset="0" max-vertical-offset="975">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GenericTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="26.74074" vertical-offset="932" max-vertical-offset="3975">
-          <caret line="16" column="19" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3050" max-vertical-offset="4200">
+          <caret line="280" column="0" selection-start-line="280" selection-start-column="0" selection-end-line="280" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
+    <entry file="file://$PROJECT_DIR$/src/TablaSimbolosFunciones.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6943" max-vertical-offset="39090">
-          <caret line="481" column="46" selection-start-line="481" selection-start-column="46" selection-end-line="481" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#136732#0" expanded="true" />
-            <element signature="e#355#386#0" expanded="false" />
-            <element signature="e#486#487#0" expanded="false" />
-            <element signature="e#510#511#0" expanded="false" />
-            <element signature="e#25533#25587#1" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="937" max-vertical-offset="1485">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tablaFunciones.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="480">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TablaIntermedio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="930">
+          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tabla.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1620">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5513" max-vertical-offset="16695">
+          <caret line="410" column="0" selection-start-line="410" selection-start-column="0" selection-end-line="410" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.pas">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.0" vertical-offset="255" max-vertical-offset="615">
-          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+        <state vertical-scroll-proportion="-3.0" vertical-offset="0" max-vertical-offset="225">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.cup">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0344827" vertical-offset="2385" max-vertical-offset="14790">
+          <caret line="157" column="47" selection-start-line="157" selection-start-column="47" selection-end-line="157" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-38.09621" vertical-offset="13907" max-vertical-offset="14250">
-          <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
-          <folding />
+        <state vertical-scroll-proportion="5.4611397" vertical-offset="6817" max-vertical-offset="39510">
+          <caret line="605" column="29" selection-start-line="605" selection-start-column="29" selection-end-line="605" selection-end-column="29" />
+          <folding>
+            <element signature="e#25512#25513#0" expanded="true" />
+            <element signature="e#25556#25557#0" expanded="true" />
+            <element signature="e#25631#25685#1" expanded="true" />
+            <element signature="e#25822#25833#0" expanded="true" />
+            <element signature="e#26578#26579#0" expanded="true" />
+            <element signature="e#26616#26617#0" expanded="true" />
+            <element signature="e#26645#26646#0" expanded="true" />
+            <element signature="e#26682#26683#0" expanded="true" />
+            <element signature="e#26725#26726#0" expanded="true" />
+            <element signature="e#26760#26761#0" expanded="true" />
+            <element signature="e#26818#26819#0" expanded="true" />
+            <element signature="e#26866#26867#0" expanded="true" />
+            <element signature="e#26922#26923#0" expanded="true" />
+            <element signature="e#26975#26976#0" expanded="true" />
+            <element signature="e#27968#27969#0" expanded="true" />
+            <element signature="e#27998#27999#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

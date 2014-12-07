@@ -29,6 +29,20 @@ public class TablaIntermedio {
 
         tabla.add(cuadru);
     }
+
+    public void agregarTabla(TablaIntermedio ta){
+        for (int i = 0; i < ta.getTabla().size(); i++) {
+            tabla.add(ta.getTabla().get(i));
+        }
+    }
+
+    public void eliminar(){
+        for (int i = 0; i <tabla.size() ; i++) {
+            if(tabla.get(i).getOperador().equals(":=") && tabla.get(i).getArg1().equals(tabla.get(i).getResultado())){
+                tabla.remove(i);
+            }
+        }
+    }
     public ArrayList<Cuadrupla> getTabla(){
 
         return this.tabla;
