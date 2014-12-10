@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4be8c687-c9eb-4ba7-a1dd-ba2c5550efd2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/Funsiones.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/Funsiones.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/TablaFunsiones.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/TablaFunsiones.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/TablaSimbolosFunciones.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/TablaSimbolosFunciones.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/parser$CUP$parser$actions.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/parser$CUP$parser$actions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/parser.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/parser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/tablaFunciones.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/tablaFunciones.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/CodigoFinal.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/CodigoFinal.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/GenericTree.class" afterPath="$PROJECT_DIR$/build/classes/GenericTree.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/TablaIntermedio.class" afterPath="$PROJECT_DIR$/build/classes/TablaIntermedio.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/TablaSimbolos.class" afterPath="$PROJECT_DIR$/build/classes/TablaSimbolos.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/parser$CUP$parser$actions.class" afterPath="$PROJECT_DIR$/build/classes/parser$CUP$parser$actions.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/proyectonetbeans/parser.java" afterPath="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proyecto.cup" afterPath="$PROJECT_DIR$/proyecto.cup" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proyecto.pas" afterPath="$PROJECT_DIR$/proyecto.pas" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Proyecto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,9 +39,15 @@
       <file leaf-file-name="parser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.91450775" vertical-offset="7867" max-vertical-offset="46125">
-              <caret line="558" column="63" selection-start-line="558" selection-start-column="63" selection-end-line="558" selection-end-column="63" />
-              <folding />
+            <state vertical-scroll-proportion="0.9222798" vertical-offset="12724" max-vertical-offset="46395">
+              <caret line="882" column="0" selection-start-line="882" selection-start-column="0" selection-end-line="882" selection-end-column="0" />
+              <folding>
+                <element signature="e#28252#28306#1" expanded="true" />
+                <element signature="e#29049#29057#0" expanded="true" />
+                <element signature="e#29776#29793#0" expanded="true" />
+                <element signature="e#38310#38311#0" expanded="true" />
+                <element signature="e#38340#38341#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,8 +107,8 @@
       <file leaf-file-name="proyecto.pas" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proyecto.pas">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-              <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="420">
+              <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -112,8 +117,8 @@
       <file leaf-file-name="proyecto.cup" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proyecto.cup">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1950" max-vertical-offset="19350">
-              <caret line="130" column="21" selection-start-line="130" selection-start-column="21" selection-end-line="130" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2025" max-vertical-offset="19545">
+              <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -152,8 +157,8 @@
         <option value="$PROJECT_DIR$/src/tabla.java" />
         <option value="$PROJECT_DIR$/src/TablaIntermedio.java" />
         <option value="$PROJECT_DIR$/proyecto.cup" />
-        <option value="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
         <option value="$PROJECT_DIR$/proyecto.pas" />
+        <option value="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
       </list>
     </option>
   </component>
@@ -536,7 +541,7 @@
       <workItem from="1417901627206" duration="25036000" />
       <workItem from="1417927764039" duration="23000" />
       <workItem from="1417989304113" duration="430000" />
-      <workItem from="1418177432969" duration="492000" />
+      <workItem from="1418177432969" duration="665000" />
     </task>
     <task id="LOCAL-00001" summary="arbol">
       <created>1417155780738</created>
@@ -554,7 +559,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187442000" />
+    <option name="totallyTimeSpent" value="187615000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
@@ -667,7 +672,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5917" max-vertical-offset="42525">
           <caret line="557" column="0" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="18" />
-          <folding />
+          <folding>
+            <element signature="e#28252#28306#1" expanded="true" />
+            <element signature="e#29049#29057#0" expanded="true" />
+            <element signature="e#29776#29793#0" expanded="true" />
+            <element signature="e#38310#38311#0" expanded="true" />
+            <element signature="e#38340#38341#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -715,7 +726,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5917" max-vertical-offset="42525">
           <caret line="557" column="0" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="18" />
-          <folding />
+          <folding>
+            <element signature="e#28252#28306#1" expanded="true" />
+            <element signature="e#29049#29057#0" expanded="true" />
+            <element signature="e#29776#29793#0" expanded="true" />
+            <element signature="e#38310#38311#0" expanded="true" />
+            <element signature="e#38340#38341#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -777,7 +794,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2850" max-vertical-offset="9945">
           <caret line="219" column="62" selection-start-line="219" selection-start-column="62" selection-end-line="219" selection-end-column="62" />
-          <folding />
+          <folding>
+            <element signature="e#28252#28306#1" expanded="true" />
+            <element signature="e#29049#29057#0" expanded="true" />
+            <element signature="e#29776#29793#0" expanded="true" />
+            <element signature="e#38310#38311#0" expanded="true" />
+            <element signature="e#38340#38341#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -854,7 +877,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5512" max-vertical-offset="6015">
           <caret line="306" column="20" selection-start-line="306" selection-start-column="20" selection-end-line="306" selection-end-column="20" />
-          <folding />
+          <folding>
+            <element signature="e#28252#28306#1" expanded="true" />
+            <element signature="e#29049#29057#0" expanded="true" />
+            <element signature="e#29776#29793#0" expanded="true" />
+            <element signature="e#38310#38311#0" expanded="true" />
+            <element signature="e#38340#38341#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -909,7 +938,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5895" max-vertical-offset="9480">
           <caret line="238" column="36" selection-start-line="238" selection-start-column="36" selection-end-line="238" selection-end-column="36" />
-          <folding />
+          <folding>
+            <element signature="e#28252#28306#1" expanded="true" />
+            <element signature="e#29049#29057#0" expanded="true" />
+            <element signature="e#29776#29793#0" expanded="true" />
+            <element signature="e#38310#38311#0" expanded="true" />
+            <element signature="e#38340#38341#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -995,8 +1030,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.cup">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1950" max-vertical-offset="19350">
-          <caret line="130" column="21" selection-start-line="130" selection-start-column="21" selection-end-line="130" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2025" max-vertical-offset="19545">
+          <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -1016,8 +1051,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.pas">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="420">
+          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1040,9 +1075,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.91450775" vertical-offset="7867" max-vertical-offset="46125">
-          <caret line="558" column="63" selection-start-line="558" selection-start-column="63" selection-end-line="558" selection-end-column="63" />
-          <folding />
+        <state vertical-scroll-proportion="0.9222798" vertical-offset="12724" max-vertical-offset="46395">
+          <caret line="882" column="0" selection-start-line="882" selection-start-column="0" selection-end-line="882" selection-end-column="0" />
+          <folding>
+            <element signature="e#28252#28306#1" expanded="true" />
+            <element signature="e#29049#29057#0" expanded="true" />
+            <element signature="e#29776#29793#0" expanded="true" />
+            <element signature="e#38310#38311#0" expanded="true" />
+            <element signature="e#38340#38341#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
