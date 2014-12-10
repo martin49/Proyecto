@@ -12,7 +12,7 @@
 import java.util.ArrayList;
 
 public class TablaIntermedio {
-    public ArrayList<Cuadrupla> tabla;
+    public static ArrayList<Cuadrupla> tabla;
     
     public TablaIntermedio(){
 
