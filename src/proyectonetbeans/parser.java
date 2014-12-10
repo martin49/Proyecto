@@ -503,9 +503,7 @@ public class parser extends java_cup.runtime.lr_parser {
     TablaIntermedio cuadruTable = new TablaIntermedio();
 
 
-    public ArrayList<Cuadruplo> getCuadruplos(){
-        return action_obj.cuadruplos;
-    }
+
 
 
 
@@ -558,19 +556,18 @@ class CUP$parser$actions {
         pro.addChild(cup);
         tree.setRoot(pro);
 
-        List<GenericTreeNode> arbol = limpiar(tree);
+        
                 System.out.println("Raiz:"+tree.getRoot());
                 System.out.println("--------------------------");
-                for (int i = 0; i < arbol.size(); i++) {
-                    System.out.println("Padre:"+arbol.get(i).getData().getNombre());
+                for (int i = 0; i < tree.list().size(); i++) {
+                    System.out.println("Padre:"+tree.list().get(i).getData().getNombre());
                     System.out.println();
                     System.out.println("Hijos:"+tree.Imprimir(i));
                     System.out.println("-------------------------------");
                 }
         //simbolo.imprimir();
         //tfuncion.imprimir();
-        cuadruTable = inta(tree);
-        cuadruTable.PrintTabla();
+        
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("Programa",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
