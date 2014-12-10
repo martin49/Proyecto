@@ -548,25 +548,16 @@ class CUP$parser$actions {
               String hijoNombre = hijoNodo.getData().getNombre();
 
               System.out.println("nHijo: "+hijoNombre);
-              if(hijoNombre.equals("LA")){
-                String tipo = simbolo.buscarTipo(hijoNodo.getData().getNombre()).substring(11,simbolo.buscarTipo(hijoNodo.getData().getNombre()).length()-1);
-
-
-                System.out.println(tipo);
-
-              }
-
-              if (TablaSimbolos.isinteger(hijoNombre)==false) {
+              if(TablaSimbolos.isinteger(hijoNombre)==false) {
                 pase = false;
                 if (hijoNodo.hasChildren()) {
 
                   List<GenericTreeNode> ultimoHijos = new ArrayList<GenericTreeNode>();
                   if ((hijoNodo.getNumberOfChildren() == 1) && (!hijoNombre.equals(hijoNodo.getChildren().get(0).getData().getNombre())) && (TablaSimbolos.isinteger(hijoNodo.getChildren().get(0).getData().getNombre()))) {
 
-                    GenericTreeNode id = comprobar(hijoNodo, hijoNodo.getData().nombre);
-                    hijoNodo.setChildren(id.getChildren());
+                    GenericTreeNode ultimo = comprobar(hijoNodo, hijoNombre);
+                    hijoNodo.setChildren(ultimo.getChildren());
                     pase = true;
-
                     if (padreNombre.equals("SA")) {
                       temporal.add(":=");
                       temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
@@ -593,33 +584,7 @@ class CUP$parser$actions {
                     }
 
 
-                  }else if(hijoNodo.getNumberOfChildren()==1 && hijoNombre.equals(hijoNodo.getChildren().get(0).getData().getNombre())){
-
-                    pase = true;
-                    if (padreNombre.equals("SA")) {
-                      temporal.add(":=");
-                      temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                      //tabla.Ingresar(":=", "", hijoNombre);
-                      //valores.add(hijoNombre);
-                      //valores.add(":=");
-                    } else if (padreNodo.getData().getNombre().equals("AR")) {
-                      temporal.add("+");
-                      temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                      System.out.println("se agrego:");
-                      System.out.println(temporal);
-
-                    } else if (padreNodo.getData().getNombre().equals("AM")) {
-                      temporal.add("*");
-                      temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                      System.out.println("se agrego:");
-                      System.out.println(temporal);
-
-
-                    }
-                  }
-
-                  else {
-
+                  } else {
 
                     ultimoHijos.add(hijoNodo);
                     inta(ultimoHijos);
@@ -822,7 +787,7 @@ class CUP$parser$actions {
       switch (CUP$parser$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // Programa ::= CP ZD CUP
+          case 0: // Programa ::= CP ZD CUP 
             {
               GenericTree RESULT =null;
 		int cpleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -834,7 +799,7 @@ class CUP$parser$actions {
 		int cupleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cupright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode cup = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-
+		
         GenericTree tree= new GenericTree();
         GenericTreeNode pro= new GenericTreeNode(new Tipo("Programa", "Programa"));
         pro.addChild(cp);
@@ -854,7 +819,6 @@ class CUP$parser$actions {
         //tfuncion.imprimir();
         List<GenericTreeNode> spunki = tree.buscar("SA");
         inta(spunki);
-              tabla.PrintTabla();
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("Programa",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1942,7 +1906,7 @@ class CUP$parser$actions {
 		int laright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode la = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-            GenericTreeNode ida = new GenericTreeNode(new Tipo("LA", la.getData().getTipo()));
+            GenericTreeNode ida = new GenericTreeNode(new Tipo(la.getData().getNombre(), la.getData().getTipo()));
             ida.addChild(la);
             RESULT=ida;
         
@@ -2799,8 +2763,6 @@ class CUP$parser$actions {
 		GenericTreeNode s = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
         String tipo = "";
-        System.err.println(sa.getData().getTipo());
-        System.err.println(ex.getData().getTipo());
         if(sa.getData().getTipo().equals("Integer") && ex.getData().getTipo().equals("Integer")){
             tipo = sa.getData().getTipo();
         }else{
@@ -2844,7 +2806,6 @@ class CUP$parser$actions {
 		GenericTreeNode s = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
         String tipo = "";
-
         if(sa.getData().getTipo().equals("Integer") && ex.getData().getTipo().equals("Integer")){
             tipo = sa.getData().getTipo();
         }else{
