@@ -1572,15 +1572,14 @@ class CUP$parser$actions {
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-        GenericTreeNode sa = new GenericTreeNode(new Tipo("SA", "SA"));
-        sa.addChild(id);
-        sa.addChild(ar);
+        String tipo1 = "";
         if(ar.getData().getTipo().equals("VSTRING")){
             if(simbolo.buscarTipo(id.getData().getNombre())!=null){
                String tipo = simbolo.buscarTipo(id.getData().getNombre()).substring(9,simbolo.buscarTipo(id.getData().getNombre()).length()-8);
                     int m = Integer.parseInt(tipo);
                     if(m>=ar.getData().getNombre().length()){
                        System.out.println("correcto"); 
+                       tipo1= ar.getData().getTipo();
                     }else{
                         System.err.println("El tamaño del string es mayor al de la variable: "+id);
                     }  
@@ -1589,6 +1588,7 @@ class CUP$parser$actions {
                     int m = Integer.parseInt(tipo);
                     if(m>=ar.getData().getNombre().length()){
                        System.out.println("correcto"); 
+                       tipo1= ar.getData().getTipo();
                     }else{
                         System.err.println("El tamaño del string es mayor al de la variable: "+id);
                     }  
@@ -1597,10 +1597,15 @@ class CUP$parser$actions {
             }
                        
             }else
-                if(id.getData().getTipo().equals(ar.getData().getTipo()))
+                if(id.getData().getTipo().equals(ar.getData().getTipo())){
                     System.out.println("correcto");
-                else
+                    tipo1= ar.getData().getTipo();
+                }else
                     System.err.println("Esta asignando un tipo distinto a la variable: "+id.getData().getNombre()+","+ " tipo correcto: "+id.getData().getTipo());
+        
+        GenericTreeNode sa = new GenericTreeNode(new Tipo("SA", tipo1));
+        sa.addChild(id);
+        sa.addChild(ar);
         RESULT=sa;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("SA",16, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -2509,15 +2514,21 @@ class CUP$parser$actions {
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-        GenericTreeNode rf = new GenericTreeNode(new Tipo("RF", "RF"));
-        GenericTreeNode f = new GenericTreeNode(new Tipo(fr, fr));
-        GenericTreeNode tt = new GenericTreeNode(new Tipo(t, t));
-        GenericTreeNode dd = new GenericTreeNode(new Tipo(d, d));
-        rf.addChild(f);
+        String tipo = "";
+        System.err.println(sa.getData().getTipo());
+        System.err.println(ex.getData().getTipo());
+        if(sa.getData().getTipo().equals("Integer") && ex.getData().getTipo().equals("Integer")){
+            tipo = sa.getData().getTipo();
+        }else{
+            tipo = sa.getData().getTipo();
+            System.err.println("Solo se pueden comparar variables de tipo Integer");
+        }
+        GenericTreeNode rf = new GenericTreeNode(new Tipo("RF", tipo));
+        //rf.addChild(f);
         rf.addChild(sa);
-        rf.addChild(tt);
+        //rf.addChild(tt);
         rf.addChild(ex);
-        rf.addChild(dd);
+        //rf.addChild(d);
         rf.addChild(s);
         RESULT= rf;
 
@@ -2548,15 +2559,20 @@ class CUP$parser$actions {
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-        GenericTreeNode rf = new GenericTreeNode(new Tipo("RF", "RF"));
-        GenericTreeNode f = new GenericTreeNode(new Tipo(fr, fr));
-        GenericTreeNode tt = new GenericTreeNode(new Tipo(t, t));
-        GenericTreeNode dd = new GenericTreeNode(new Tipo(d, d));
-        rf.addChild(f);
+        String tipo = "";
+
+        if(sa.getData().getTipo().equals("Integer") && ex.getData().getTipo().equals("Integer")){
+            tipo = sa.getData().getTipo();
+        }else{
+            tipo = sa.getData().getTipo();
+            System.err.println("Solo se pueden comparar variables de tipo Integer");
+        }
+        GenericTreeNode rf = new GenericTreeNode(new Tipo("RF", tipo));
+        //rf.addChild(f);
         rf.addChild(sa);
-        rf.addChild(tt);
+        //rf.addChild(tt);
         rf.addChild(ex);
-        rf.addChild(dd);
+        //rf.addChild(d);
         rf.addChild(s);
         RESULT= rf;
 

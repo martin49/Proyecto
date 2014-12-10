@@ -494,15 +494,14 @@ S ::= SA:sa CIERRE S:s1{:
 :}|error S;
 
 SA ::= IDA:id ASSIG AR:ar{:
-        GenericTreeNode sa = new GenericTreeNode(new Tipo("SA", "SA"));
-        sa.addChild(id);
-        sa.addChild(ar);
+        String tipo1 = "";
         if(ar.getData().getTipo().equals("VSTRING")){
             if(simbolo.buscarTipo(id.getData().getNombre())!=null){
                String tipo = simbolo.buscarTipo(id.getData().getNombre()).substring(9,simbolo.buscarTipo(id.getData().getNombre()).length()-8);
                     int m = Integer.parseInt(tipo);
                     if(m>=ar.getData().getNombre().length()){
                        System.out.println("correcto"); 
+                       tipo1= ar.getData().getTipo();
                     }else{
                         System.err.println("El tamaño del string es mayor al de la variable: "+id);
                     }  
@@ -511,6 +510,7 @@ SA ::= IDA:id ASSIG AR:ar{:
                     int m = Integer.parseInt(tipo);
                     if(m>=ar.getData().getNombre().length()){
                        System.out.println("correcto"); 
+                       tipo1= ar.getData().getTipo();
                     }else{
                         System.err.println("El tamaño del string es mayor al de la variable: "+id);
                     }  
@@ -519,10 +519,15 @@ SA ::= IDA:id ASSIG AR:ar{:
             }
                        
             }else
-                if(id.getData().getTipo().equals(ar.getData().getTipo()))
+                if(id.getData().getTipo().equals(ar.getData().getTipo())){
                     System.out.println("correcto");
-                else
+                    tipo1= ar.getData().getTipo();
+                }else
                     System.err.println("Esta asignando un tipo distinto a la variable: "+id.getData().getNombre()+","+ " tipo correcto: "+id.getData().getTipo());
+        
+        GenericTreeNode sa = new GenericTreeNode(new Tipo("SA", tipo1));
+        sa.addChild(id);
+        sa.addChild(ar);
         RESULT=sa;
 :};
 
@@ -933,28 +938,36 @@ RR ::= REPEAT:rp S:s UNTIL:ul CONDICION:cd {:
 :};
 
 RF ::= FOR:fr SA:sa TO:t EXPRESION:ex DO:d S:s {:
-        GenericTreeNode rf = new GenericTreeNode(new Tipo("RF", "RF"));
-        GenericTreeNode f = new GenericTreeNode(new Tipo(fr, fr));
-        GenericTreeNode tt = new GenericTreeNode(new Tipo(t, t));
-        GenericTreeNode dd = new GenericTreeNode(new Tipo(d, d));
-        rf.addChild(f);
+        String tipo = "";
+        if(sa.getData().getTipo().equals("Integer") && ex.getData().getTipo().equals("Integer")){
+            tipo = sa.getData().getTipo();
+        }else{
+            tipo = sa.getData().getTipo();
+            System.err.println("Solo se pueden comparar variables de tipo Integer");
+        }
+        GenericTreeNode rf = new GenericTreeNode(new Tipo("RF", tipo));
+        //rf.addChild(f);
         rf.addChild(sa);
-        rf.addChild(tt);
+        //rf.addChild(tt);
         rf.addChild(ex);
-        rf.addChild(dd);
+        //rf.addChild(d);
         rf.addChild(s);
         RESULT= rf;
 :}
 | FOR:fr SA:sa DOWNTO:t EXPRESION:ex DO:d S:s {:
-        GenericTreeNode rf = new GenericTreeNode(new Tipo("RF", "RF"));
-        GenericTreeNode f = new GenericTreeNode(new Tipo(fr, fr));
-        GenericTreeNode tt = new GenericTreeNode(new Tipo(t, t));
-        GenericTreeNode dd = new GenericTreeNode(new Tipo(d, d));
-        rf.addChild(f);
+        String tipo = "";
+        if(sa.getData().getTipo().equals("Integer") && ex.getData().getTipo().equals("Integer")){
+            tipo = sa.getData().getTipo();
+        }else{
+            tipo = sa.getData().getTipo();
+            System.err.println("Solo se pueden comparar variables de tipo Integer");
+        }
+        GenericTreeNode rf = new GenericTreeNode(new Tipo("RF", tipo));
+        //rf.addChild(f);
         rf.addChild(sa);
-        rf.addChild(tt);
+        //rf.addChild(tt);
         rf.addChild(ex);
-        rf.addChild(dd);
+        //rf.addChild(d);
         rf.addChild(s);
         RESULT= rf;
 :};

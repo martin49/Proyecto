@@ -27,14 +27,8 @@ var a,g,t:char;
 			b:=c*56;
 		end.
 begin
-	if b<4 then
-		begin
-			a := 'c';
-		end;
-	else 
-		begin
-			a := 'b';
-		end;
+	for b:=1 to 10 do
+		b := b+1;
 	a := g;
 	b := h[3];
 	b := p(3,4,5,6,'b');
