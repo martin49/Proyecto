@@ -500,12 +500,12 @@ public class parser extends java_cup.runtime.lr_parser {
     String dominioL="";
     int num_parametros=0;
 
-    TablaIntermedio cuadruTable = new TablaIntermedio();
+    TablaIntermedio tabla = new TablaIntermedio();
+    ArrayList<String> valores = new ArrayList<String>();
+    boolean pase = false;
+    int contador2 = 0;
 
 
-    public ArrayList<Cuadruplo> getCuadruplos(){
-        return action_obj.cuadruplos;
-    }
 
 
 
@@ -514,6 +514,290 @@ public class parser extends java_cup.runtime.lr_parser {
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$parser$actions {
+
+
+
+    public GenericTreeNode comprobar(GenericTreeNode a, String muro){
+          if (a.getData().getNombre().equals(muro) && a.hasChildren()){
+
+
+            return comprobar(a.getChildren().get(0), muro);
+
+          }
+          else {
+            return a;
+          }
+        }
+
+
+
+        public void inta(List<GenericTreeNode> listaNodos){
+
+          for( int i = 0 ; i < listaNodos.size() ; i++ ) {
+
+            GenericTreeNode padreNodo = listaNodos.get(i);
+            String padreNombre = padreNodo.getData().getNombre();
+
+
+            List<GenericTreeNode> actualHijos = padreNodo.getChildren();
+            System.out.println("nPadre: "+padreNombre);
+            ArrayList<String> temporal = new ArrayList<String>();
+            for (int j = 0; j < actualHijos.size(); j++) {
+
+              GenericTreeNode hijoNodo = actualHijos.get(j);
+              String hijoNombre = hijoNodo.getData().getNombre();
+
+              System.out.println("nHijo: "+hijoNombre);
+              if(hijoNombre.equals("LA")){
+                String tipo = simbolo.buscarTipo(hijoNodo.getData().getNombre()).substring(11,simbolo.buscarTipo(hijoNodo.getData().getNombre()).length()-1);
+
+
+                System.out.println(tipo);
+
+              }
+
+              if (TablaSimbolos.isinteger(hijoNombre)==false) {
+                pase = false;
+                if (hijoNodo.hasChildren()) {
+
+                  List<GenericTreeNode> ultimoHijos = new ArrayList<GenericTreeNode>();
+                  if ((hijoNodo.getNumberOfChildren() == 1) && (!hijoNombre.equals(hijoNodo.getChildren().get(0).getData().getNombre())) && (TablaSimbolos.isinteger(hijoNodo.getChildren().get(0).getData().getNombre()))) {
+
+                    GenericTreeNode id = comprobar(hijoNodo, hijoNodo.getData().nombre);
+                    hijoNodo.setChildren(id.getChildren());
+                    pase = true;
+
+                    if (padreNombre.equals("SA")) {
+                      temporal.add(":=");
+                      temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
+                      //tabla.Ingresar(":=", "", hijoNombre);
+                      //valores.add(hijoNombre);
+                      //valores.add(":=");
+                    } else if (padreNodo.getData().getNombre().equals("AR")) {
+                      temporal.add("+");
+                      temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
+                      System.out.println("se agrego:");
+                      System.out.println(temporal);
+
+                    } else if (padreNodo.getData().getNombre().equals("AM")) {
+                      temporal.add("*");
+                      temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
+                      System.out.println("se agrego:");
+                      System.out.println(temporal);
+
+
+                    } else {
+                      //valores.add(hijoNombre);
+                      //valores.add(temp);
+                      //contador2++;
+                    }
+
+
+                  }else if(hijoNodo.getNumberOfChildren()==1 && hijoNombre.equals(hijoNodo.getChildren().get(0).getData().getNombre())){
+
+                    pase = true;
+                    if (padreNombre.equals("SA")) {
+                      temporal.add(":=");
+                      temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
+                      //tabla.Ingresar(":=", "", hijoNombre);
+                      //valores.add(hijoNombre);
+                      //valores.add(":=");
+                    } else if (padreNodo.getData().getNombre().equals("AR")) {
+                      temporal.add("+");
+                      temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
+                      System.out.println("se agrego:");
+                      System.out.println(temporal);
+
+                    } else if (padreNodo.getData().getNombre().equals("AM")) {
+                      temporal.add("*");
+                      temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
+                      System.out.println("se agrego:");
+                      System.out.println(temporal);
+
+
+                    }
+                  }
+
+                  else {
+
+
+                    ultimoHijos.add(hijoNodo);
+                    inta(ultimoHijos);
+
+
+
+
+                  }
+
+
+                }else {
+
+                  pase = true;
+
+                  if (padreNombre.equals("SA")){
+                    temporal.add(":=");
+                    temporal.add(hijoNombre);
+
+                    System.out.println("se agrego:");
+                    System.out.println(temporal);
+                  }
+
+                  else if(padreNodo.getData().getNombre().equals("AR")){
+                    temporal.add("+");
+                    temporal.add(hijoNombre);
+                    // tabla.Ingresar("+", hijoNombre, "", "");
+                    //valores.add(hijoNombre);
+                    //valores.add("+");
+
+                  }
+                  else if(padreNodo.getData().getNombre().equals("AM")){
+                    temporal.add("*");
+                    temporal.add(hijoNombre);
+
+                    //tabla.Ingresar("*", hijoNombre, "", "");
+                    //valores.add(hijoNombre);
+                    //valores.add("*");
+                  }
+                  else {
+                    //valores.add(hijoNombre);
+                    //valores.add(temp);
+                    //contador2++;
+                  }
+                }
+              }
+              else {
+
+                pase = true;
+
+                if (padreNombre.equals("SA")){
+                  temporal.add(":=");
+                  temporal.add(hijoNombre);
+
+                }
+
+                else if(padreNodo.getData().getNombre().equals("AR")){
+                  temporal.add("+");
+                  temporal.add(hijoNombre);
+
+                }
+                else if(padreNodo.getData().getNombre().equals("AM")){
+                  temporal.add("*");
+                  temporal.add(hijoNombre);
+
+                }
+                else {
+                  //valores.add(hijoNombre);
+                  //valores.add(temp);
+                  //contador2++;
+                }
+              }
+
+            }
+            if(temporal.size()==2){
+                for (int k = 0; k < valores.size(); k++) {
+                  temporal.add(valores.get(k));
+                }
+              pase = true;
+              valores.clear();
+              }
+
+
+
+            if (pase) {
+
+              if (temporal.get(0).equals("*")){
+                if (temporal.size() == 2){
+                  for (int k = 0; k < temporal.size();  k++) {
+                    valores.add(temporal.get(k));
+                  }
+                }else {
+                  if (contador2 == 0) {
+                    String temp = "temp" + contador2;
+                    tabla.Ingresar("*", temporal.get(1), temporal.get(3), temp);
+                    valores.add("*");
+                    valores.add(temp);
+                    contador2++;
+                  } else {
+                    String temp = "temp" + (contador2 - 1);
+                    String temp1 = "temp" + contador2;
+                    tabla.Ingresar("*", temporal.get(1), temp, temp1);
+                    valores.add("*");
+                    valores.add(temp1);
+                    contador2++;
+                  }
+                }
+
+
+              }
+              else if (temporal.get(0).equals("+")){
+                if (temporal.size() == 2){
+                  for (int k = 0; k < temporal.size();  k++) {
+                    valores.add(temporal.get(k));
+                  }
+                }else{
+                    if(contador2==0){
+
+                    String temp = "temp"+contador2;
+                    tabla.Ingresar("+", temporal.get(1), temporal.get(3), temp);
+                    valores.add("+"); valores.add(temp);
+                    contador2++;
+
+
+                }else{
+                  String temp = "temp"+(contador2-1);
+                  String temp1 = "temp"+contador2;
+                  tabla.Ingresar("+", temporal.get(1), temp, temp1);
+                      valores.add("+"); valores.add(temp1);
+                  contador2++;
+                }
+              }
+              }else if (temporal.get(0).equals(":=")){
+                if(contador2==0){
+                  if(temporal.size() == 2){
+                    String temp = "temp"+contador2;
+                    tabla.Ingresar(":=", temporal.get(1),temp);
+                    contador2++;
+                  }else{
+                    String temp = "temp"+(contador2);
+                    tabla.Ingresar(":=", temporal.get(3),temp);
+                    tabla.Ingresar(":=",temp, temporal.get(1));
+                    contador2++;
+                  }
+
+                }else{
+                  if(temporal.size() == 2){
+                    String temp = "temp"+(contador2-1);
+                    tabla.Ingresar(":=", temporal.get(1),temp);
+                    contador2++;
+                  }else{
+                    String temp = "temp"+(contador2-1);
+                    tabla.Ingresar(":=", temporal.get(3),temp);
+                    tabla.Ingresar(":=",temp, temporal.get(1));
+                    contador2++;
+                  }
+                }
+              }
+              pase = false;
+              tabla.eliminar();
+              tabla.PrintTabla();
+              /*System.out.println(va);
+              String operador = valores.get(0);
+              String arg1 = valores.get(2);
+              String result = valores.get(3);
+
+              tabla.Ingresar(operador, arg1, result);
+
+              String arg2 = valores.get(3);
+              String result2 = valores.get(1);
+
+              tabla.Ingresar(operador, arg2, result2);*/
+            }
+
+
+             // valores.clear();
+
+          }
+        }
 
 
   private final parser parser;
@@ -538,7 +822,7 @@ class CUP$parser$actions {
       switch (CUP$parser$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // Programa ::= CP ZD CUP 
+          case 0: // Programa ::= CP ZD CUP
             {
               GenericTree RESULT =null;
 		int cpleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -550,7 +834,7 @@ class CUP$parser$actions {
 		int cupleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cupright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode cup = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTree tree= new GenericTree();
         GenericTreeNode pro= new GenericTreeNode(new Tipo("Programa", "Programa"));
         pro.addChild(cp);
@@ -558,19 +842,19 @@ class CUP$parser$actions {
         pro.addChild(cup);
         tree.setRoot(pro);
 
-        List<GenericTreeNode> arbol = limpiar(tree);
                 System.out.println("Raiz:"+tree.getRoot());
                 System.out.println("--------------------------");
-                for (int i = 0; i < arbol.size(); i++) {
-                    System.out.println("Padre:"+arbol.get(i).getData().getNombre());
+                for (int i = 0; i < tree.list().size(); i++) {
+                    System.out.println("Padre:"+tree.list().get(i).getData().getNombre());
                     System.out.println();
                     System.out.println("Hijos:"+tree.Imprimir(i));
                     System.out.println("-------------------------------");
                 }
         //simbolo.imprimir();
         //tfuncion.imprimir();
-        cuadruTable = inta(tree);
-        cuadruTable.PrintTabla();
+        List<GenericTreeNode> spunki = tree.buscar("SA");
+        inta(spunki);
+              tabla.PrintTabla();
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("Programa",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1653,7 +1937,7 @@ class CUP$parser$actions {
 		int laright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode la = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-            GenericTreeNode ida = new GenericTreeNode(new Tipo(la.getData().getNombre(), la.getData().getTipo()));
+            GenericTreeNode ida = new GenericTreeNode(new Tipo("LA", la.getData().getTipo()));
             ida.addChild(la);
             RESULT=ida;
         
@@ -1696,7 +1980,7 @@ class CUP$parser$actions {
 		int amright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode am = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-        GenericTreeNode a= new GenericTreeNode(new Tipo(am.getData().getNombre(), am.getData().getTipo()));
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AR", am.getData().getTipo()));
         a.addChild(am);
         RESULT=a;
 
@@ -1740,7 +2024,7 @@ class CUP$parser$actions {
 		int valright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode val = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-        GenericTreeNode a= new GenericTreeNode(new Tipo(val.getData().getNombre(), val.getData().getTipo()));
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AM", val.getData().getTipo()));
         a.addChild(val);
         RESULT=a;
 
@@ -1772,7 +2056,7 @@ class CUP$parser$actions {
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
-        GenericTreeNode f= new GenericTreeNode(new Tipo(ar.getData().getNombre(), ar.getData().getTipo()));
+        GenericTreeNode f= new GenericTreeNode(new Tipo("AR", ar.getData().getTipo()));
         f.addChild(ar);
         RESULT=f;
 
