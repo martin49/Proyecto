@@ -51,7 +51,7 @@ public class TablaIntermedio {
 
         this.tabla.get(i).resultado =etiqueta;
     }
-    public void PrintTabla(){
+    public static void PrintTabla(){
         for(Cuadrupla i: tabla){
             System.out.print(i.operador+" |");
             if(i.arg1 != null)

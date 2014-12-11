@@ -2,12 +2,9 @@ program d;
 
 var 
 	b,c:Integer;
-	
+	a: Array[1..3] of Integer;
 
 begin
-	b :=0;
-	c := 3;
 	b := c+4;
-	
 end.
 

@@ -41,6 +41,21 @@ public class CodigoFinal {
             }
             bw.append(".text\n"); 
             bw.append(".globl main\n"); 
+            bw.append("main:\n");
+            bw.append("move $fp,$sp\n");
+             for (int i = 0; i < TablaIntermedio.tabla.size(); i++) {
+                 switch(TablaIntermedio.tabla.get(i).operador){
+                     case ":=":{
+                         bw.append("li $t"+i+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         bw.append("lw $t"+i+", "+TablaIntermedio.tabla.get(i).resultado+"\n");
+                         break;
+                     }
+                     case "+":{
+                         bw.append("add $t"+i+", "+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+"\n");
+                         break;
+                     }
+                 }
+             }
              
         } else {
             
@@ -56,6 +71,19 @@ public class CodigoFinal {
             }
              bw.append(".text\n"); 
              bw.append(".globl main\n"); 
+             bw.append("main:\n");
+            bw.append("move $fp,$sp\n");
+             for (int i = 0; i < TablaIntermedio.tabla.size(); i++) {
+                 switch(TablaIntermedio.tabla.get(i).operador){
+                     case ":=":{
+                         bw.append("li $t"+i+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         bw.append("lw $t"+i+", "+TablaIntermedio.tabla.get(i).resultado+"\n");
+                     }
+                     case "+":{
+                         bw.append("add "+TablaIntermedio.tabla.get(i).arg1+TablaIntermedio.tabla.get(i).arg2+" $t"+i+"\n");
+                     }
+                 }
+             }
         }
           bw.close();      
         }catch(IOException e){

@@ -87,19 +87,19 @@ action code{:
 
 
                       List<GenericTreeNode> actualHijos = padreNodo.getChildren();
-                      System.out.println("nPadre: "+padreNombre);
+                      //System.out.println("nPadre: "+padreNombre);
                       ArrayList<String> temporal = new ArrayList<String>();
                       for (int j = 0; j < actualHijos.size(); j++) {
 
                         GenericTreeNode hijoNodo = actualHijos.get(j);
                         String hijoNombre = hijoNodo.getData().getNombre();
 
-                        System.out.println("nHijo: "+hijoNombre);
+                        //System.out.println("nHijo: "+hijoNombre);
                         if(hijoNombre.equals("LA")){
                           String tipo = simbolo.buscarTipo(hijoNodo.getData().getNombre()).substring(11,simbolo.buscarTipo(hijoNodo.getData().getNombre()).length()-1);
 
 
-                          System.out.println(tipo);
+                          //System.out.println(tipo);
 
                         }
 
@@ -123,14 +123,14 @@ action code{:
                               } else if (padreNodo.getData().getNombre().equals("AR")) {
                                 temporal.add("+");
                                 temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                                System.out.println("se agrego:");
-                                System.out.println(temporal);
+                                //System.out.println("se agrego:");
+                                //System.out.println(temporal);
 
                               } else if (padreNodo.getData().getNombre().equals("AM")) {
                                 temporal.add("*");
                                 temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                                System.out.println("se agrego:");
-                                System.out.println(temporal);
+                                //System.out.println("se agrego:");
+                                //System.out.println(temporal);
 
 
                               } else {
@@ -152,14 +152,14 @@ action code{:
                               } else if (padreNodo.getData().getNombre().equals("AR")) {
                                 temporal.add("+");
                                 temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                                System.out.println("se agrego:");
-                                System.out.println(temporal);
+                                //System.out.println("se agrego:");
+                                //System.out.println(temporal);
 
                               } else if (padreNodo.getData().getNombre().equals("AM")) {
                                 temporal.add("*");
                                 temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                                System.out.println("se agrego:");
-                                System.out.println(temporal);
+                                //System.out.println("se agrego:");
+                                //System.out.println(temporal);
 
 
                               }
@@ -185,8 +185,8 @@ action code{:
                               temporal.add(":=");
                               temporal.add(hijoNombre);
 
-                              System.out.println("se agrego:");
-                              System.out.println(temporal);
+                              //System.out.println("se agrego:");
+                              //System.out.println(temporal);
                             }
 
                             else if(padreNodo.getData().getNombre().equals("AR")){
@@ -265,9 +265,8 @@ action code{:
                               valores.add(temp);
                               contador2++;
                             } else {
-                              String temp = "temp" + (contador2 - 1);
                               String temp1 = "temp" + contador2;
-                              tabla.Ingresar("*", temporal.get(1), temp, temp1);
+                              tabla.Ingresar("*", temporal.get(1), temporal.get(3), temp1);
                               valores.add("*");
                               valores.add(temp1);
                               contador2++;
@@ -291,9 +290,8 @@ action code{:
 
 
                           }else{
-                            String temp = "temp"+(contador2-1);
                             String temp1 = "temp"+contador2;
-                            tabla.Ingresar("+", temporal.get(1), temp, temp1);
+                            tabla.Ingresar("+", temporal.get(1), temporal.get(3), temp1);
                                 valores.add("+"); valores.add(temp1);
                             contador2++;
                           }
@@ -313,11 +311,11 @@ action code{:
 
                           }else{
                             if(temporal.size() == 2){
-                              String temp = "temp"+(contador2-1);
+                              String temp = "temp"+(contador2);
                               tabla.Ingresar(":=", temporal.get(1),temp);
                               contador2++;
                             }else{
-                              String temp = "temp"+(contador2-1);
+                              String temp = "temp"+(contador2);
                               tabla.Ingresar(":=", temporal.get(3),temp);
                               tabla.Ingresar(":=",temp, temporal.get(1));
                               contador2++;
@@ -325,8 +323,8 @@ action code{:
                           }
                         }
                         pase = false;
-                        tabla.eliminar();
-                        tabla.PrintTabla();
+                        //tabla.eliminar();
+                        //tabla.PrintTabla();
                         /*System.out.println(va);
                         String operador = valores.get(0);
                         String arg1 = valores.get(2);
@@ -367,12 +365,14 @@ non terminal GenericTreeNode TA, TST;
 non terminal GenericTreeNode SC, S, SA, SCI;
 non terminal GenericTreeNode LITERAL, EXPRESION, CONDICION, CONDICIONOPL;
 non terminal GenericTreeNode LF,LP, LA;
-non terminal GenericTreeNode IS,IDO,EC,ER, EA;
+non terminal GenericTreeNode IS,EC,ER, EA;
 non terminal GenericTreeNode RW, RR, RF;
-non terminal GenericTreeNode CF, CPR, AM, F, EX, WRT;
+non terminal GenericTreeNode CF, CPR, AM, F, EX;
 non terminal GenericTreeNode TEL, LEER, IDA;
 non terminal GenericTreeNode DP, DF, DSP, ZDSP, AR, ESCR, MET, PAV;
 non terminal String OP,OL, OPL;
+
+precedence left ELSE;
 
 Programa ::= CP:cp ZD:zd CUP:cup{:
         GenericTree tree= new GenericTree();
@@ -838,7 +838,7 @@ IDA ::= ID:id{:String tipo = "";
         ida.addChild(i);
         RESULT=ida;
         :}|LA:la{:
-            GenericTreeNode ida = new GenericTreeNode(new Tipo(la.getData().getNombre(), la.getData().getTipo()));
+            GenericTreeNode ida = new GenericTreeNode(new Tipo("LA", la.getData().getTipo()));
             ida.addChild(la);
             RESULT=ida;
         :};
@@ -1159,25 +1159,25 @@ EA ::= IS:is{:
         RESULT=ec;
 :};
 
-IS ::= IF:ifc CONDICION:cd THEN:tn S:s IDO:ido{:
+IS ::= IF:ifc CONDICION:cd THEN:tn S:s ELSE S:s1{:
         GenericTreeNode is = new GenericTreeNode(new Tipo("IS", "IS"));
-        GenericTreeNode fi = new GenericTreeNode(new Tipo(ifc, ifc));
-        GenericTreeNode ten = new GenericTreeNode(new Tipo(tn, tn));
-        is.addChild(fi);
+        //GenericTreeNode fi = new GenericTreeNode(new Tipo(ifc, ifc));
+        //GenericTreeNode ten = new GenericTreeNode(new Tipo(tn, tn));
+        //is.addChild(fi);
         is.addChild(cd);
-        is.addChild(ten);
+        //is.addChild(ten);
         is.addChild(s);
-        is.addChild(s);
+        is.addChild(s1);
         RESULT=is;
-:};
-
-IDO ::= ELSE:el S:s1{:
-        GenericTreeNode ido = new GenericTreeNode(new Tipo("IDO", "IDO"));
-        GenericTreeNode els = new GenericTreeNode(new Tipo(el, el));
-        ido.addChild(els);
-        ido.addChild(s1);
-        RESULT=ido;
-:};
+:}| IF CONDICION:cd THEN S:s {: GenericTreeNode is = new GenericTreeNode(new Tipo("IS", "IS"));
+        //GenericTreeNode fi = new GenericTreeNode(new Tipo(ifc, ifc));
+        //GenericTreeNode ten = new GenericTreeNode(new Tipo(tn, tn));
+        //is.addChild(fi);
+        is.addChild(cd);
+        //is.addChild(ten);
+        is.addChild(s);
+        //is.addChild(s1);
+        RESULT=is; :};
 
 ER ::= RW:rw {:
         GenericTreeNode er = new GenericTreeNode(new Tipo("ER", "ER"));
@@ -1295,38 +1295,36 @@ EX ::= AR:ar{:
 :};
 
 MET ::= ESCR:wt{:
-        GenericTreeNode met = new GenericTreeNode(new Tipo("Metodo", "Metodo"));
+        GenericTreeNode met = new GenericTreeNode(new Tipo(wt.getData().getNombre(), wt.getData().getTipo()));
         met.addChild(wt);
         RESULT=met;
-:};
-
-ESCR ::= WRITE:wt PARIZQ VSTRING:vs WRT:wrt PARDER {:
-        GenericTreeNode escr = new GenericTreeNode(new Tipo(wt, wt));
-        GenericTreeNode str = new GenericTreeNode(new Tipo(vs, vs));
-        escr.addChild(str);
-        escr.addChild(wrt);
-        RESULT=escr;
-:}
-| LEER:lr{:
-        GenericTreeNode escr = new GenericTreeNode(new Tipo("READ", "READ"));
+:}| LEER:lr{:
+        GenericTreeNode escr = new GenericTreeNode(new Tipo(lr.getData().getNombre(), lr.getData().getTipo()));
         escr.addChild(lr);
         RESULT=escr;
 :};
 
-WRT ::= COMA ID:id{:
-        GenericTreeNode wrt= new GenericTreeNode(new Tipo("WRT", "WRT"));
-        GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
-        wrt.addChild(i);
-        RESULT=wrt;
-:}
-| {:
-    GenericTreeNode wrt= new GenericTreeNode(new Tipo("WRT", "WRT"));
-    RESULT=wrt;
-:};
+ESCR ::= WRITE:wt PARIZQ VSTRING:vs COMA EXPRESION:id PARDER {:
+        
+        fun.crear(wt, "string X "+ id.getData().getTipo()+"->void", ambito, "string X "+ id.getData().getTipo(), "void",num_parametros);
+      
+        
+        GenericTreeNode escr = new GenericTreeNode(new Tipo(wt, "void"));
+        escr.addChild(id);
+        RESULT=escr;
+:}| WRITE:wt PARIZQ VSTRING PARDER{:
+  fun.crear(wt, "string->void", ambito, "string->void", "void",num_parametros);
+  GenericTreeNode escr = new GenericTreeNode(new Tipo(wt, "void"));
+  RESULT=escr;
+  :};
 
-LEER ::= READ:rd PARIZQ ID:id PARDER{:
-        GenericTreeNode leer = new GenericTreeNode(new Tipo(rd, rd));
-        GenericTreeNode i = new GenericTreeNode(new Tipo(id, id));
-        leer.addChild(i);
+
+LEER ::= READ:rd PARIZQ EXPRESION:id PARDER{:
+
+        fun.crear(rd, id.getData().getTipo()+"->void", ambito, id.getData().getTipo(), "void", num_parametros);
+        
+        
+        GenericTreeNode leer = new GenericTreeNode(new Tipo(rd, "void"));
+        leer.addChild(id);
         RESULT=leer;
 :};
