@@ -1348,7 +1348,7 @@ RF ::= FOR:fr SA:sa TO:t EXPRESION:ex DO:d S:s {:
         RESULT= rf;
 :};
 
-CONDICION ::= CONDICION:ex OL CONDICIONOPL:ex2{:
+CONDICION ::= CONDICION:ex OL:ol CONDICIONOPL:ex2{:
         String tipo="";
         if(ex.getData().getTipo().equals("Integer") && ex2.getData().getTipo().equals("Integer")){
             tipo= ex.getData().getTipo();
@@ -1356,16 +1356,16 @@ CONDICION ::= CONDICION:ex OL CONDICIONOPL:ex2{:
             System.err.println("Las expresiones que esta tratando de comparar tienen tipos distintos");
             tipo=ex.getData().getTipo();
         }
-        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICION", tipo));
+        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICION"+ol, tipo));
         eb.addChild(ex);
         eb.addChild(ex2);
         RESULT=eb;
-:}| CONDICIONOPL:opl{:GenericTreeNode a= new GenericTreeNode(new Tipo(opl.getData().getNombre(), opl.getData().getTipo()));
+:}| CONDICIONOPL:opl{:GenericTreeNode a= new GenericTreeNode(new Tipo("CONDICION", opl.getData().getTipo()));
         a.addChild(opl);
         RESULT=a;:};
 
 
-CONDICIONOPL ::= CONDICIONOPL:opl OPL EX:ex{:
+CONDICIONOPL ::= CONDICIONOPL:opl OPL:op EX:ex{:
     String tipo="";
         if(opl.getData().getTipo().equals("Integer") && ex.getData().getTipo().equals("Integer")){
             tipo= opl.getData().getTipo();
@@ -1373,13 +1373,13 @@ CONDICIONOPL ::= CONDICIONOPL:opl OPL EX:ex{:
             System.err.println("Las expresiones que esta tratando de comparar tienen tipos distintos");
             tipo=opl.getData().getTipo();
         }
-        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICIONOPL", tipo));
+        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICIONOPL"+op, tipo));
         eb.addChild(opl);
         eb.addChild(ex);
         RESULT=eb;
 
     :}| EX:ar{:
-        GenericTreeNode ex = new GenericTreeNode(new Tipo(ar.getData().getNombre(), ar.getData().getTipo()));
+        GenericTreeNode ex = new GenericTreeNode(new Tipo("CONDICIONOPL", ar.getData().getTipo()));
         ex.addChild(ar);
         RESULT=ex;
 :};

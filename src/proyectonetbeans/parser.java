@@ -903,7 +903,6 @@ class CUP$parser$actions {
                   tabla.AgregarCuad(adios);
                 }
 
-
   private final parser parser;
 
   /** Constructor */
@@ -2972,6 +2971,9 @@ class CUP$parser$actions {
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int olleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int olright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		String ol = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		int ex2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ex2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex2 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
@@ -2983,7 +2985,7 @@ class CUP$parser$actions {
             System.err.println("Las expresiones que esta tratando de comparar tienen tipos distintos");
             tipo=ex.getData().getTipo();
         }
-        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICION", tipo));
+        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICION"+ol, tipo));
         eb.addChild(ex);
         eb.addChild(ex2);
         RESULT=eb;
@@ -2999,7 +3001,7 @@ class CUP$parser$actions {
 		int oplleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int oplright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode opl = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode a= new GenericTreeNode(new Tipo(opl.getData().getNombre(), opl.getData().getTipo()));
+		GenericTreeNode a= new GenericTreeNode(new Tipo("CONDICION", opl.getData().getTipo()));
         a.addChild(opl);
         RESULT=a;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CONDICION",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -3013,6 +3015,9 @@ class CUP$parser$actions {
 		int oplleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int oplright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		GenericTreeNode opl = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
@@ -3024,7 +3029,7 @@ class CUP$parser$actions {
             System.err.println("Las expresiones que esta tratando de comparar tienen tipos distintos");
             tipo=opl.getData().getTipo();
         }
-        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICIONOPL", tipo));
+        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICIONOPL"+op, tipo));
         eb.addChild(opl);
         eb.addChild(ex);
         RESULT=eb;
@@ -3042,7 +3047,7 @@ class CUP$parser$actions {
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-        GenericTreeNode ex = new GenericTreeNode(new Tipo(ar.getData().getNombre(), ar.getData().getTipo()));
+        GenericTreeNode ex = new GenericTreeNode(new Tipo("CONDICIONOPL", ar.getData().getTipo()));
         ex.addChild(ar);
         RESULT=ex;
 

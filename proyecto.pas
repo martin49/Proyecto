@@ -5,6 +5,7 @@ var
 	a: Array[1..3] of Integer;
 
 begin
-	b := 4*5/6*7;
+	if b<4 and c>9 then
+		b:=4+5;
 end.
 
