@@ -16,7 +16,14 @@ public class Cuadrupla {
     public String resultado;
     public String ambito = null;
     
-    
+
+    public Cuadrupla(){
+        String operador = null;
+        String arg1 = null;
+        String arg2 = null;
+        String resultado = null;
+    }
+
     public Cuadrupla(String operador,String argumento1, String argumento2, String resultado){
         this.operador = operador;
         this.arg1 = argumento1;

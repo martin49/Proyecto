@@ -64,286 +64,239 @@ parser code {:
 
 action code{:
 
-    public GenericTreeNode comprobar(GenericTreeNode a, String muro){
-          if (a.getData().getNombre().equals(muro) && a.hasChildren()){
+    public GenericTreeNode sacar(GenericTreeNode a){
+              if (a.hasChildren() && (a.getNumberOfChildren() < 2) ){
 
 
-            return comprobar(a.getChildren().get(0), muro);
+                return sacar(a.getChildren().get(0));
+
+              }
+              else {
+                return a;
+              }
+            }
+
+        public void inta(GenericTreeNode padre){
+
+          if (padre.hasChildren()){
+
+
+            if (padre.getData().getNombre().equals("S") && (padre.getChildren().get(1).getData().getNombre().equals(""))) {
+              padre.getChildren().remove(1);
+            }
+
+            System.out.println(padre.getData().getNombre());
+            System.out.println(padre.getNumberOfChildren());
+
+            if (padre.getNumberOfChildren() >= 2){
+
+              for( int i = 0 ; i < padre.getNumberOfChildren(); i++ ) {
+
+                if(padre.getChildren().get(i).getData().getNombre().equals("SA")){
+                  vSA(padre.getChildren().get(i));
+
+                }
+                else if (padre.getChildren().get(i).getData().getNombre().equals("AR")){
+
+                }
+                else if (padre.getChildren().get(i).getData().getNombre().equals("AM")){
+
+                }
+                else {
+                  inta(padre.getChildren().get(i));
+                }
+
+              }
+            }
+            else{
+              if(padre.getChildren().get(0).getData().getNombre().equals("SA")){
+                vSA(padre.getChildren().get(0));
+
+              }
+              else if (padre.getChildren().get(0).getData().getNombre().equals("AR")){
+
+              }
+              else if (padre.getChildren().get(0).getData().getNombre().equals("AM")){
+
+              }
+              else {
+                inta(padre.getChildren().get(0));
+              }
+
+            }
 
           }
           else {
-            return a;
+
+
+          }
+
+
+        }
+
+        public String vAR(GenericTreeNode ar){
+          Cuadrupla adios = new Cuadrupla();
+          String resultado = "";
+          ArrayList<String> segunda = new ArrayList<String>();
+
+          for (int i = 0; i < ar.getNumberOfChildren(); i++) {
+
+            GenericTreeNode hijo = sacar(ar.getChildren().get(i));
+
+            if (hijo.getNumberOfChildren() < 2) {
+              String temp = "t" + contador;
+              if (i == 0) {
+                adios.setOperador("+");
+                adios.setArg1(hijo.getData().getNombre());
+
+              }
+              else {
+                  if (!resultado.equals("")){
+                    adios.setOperador("+");
+                    adios.setArg1(resultado);
+                    adios.setArg2(hijo.getData().getNombre());
+                    adios.setResultado(temp);
+                    tabla.AgregarCuad(adios);
+                    contador++;
+
+                    resultado = temp;
+                  }
+                  else {
+                    adios.setArg2(hijo.getData().getNombre());
+                    adios.setResultado(temp);
+                    tabla.AgregarCuad(adios);
+                    contador++;
+
+                    resultado = temp;
+                  }
+              }
+            }
+            else{
+              if (hijo.getData().getNombre().equals("AR")) {
+                resultado = vAR(hijo);
+              }
+
+              else if(hijo.getData().getNombre().equals("AM")){
+                resultado = vAM(hijo);
+                segunda.add(resultado);
+              }
+
+            }
+          }
+            if (segunda.size() == 2){
+              String temp = "t" + contador;
+              adios.setOperador("+");
+              adios.setArg1(segunda.get(0));
+              adios.setArg2(segunda.get(1));
+              adios.setResultado(temp);
+              tabla.AgregarCuad(adios);
+              contador++;
+
+              resultado = temp;
+            }
+
+            if (adios.getArg2() == null || adios.getResultado() == null){
+              String temp = "t" + contador;
+              adios.setArg2(resultado);
+              adios.setResultado(temp);
+              tabla.AgregarCuad(adios);
+              contador++;
+
+              resultado = temp;
+
+            }
+
+            return resultado;
+
+        }
+
+      public String vAM(GenericTreeNode ar){
+        Cuadrupla adios = new Cuadrupla();
+        String resultado = "";
+
+        for (int i = 0; i < ar.getNumberOfChildren(); i++) {
+          GenericTreeNode hijo = sacar(ar.getChildren().get(i));
+          if (hijo.getNumberOfChildren() < 2) {
+            String temp = "t" + contador;
+            if (i == 0) {
+              adios.setOperador("*");
+              adios.setArg1(hijo.getData().getNombre());
+
+            }
+            else {
+              if (!resultado.equals("")){
+                adios.setOperador("*");
+                adios.setArg1(resultado);
+                adios.setArg2(hijo.getData().getNombre());
+                adios.setResultado(temp);
+                tabla.AgregarCuad(adios);
+                contador++;
+
+                resultado = temp;
+              }
+              else {
+                adios.setArg2(hijo.getData().getNombre());
+                adios.setResultado(temp);
+                tabla.AgregarCuad(adios);
+                contador++;
+
+                resultado = temp;
+              }
+            }
+          }
+          else{
+            if (hijo.getData().getNombre().equals("AM")) {
+              resultado = vAM(hijo);
+            }
+
           }
         }
 
+        return resultado;
+
+      }
 
 
-        public void inta(List<GenericTreeNode> listaNodos){
+        public void vSA(GenericTreeNode sa){
 
-          for( int i = 0 ; i < listaNodos.size() ; i++ ) {
+          Cuadrupla adios = new Cuadrupla();
+          Cuadrupla adios2 = new Cuadrupla();
 
-                      GenericTreeNode padreNodo = listaNodos.get(i);
-                      String padreNombre = padreNodo.getData().getNombre();
+          for (int i = 0; i < sa.getNumberOfChildren(); i++) {
+            GenericTreeNode hijo = sacar(sa.getChildren().get(i));
+            if (hijo.getNumberOfChildren() < 2) {
+              String temp = "t" + contador;
+              if (i == 0) {
+                adios.setOperador(":=");
+                adios.setResultado(hijo.getData().getNombre());
+              }
+              else {
 
+                adios2.setOperador(":=");
+                adios2.setResultado(temp);
+                adios2.setArg1(hijo.getData().getNombre());
+                tabla.AgregarCuad(adios2);
+                adios.setArg1(temp);
 
-                      List<GenericTreeNode> actualHijos = padreNodo.getChildren();
-                      System.out.println("nPadre: "+padreNombre);
-                      ArrayList<String> temporal = new ArrayList<String>();
-                      for (int j = 0; j < actualHijos.size(); j++) {
+              }
 
-                        GenericTreeNode hijoNodo = actualHijos.get(j);
-                        String hijoNombre = hijoNodo.getData().getNombre();
-
-                        System.out.println("nHijo: "+hijoNombre);
-                        if(hijoNombre.equals("LA")){
-                          String tipo = simbolo.buscarTipo(hijoNodo.getData().getNombre()).substring(11,simbolo.buscarTipo(hijoNodo.getData().getNombre()).length()-1);
-
-
-                          System.out.println(tipo);
-
-                        }
-
-                        if (TablaSimbolos.isinteger(hijoNombre)==false) {
-                          pase = false;
-                          if (hijoNodo.hasChildren()) {
-
-                            List<GenericTreeNode> ultimoHijos = new ArrayList<GenericTreeNode>();
-                            if ((hijoNodo.getNumberOfChildren() == 1) && (!hijoNombre.equals(hijoNodo.getChildren().get(0).getData().getNombre())) && (TablaSimbolos.isinteger(hijoNodo.getChildren().get(0).getData().getNombre()))) {
-
-                              GenericTreeNode id = comprobar(hijoNodo, hijoNodo.getData().nombre);
-                              hijoNodo.setChildren(id.getChildren());
-                              pase = true;
-
-                              if (padreNombre.equals("SA")) {
-                                temporal.add(":=");
-                                temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                                //tabla.Ingresar(":=", "", hijoNombre);
-                                //valores.add(hijoNombre);
-                                //valores.add(":=");
-                              } else if (padreNodo.getData().getNombre().equals("AR")) {
-                                temporal.add("+");
-                                temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                                System.out.println("se agrego:");
-                                System.out.println(temporal);
-
-                              } else if (padreNodo.getData().getNombre().equals("AM")) {
-                                temporal.add("*");
-                                temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                                System.out.println("se agrego:");
-                                System.out.println(temporal);
-
-
-                              } else {
-                                //valores.add(hijoNombre);
-                                //valores.add(temp);
-                                //contador2++;
-                              }
-
-
-                            }else if(hijoNodo.getNumberOfChildren()==1 && hijoNombre.equals(hijoNodo.getChildren().get(0).getData().getNombre())){
-
-                              pase = true;
-                              if (padreNombre.equals("SA")) {
-                                temporal.add(":=");
-                                temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                                //tabla.Ingresar(":=", "", hijoNombre);
-                                //valores.add(hijoNombre);
-                                //valores.add(":=");
-                              } else if (padreNodo.getData().getNombre().equals("AR")) {
-                                temporal.add("+");
-                                temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                                System.out.println("se agrego:");
-                                System.out.println(temporal);
-
-                              } else if (padreNodo.getData().getNombre().equals("AM")) {
-                                temporal.add("*");
-                                temporal.add(hijoNodo.getChildren().get(0).getData().getNombre());
-                                System.out.println("se agrego:");
-                                System.out.println(temporal);
-
-
-                              }
-                            }
-
-                            else {
-
-
-                              ultimoHijos.add(hijoNodo);
-                              inta(ultimoHijos);
-
-
-
-
-                            }
-
-
-                          }else {
-
-                            pase = true;
-
-                            if (padreNombre.equals("SA")){
-                              temporal.add(":=");
-                              temporal.add(hijoNombre);
-
-                              System.out.println("se agrego:");
-                              System.out.println(temporal);
-                            }
-
-                            else if(padreNodo.getData().getNombre().equals("AR")){
-                              temporal.add("+");
-                              temporal.add(hijoNombre);
-                              // tabla.Ingresar("+", hijoNombre, "", "");
-                              //valores.add(hijoNombre);
-                              //valores.add("+");
-
-                            }
-                            else if(padreNodo.getData().getNombre().equals("AM")){
-                              temporal.add("*");
-                              temporal.add(hijoNombre);
-
-                              //tabla.Ingresar("*", hijoNombre, "", "");
-                              //valores.add(hijoNombre);
-                              //valores.add("*");
-                            }
-                            else {
-                              //valores.add(hijoNombre);
-                              //valores.add(temp);
-                              //contador2++;
-                            }
-                          }
-                        }
-                        else {
-
-                          pase = true;
-
-                          if (padreNombre.equals("SA")){
-                            temporal.add(":=");
-                            temporal.add(hijoNombre);
-
-                          }
-
-                          else if(padreNodo.getData().getNombre().equals("AR")){
-                            temporal.add("+");
-                            temporal.add(hijoNombre);
-
-                          }
-                          else if(padreNodo.getData().getNombre().equals("AM")){
-                            temporal.add("*");
-                            temporal.add(hijoNombre);
-
-                          }
-                          else {
-                            //valores.add(hijoNombre);
-                            //valores.add(temp);
-                            //contador2++;
-                          }
-                        }
-
-                      }
-                      if(temporal.size()==2){
-                          for (int k = 0; k < valores.size(); k++) {
-                            temporal.add(valores.get(k));
-                          }
-                        pase = true;
-                        valores.clear();
-                        }
-
-
-
-                      if (pase) {
-
-                        if (temporal.get(0).equals("*")){
-                          if (temporal.size() == 2){
-                            for (int k = 0; k < temporal.size();  k++) {
-                              valores.add(temporal.get(k));
-                            }
-                          }else {
-                            if (contador2 == 0) {
-                              String temp = "temp" + contador2;
-                              tabla.Ingresar("*", temporal.get(1), temporal.get(3), temp);
-                              valores.add("*");
-                              valores.add(temp);
-                              contador2++;
-                            } else {
-                              String temp = "temp" + (contador2 - 1);
-                              String temp1 = "temp" + contador2;
-                              tabla.Ingresar("*", temporal.get(1), temp, temp1);
-                              valores.add("*");
-                              valores.add(temp1);
-                              contador2++;
-                            }
-                          }
-
-
-                        }
-                        else if (temporal.get(0).equals("+")){
-                          if (temporal.size() == 2){
-                            for (int k = 0; k < temporal.size();  k++) {
-                              valores.add(temporal.get(k));
-                            }
-                          }else{
-                              if(contador2==0){
-
-                              String temp = "temp"+contador2;
-                              tabla.Ingresar("+", temporal.get(1), temporal.get(3), temp);
-                              valores.add("+"); valores.add(temp);
-                              contador2++;
-
-
-                          }else{
-                            String temp = "temp"+(contador2-1);
-                            String temp1 = "temp"+contador2;
-                            tabla.Ingresar("+", temporal.get(1), temp, temp1);
-                                valores.add("+"); valores.add(temp1);
-                            contador2++;
-                          }
-                        }
-                        }else if (temporal.get(0).equals(":=")){
-                          if(contador2==0){
-                            if(temporal.size() == 2){
-                              String temp = "temp"+contador2;
-                              tabla.Ingresar(":=", temporal.get(1),temp);
-                              contador2++;
-                            }else{
-                              String temp = "temp"+(contador2);
-                              tabla.Ingresar(":=", temporal.get(3),temp);
-                              tabla.Ingresar(":=",temp, temporal.get(1));
-                              contador2++;
-                            }
-
-                          }else{
-                            if(temporal.size() == 2){
-                              String temp = "temp"+(contador2-1);
-                              tabla.Ingresar(":=", temporal.get(1),temp);
-                              contador2++;
-                            }else{
-                              String temp = "temp"+(contador2-1);
-                              tabla.Ingresar(":=", temporal.get(3),temp);
-                              tabla.Ingresar(":=",temp, temporal.get(1));
-                              contador2++;
-                            }
-                          }
-                        }
-                        pase = false;
-                        tabla.eliminar();
-                        tabla.PrintTabla();
-                        /*System.out.println(va);
-                        String operador = valores.get(0);
-                        String arg1 = valores.get(2);
-                        String result = valores.get(3);
-
-                        tabla.Ingresar(operador, arg1, result);
-
-                        String arg2 = valores.get(3);
-                        String result2 = valores.get(1);
-
-                        tabla.Ingresar(operador, arg2, result2);*/
-                      }
-
-
-                       // valores.clear();
-
-                    }
+            }
+            else{
+              if (hijo.getData().getNombre().equals("AR")){
+                String temp = "t" + contador;
+                String temp1 = vAR(hijo);
+                adios.setArg1(temp1);
+                contador++;
+              }
+              else if(hijo.getData().getNombre().equals("AM")){
+                String temp = "t" + contador;
+                String temp1 = vAM(hijo);
+                adios.setArg1(temp1);
+                contador++;
+              }
+            }
+          }
+          tabla.AgregarCuad(adios);
         }
 
 :};
@@ -390,10 +343,10 @@ Programa ::= CP:cp ZD:zd CUP:cup{:
                     System.out.println("Hijos:"+tree.Imprimir(i));
                     System.out.println("-------------------------------");
                 }
-        //simbolo.imprimir();
-        //tfuncion.imprimir();
-        List<GenericTreeNode> spunki = tree.buscar("SA");
-        inta(spunki);
+        GenericTreeNode cupo = tree.buscar("CUP").get(0);
+          inta(cupo);
+          tabla.PrintTabla();
+
 :};
 
 CP ::= PROGRAM:p ID:i CIERRE{:
