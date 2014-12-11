@@ -243,8 +243,7 @@ public class GenericTree {
             System.out.println("-------------------------------");
         }
     }
-
-
+    
     public List<GenericTreeNode> buscar(String dataToFind) {
         List<GenericTreeNode> nodos;
         nodos = null;

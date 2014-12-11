@@ -5,6 +5,7 @@ var
 	a: Array[1..3] of Integer;
 
 begin
-	b := c+4;
+	b := 4;
+	
 end.
 

@@ -714,13 +714,13 @@ class CUP$parser$actions {
                             }
                           }else {
                             if (contador2 == 0) {
-                              String temp = "temp" + contador2;
+                              String temp = "t" + contador2;
                               tabla.Ingresar("*", temporal.get(1), temporal.get(3), temp);
                               valores.add("*");
                               valores.add(temp);
                               contador2++;
                             } else {
-                              String temp1 = "temp" + contador2;
+                              String temp1 = "t" + contador2;
                               tabla.Ingresar("*", temporal.get(1), temporal.get(3), temp1);
                               valores.add("*");
                               valores.add(temp1);
@@ -738,14 +738,14 @@ class CUP$parser$actions {
                           }else{
                               if(contador2==0){
 
-                              String temp = "temp"+contador2;
+                              String temp = "t"+contador2;
                               tabla.Ingresar("+", temporal.get(1), temporal.get(3), temp);
                               valores.add("+"); valores.add(temp);
                               contador2++;
 
 
                           }else{
-                            String temp1 = "temp"+contador2;
+                            String temp1 = "t"+contador2;
                             tabla.Ingresar("+", temporal.get(1), temporal.get(3), temp1);
                                 valores.add("+"); valores.add(temp1);
                             contador2++;
@@ -754,25 +754,25 @@ class CUP$parser$actions {
                         }else if (temporal.get(0).equals(":=")){
                           if(contador2==0){
                             if(temporal.size() == 2){
-                              String temp = "temp"+contador2;
+                              String temp = "t"+contador2;
                               tabla.Ingresar(":=", temporal.get(1),temp);
                               contador2++;
                             }else{
-                              String temp = "temp"+(contador2);
-                              tabla.Ingresar(":=", temporal.get(3),temp);
-                              tabla.Ingresar(":=",temp, temporal.get(1));
+                              String temp = "t"+(contador2);
+                              tabla.Ingresar(":=", temporal.get(3),"1",temp);
+                              tabla.Ingresar(":=",temp,"0", temporal.get(1));
                               contador2++;
                             }
 
                           }else{
                             if(temporal.size() == 2){
-                              String temp = "temp"+(contador2);
+                              String temp = "t"+(contador2);
                               tabla.Ingresar(":=", temporal.get(1),temp);
                               contador2++;
                             }else{
-                              String temp = "temp"+(contador2);
-                              tabla.Ingresar(":=", temporal.get(3),temp);
-                              tabla.Ingresar(":=",temp, temporal.get(1));
+                              String temp = "t"+(contador2);
+                              tabla.Ingresar(":=", temporal.get(3), "1",temp);
+                              tabla.Ingresar(":=",temp, "0", temporal.get(1));
                               contador2++;
                             }
                           }
@@ -842,7 +842,6 @@ class CUP$parser$actions {
         pro.addChild(cup);
         tree.setRoot(pro);
         tree.list();
-                
         //simbolo.imprimir();
         //tfuncion.imprimir();
         List<GenericTreeNode> spunki = tree.buscar("SA");

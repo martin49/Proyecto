@@ -259,13 +259,13 @@ action code{:
                             }
                           }else {
                             if (contador2 == 0) {
-                              String temp = "temp" + contador2;
+                              String temp = "t" + contador2;
                               tabla.Ingresar("*", temporal.get(1), temporal.get(3), temp);
                               valores.add("*");
                               valores.add(temp);
                               contador2++;
                             } else {
-                              String temp1 = "temp" + contador2;
+                              String temp1 = "t" + contador2;
                               tabla.Ingresar("*", temporal.get(1), temporal.get(3), temp1);
                               valores.add("*");
                               valores.add(temp1);
@@ -283,14 +283,14 @@ action code{:
                           }else{
                               if(contador2==0){
 
-                              String temp = "temp"+contador2;
+                              String temp = "t"+contador2;
                               tabla.Ingresar("+", temporal.get(1), temporal.get(3), temp);
                               valores.add("+"); valores.add(temp);
                               contador2++;
 
 
                           }else{
-                            String temp1 = "temp"+contador2;
+                            String temp1 = "t"+contador2;
                             tabla.Ingresar("+", temporal.get(1), temporal.get(3), temp1);
                                 valores.add("+"); valores.add(temp1);
                             contador2++;
@@ -299,25 +299,25 @@ action code{:
                         }else if (temporal.get(0).equals(":=")){
                           if(contador2==0){
                             if(temporal.size() == 2){
-                              String temp = "temp"+contador2;
+                              String temp = "t"+contador2;
                               tabla.Ingresar(":=", temporal.get(1),temp);
                               contador2++;
                             }else{
-                              String temp = "temp"+(contador2);
-                              tabla.Ingresar(":=", temporal.get(3),temp);
-                              tabla.Ingresar(":=",temp, temporal.get(1));
+                              String temp = "t"+(contador2);
+                              tabla.Ingresar(":=", temporal.get(3),"1",temp);
+                              tabla.Ingresar(":=",temp,"0", temporal.get(1));
                               contador2++;
                             }
 
                           }else{
                             if(temporal.size() == 2){
-                              String temp = "temp"+(contador2);
+                              String temp = "t"+(contador2);
                               tabla.Ingresar(":=", temporal.get(1),temp);
                               contador2++;
                             }else{
-                              String temp = "temp"+(contador2);
-                              tabla.Ingresar(":=", temporal.get(3),temp);
-                              tabla.Ingresar(":=",temp, temporal.get(1));
+                              String temp = "t"+(contador2);
+                              tabla.Ingresar(":=", temporal.get(3), "1",temp);
+                              tabla.Ingresar(":=",temp, "0", temporal.get(1));
                               contador2++;
                             }
                           }
@@ -381,15 +381,7 @@ Programa ::= CP:cp ZD:zd CUP:cup{:
         pro.addChild(zd);
         pro.addChild(cup);
         tree.setRoot(pro);
-
-                System.out.println("Raiz:"+tree.getRoot());
-                System.out.println("--------------------------");
-                for (int i = 0; i < tree.list().size(); i++) {
-                    System.out.println("Padre:"+tree.list().get(i).getData().getNombre());
-                    System.out.println();
-                    System.out.println("Hijos:"+tree.Imprimir(i));
-                    System.out.println("-------------------------------");
-                }
+        tree.list();
         //simbolo.imprimir();
         //tfuncion.imprimir();
         List<GenericTreeNode> spunki = tree.buscar("SA");
