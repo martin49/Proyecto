@@ -47,12 +47,14 @@ public class CodigoFinal {
              for (int i = 0; i < TablaIntermedio.tabla.size(); i++) {
                  switch(TablaIntermedio.tabla.get(i).operador){
                      case ":=":{
-                         if(TablaIntermedio.tabla.get(i).arg2.equals("1")){
+                         try{
+                            if(TablaIntermedio.tabla.get(i).arg2.equals("1")){
                              if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i).arg1))
                                 bw.append("li $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
                              else
                                 bw.append("move $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
-                         }else{
+                         }
+                         }catch (Exception e) {
                              int a=0;
                              bw.append("move $a"+a+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
                              bw.append("la $a"+a+", _"+TablaIntermedio.tabla.get(i).resultado+"\n");
@@ -63,11 +65,67 @@ public class CodigoFinal {
                          break;
                      }
                      case "+":{
-                         bw.append("add $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         if(i==0)
+                             if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i).arg1)){
+                                bw.append("li $a0,"+TablaIntermedio.tabla.get(i).arg1+"\n");
+                            bw.append("add $"+TablaIntermedio.tabla.get(i).resultado+", $a0, "+TablaIntermedio.tabla.get(i).arg2+"\n");
+                            }else
+                            bw.append("add $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+"\n");
+                         else
+                             if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i-1).arg1))
+                                bw.append("add $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                             else
+                                 
+                                bw.append("add $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
                          break;
                      }
-                         case "*":{
-                         bw.append("mul $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                     case "-":{
+                         if(i==0)
+                             if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i).arg1)){
+                                bw.append("li $a0,"+TablaIntermedio.tabla.get(i).arg1+"\n");
+                            bw.append("sub $"+TablaIntermedio.tabla.get(i).resultado+", $a0, "+TablaIntermedio.tabla.get(i).arg2+"\n");
+                            }else
+                            bw.append("sub $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+"\n");
+                         else
+                         if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i-1).arg1))
+                                bw.append("sub $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                             else
+                                 
+                                bw.append("sub $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         break;
+                     }
+                     case "*":{
+                         if(i==0){
+                            if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i).arg1)){
+                                bw.append("li $a0,"+TablaIntermedio.tabla.get(i).arg1+"\n");
+                            bw.append("mul $"+TablaIntermedio.tabla.get(i).resultado+", $a0, "+TablaIntermedio.tabla.get(i).arg2+"\n");
+                            }else{
+                                bw.append("mul $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+"\n");
+                            }
+                                
+                                 
+                         }
+                            
+                         else
+                         if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i-1).arg1))
+                                bw.append("mul $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                             else
+                                 
+                                bw.append("mul $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         break;
+                     }case "/":{
+                         if(i==0)
+                             if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i).arg1)){
+                                bw.append("li $a0,"+TablaIntermedio.tabla.get(i).arg1+"\n");
+                            bw.append("div $"+TablaIntermedio.tabla.get(i).resultado+", $a0, "+TablaIntermedio.tabla.get(i).arg2+"\n");
+                            }else
+                            bw.append("div $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+"\n");
+                         else
+                         if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i-1).arg1))
+                                bw.append("div $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                             else
+                                 
+                                bw.append("div $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
                          break;
                      }
                  }
