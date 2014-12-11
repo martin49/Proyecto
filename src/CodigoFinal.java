@@ -54,7 +54,7 @@ public class CodigoFinal {
                                 bw.append("move $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
                          }else{
                              int a=0;
-                             bw.append("lw $a"+a+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
+                             bw.append("move $a"+a+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
                              bw.append("la $a"+a+", _"+TablaIntermedio.tabla.get(i).resultado+"\n");
                              a++;
                          }  
@@ -100,7 +100,7 @@ public class CodigoFinal {
                                 bw.append("move $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
                          }else{
                              int a=0;
-                             bw.append("lw $a"+a+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
+                             bw.append("move $a"+a+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
                              bw.append("la $a"+a+", _"+TablaIntermedio.tabla.get(i).resultado+"\n");
                              a++;
                          }  

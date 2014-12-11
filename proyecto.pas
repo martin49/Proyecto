@@ -6,6 +6,6 @@ var
 
 begin
 	b := 4;
-	
+	c := b +2;
 end.
 
