@@ -841,15 +841,8 @@ class CUP$parser$actions {
         pro.addChild(zd);
         pro.addChild(cup);
         tree.setRoot(pro);
-
-                System.out.println("Raiz:"+tree.getRoot());
-                System.out.println("--------------------------");
-                for (int i = 0; i < tree.list().size(); i++) {
-                    System.out.println("Padre:"+tree.list().get(i).getData().getNombre());
-                    System.out.println();
-                    System.out.println("Hijos:"+tree.Imprimir(i));
-                    System.out.println("-------------------------------");
-                }
+        tree.list();
+                
         //simbolo.imprimir();
         //tfuncion.imprimir();
         List<GenericTreeNode> spunki = tree.buscar("SA");
