@@ -12,7 +12,7 @@
 import java.util.ArrayList;
 
 public class TablaIntermedio {
-    public ArrayList<Cuadrupla> tabla;
+    public static ArrayList<Cuadrupla> tabla;
     
     public TablaIntermedio(){
 
@@ -51,7 +51,7 @@ public class TablaIntermedio {
 
         this.tabla.get(i).resultado =etiqueta;
     }
-    public void PrintTabla(){
+    public static void PrintTabla(){
         for(Cuadrupla i: tabla){
             System.out.print(i.operador+" |");
             if(i.arg1 != null)

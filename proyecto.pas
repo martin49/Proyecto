@@ -1,9 +1,11 @@
 program d;
 
-var b,c, d, e:Integer;
+var
+	b,c:Integer;
+	a: Array[1..3] of Integer;
 
 begin
-	b := 2 + c * 4;
-
+	b := 4;
+	c := b +2;
 end.
 

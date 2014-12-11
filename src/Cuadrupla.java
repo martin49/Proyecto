@@ -14,7 +14,7 @@ public class Cuadrupla {
     public String arg1;
     public String arg2;
     public String resultado;
-    public String ambito = null;
+    public String ambito;
     
 
     public Cuadrupla(){
@@ -29,6 +29,7 @@ public class Cuadrupla {
         this.arg1 = argumento1;
         this.arg2 = argumento2;
         this.resultado = resultado;
+        
     }
     public Cuadrupla(String operador,String argumento1, String argumento2, String resultado,String ambito){
         this.operador = operador;

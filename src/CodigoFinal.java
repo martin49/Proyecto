@@ -41,6 +41,37 @@ public class CodigoFinal {
             }
             bw.append(".text\n"); 
             bw.append(".globl main\n"); 
+            bw.append("main:\n");
+            bw.append("move $fp,$sp\n");
+            
+             for (int i = 0; i < TablaIntermedio.tabla.size(); i++) {
+                 switch(TablaIntermedio.tabla.get(i).operador){
+                     case ":=":{
+                         if(TablaIntermedio.tabla.get(i).arg2.equals("1")){
+                             if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i).arg1))
+                                bw.append("li $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                             else
+                                bw.append("move $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         }else{
+                             int a=0;
+                             bw.append("move $a"+a+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
+                             bw.append("la $a"+a+", _"+TablaIntermedio.tabla.get(i).resultado+"\n");
+                             a++;
+                         }  
+                         
+                         
+                         break;
+                     }
+                     case "+":{
+                         bw.append("add $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         break;
+                     }
+                         case "*":{
+                         bw.append("mul $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         break;
+                     }
+                 }
+             }
              
         } else {
             
@@ -54,8 +85,39 @@ public class CodigoFinal {
             }
                 
             }
-             bw.append(".text\n"); 
-             bw.append(".globl main\n"); 
+            bw.append(".text\n"); 
+            bw.append(".globl main\n"); 
+            bw.append("main:\n");
+            bw.append("move $fp,$sp\n");
+            
+             for (int i = 0; i < TablaIntermedio.tabla.size(); i++) {
+                 switch(TablaIntermedio.tabla.get(i).operador){
+                     case ":=":{
+                         if(TablaIntermedio.tabla.get(i).arg2.equals("1")){
+                             if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i).arg1))
+                                bw.append("li $"+TablaIntermedio.tabla.get(i).resultado+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                             else
+                                bw.append("move $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         }else{
+                             int a=0;
+                             bw.append("move $a"+a+", $"+TablaIntermedio.tabla.get(i).arg1+"\n");
+                             bw.append("la $a"+a+", _"+TablaIntermedio.tabla.get(i).resultado+"\n");
+                             a++;
+                         }  
+                         
+                         
+                         break;
+                     }
+                     case "+":{
+                         bw.append("add $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         break;
+                     }
+                         case "*":{
+                         bw.append("mul $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
+                         break;
+                     }
+                 }
+             }
         }
           bw.close();      
         }catch(IOException e){
@@ -65,8 +127,4 @@ public class CodigoFinal {
         
     }
     
-    public static void codigo(){
-        
-            
-    }
 }

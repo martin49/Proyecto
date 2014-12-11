@@ -2,10 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4be8c687-c9eb-4ba7-a1dd-ba2c5550efd2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/CodigoFinal.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/CodigoFinal.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Proyecto/CodigoFinal.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Proyecto/sym.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/CodigoFinal.class" afterPath="$PROJECT_DIR$/build/classes/CodigoFinal.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/Cuadrupla.class" afterPath="$PROJECT_DIR$/build/classes/Cuadrupla.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/Cuadrupla.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/Cuadrupla.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/EjemploCUP.class" afterPath="$PROJECT_DIR$/build/classes/EjemploCUP.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/EjemploCUP.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/EjemploCUP.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/GenericTree.class" afterPath="$PROJECT_DIR$/build/classes/GenericTree.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/GenericTree.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/GenericTree.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/TablaIntermedio.class" afterPath="$PROJECT_DIR$/build/classes/TablaIntermedio.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/TablaIntermedio.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/TablaIntermedio.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/parser$CUP$parser$actions.class" afterPath="$PROJECT_DIR$/build/classes/parser$CUP$parser$actions.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/parser$CUP$parser$actions.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/parser$CUP$parser$actions.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/parser.class" afterPath="$PROJECT_DIR$/build/classes/parser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/parser.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/parser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CodigoFinal.java" afterPath="$PROJECT_DIR$/src/CodigoFinal.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cuadrupla.java" afterPath="$PROJECT_DIR$/src/Cuadrupla.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/proyectonetbeans/EjemploCUP.java" afterPath="$PROJECT_DIR$/src/proyectonetbeans/EjemploCUP.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GenericTree.java" afterPath="$PROJECT_DIR$/src/GenericTree.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TablaIntermedio.java" afterPath="$PROJECT_DIR$/src/TablaIntermedio.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/proyectonetbeans/parser.java" afterPath="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proyecto.cup" afterPath="$PROJECT_DIR$/proyecto.cup" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proyecto.pas" afterPath="$PROJECT_DIR$/proyecto.pas" />
@@ -38,15 +54,17 @@
       <file leaf-file-name="parser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="7372" max-vertical-offset="45630">
-              <caret line="808" column="3" selection-start-line="808" selection-start-column="3" selection-end-line="808" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="6802" max-vertical-offset="45510">
+              <caret line="754" column="9" selection-start-line="754" selection-start-column="9" selection-end-line="754" selection-end-column="9" />
               <folding>
                 <element signature="e#355#386#0" expanded="true" />
-                <element signature="e#28116#28124#0" expanded="true" />
-                <element signature="e#28252#28306#1" expanded="true" />
-                <element signature="e#30332#30340#0" expanded="true" />
-                <element signature="e#35187#35188#0" expanded="true" />
-                <element signature="e#35217#35218#0" expanded="true" />
+                <element signature="e#25593#25594#0" expanded="true" />
+                <element signature="e#25648#25649#0" expanded="true" />
+                <element signature="e#28206#28214#0" expanded="true" />
+                <element signature="e#28342#28396#1" expanded="true" />
+                <element signature="e#30577#30585#0" expanded="true" />
+                <element signature="e#36480#36481#0" expanded="true" />
+                <element signature="e#36510#36511#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -55,8 +73,8 @@
       <file leaf-file-name="Cuadrupla.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Cuadrupla.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="1080">
-              <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1095">
+              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -72,11 +90,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="proyecto.pas" pinned="false" current-in-tab="true">
+      <file leaf-file-name="proyecto.pas" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proyecto.pas">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18703242" vertical-offset="0" max-vertical-offset="401">
-              <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+            <state vertical-scroll-proportion="-4.8" vertical-offset="0" max-vertical-offset="255">
+              <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CodigoFinal.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CodigoFinal.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.44067797" vertical-offset="463" max-vertical-offset="1980">
+              <caret line="47" column="63" selection-start-line="47" selection-start-column="63" selection-end-line="47" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -85,8 +113,8 @@
       <file leaf-file-name="proyecto.cup" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proyecto.cup">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.793103" vertical-offset="4965" max-vertical-offset="19365">
-              <caret line="348" column="0" selection-start-line="348" selection-start-column="0" selection-end-line="348" selection-end-column="0" />
+            <state vertical-scroll-proportion="-8.275862" vertical-offset="3960" max-vertical-offset="19290">
+              <caret line="280" column="43" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -125,8 +153,8 @@
         <option value="$PROJECT_DIR$/src/tabla.java" />
         <option value="$PROJECT_DIR$/src/TablaIntermedio.java" />
         <option value="$PROJECT_DIR$/src/Cuadrupla.java" />
-        <option value="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
         <option value="$PROJECT_DIR$/proyecto.pas" />
+        <option value="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
         <option value="$PROJECT_DIR$/proyecto.cup" />
       </list>
     </option>
@@ -534,7 +562,7 @@
       <workItem from="1417989304113" duration="430000" />
       <workItem from="1418177432969" duration="4585000" />
       <workItem from="1418188659409" duration="2512000" />
-      <workItem from="1418258050677" duration="21466000" />
+      <workItem from="1418258050677" duration="22537000" />
     </task>
     <task id="LOCAL-00001" summary="arbol">
       <created>1417155780738</created>
@@ -552,7 +580,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215513000" />
+    <option name="totallyTimeSpent" value="216584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
@@ -572,14 +600,14 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32988167" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17294389" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32988167" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24980783" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -643,21 +671,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5917" max-vertical-offset="42525">
-          <caret line="557" column="0" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="18" />
-          <folding>
-            <element signature="e#355#386#0" expanded="true" />
-            <element signature="e#28116#28124#0" expanded="true" />
-            <element signature="e#28252#28306#1" expanded="true" />
-            <element signature="e#30332#30340#0" expanded="true" />
-            <element signature="e#35187#35188#0" expanded="true" />
-            <element signature="e#35217#35218#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Cuadrupla.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="365" max-vertical-offset="975">
@@ -704,11 +717,13 @@
           <caret line="557" column="0" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="18" />
           <folding>
             <element signature="e#355#386#0" expanded="true" />
-            <element signature="e#28116#28124#0" expanded="true" />
-            <element signature="e#28252#28306#1" expanded="true" />
-            <element signature="e#30332#30340#0" expanded="true" />
-            <element signature="e#35187#35188#0" expanded="true" />
-            <element signature="e#35217#35218#0" expanded="true" />
+            <element signature="e#25593#25594#0" expanded="true" />
+            <element signature="e#25648#25649#0" expanded="true" />
+            <element signature="e#28206#28214#0" expanded="true" />
+            <element signature="e#28342#28396#1" expanded="true" />
+            <element signature="e#30577#30585#0" expanded="true" />
+            <element signature="e#36480#36481#0" expanded="true" />
+            <element signature="e#36510#36511#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -773,11 +788,13 @@
           <caret line="219" column="62" selection-start-line="219" selection-start-column="62" selection-end-line="219" selection-end-column="62" />
           <folding>
             <element signature="e#355#386#0" expanded="true" />
-            <element signature="e#28116#28124#0" expanded="true" />
-            <element signature="e#28252#28306#1" expanded="true" />
-            <element signature="e#30332#30340#0" expanded="true" />
-            <element signature="e#35187#35188#0" expanded="true" />
-            <element signature="e#35217#35218#0" expanded="true" />
+            <element signature="e#25593#25594#0" expanded="true" />
+            <element signature="e#25648#25649#0" expanded="true" />
+            <element signature="e#28206#28214#0" expanded="true" />
+            <element signature="e#28342#28396#1" expanded="true" />
+            <element signature="e#30577#30585#0" expanded="true" />
+            <element signature="e#36480#36481#0" expanded="true" />
+            <element signature="e#36510#36511#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -857,11 +874,13 @@
           <caret line="306" column="20" selection-start-line="306" selection-start-column="20" selection-end-line="306" selection-end-column="20" />
           <folding>
             <element signature="e#355#386#0" expanded="true" />
-            <element signature="e#28116#28124#0" expanded="true" />
-            <element signature="e#28252#28306#1" expanded="true" />
-            <element signature="e#30332#30340#0" expanded="true" />
-            <element signature="e#35187#35188#0" expanded="true" />
-            <element signature="e#35217#35218#0" expanded="true" />
+            <element signature="e#25593#25594#0" expanded="true" />
+            <element signature="e#25648#25649#0" expanded="true" />
+            <element signature="e#28206#28214#0" expanded="true" />
+            <element signature="e#28342#28396#1" expanded="true" />
+            <element signature="e#30577#30585#0" expanded="true" />
+            <element signature="e#36480#36481#0" expanded="true" />
+            <element signature="e#36510#36511#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -919,11 +938,13 @@
           <caret line="238" column="36" selection-start-line="238" selection-start-column="36" selection-end-line="238" selection-end-column="36" />
           <folding>
             <element signature="e#355#386#0" expanded="true" />
-            <element signature="e#28116#28124#0" expanded="true" />
-            <element signature="e#28252#28306#1" expanded="true" />
-            <element signature="e#30332#30340#0" expanded="true" />
-            <element signature="e#35187#35188#0" expanded="true" />
-            <element signature="e#35217#35218#0" expanded="true" />
+            <element signature="e#25593#25594#0" expanded="true" />
+            <element signature="e#25648#25649#0" expanded="true" />
+            <element signature="e#28206#28214#0" expanded="true" />
+            <element signature="e#28342#28396#1" expanded="true" />
+            <element signature="e#30577#30585#0" expanded="true" />
+            <element signature="e#36480#36481#0" expanded="true" />
+            <element signature="e#36510#36511#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1049,16 +1070,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Cuadrupla.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="1080">
-          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1095">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proyecto.pas">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.8" vertical-offset="0" max-vertical-offset="255">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6712" max-vertical-offset="45510">
+          <caret line="754" column="9" selection-start-line="754" selection-start-column="9" selection-end-line="754" selection-end-column="9" />
+          <folding>
+            <element signature="e#355#386#0" expanded="true" />
+            <element signature="e#25593#25594#0" expanded="true" />
+            <element signature="e#25648#25649#0" expanded="true" />
+            <element signature="e#28206#28214#0" expanded="true" />
+            <element signature="e#28342#28396#1" expanded="true" />
+            <element signature="e#30577#30585#0" expanded="true" />
+            <element signature="e#36480#36481#0" expanded="true" />
+            <element signature="e#36510#36511#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.cup">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.793103" vertical-offset="4965" max-vertical-offset="19365">
-          <caret line="348" column="0" selection-start-line="348" selection-start-column="0" selection-end-line="348" selection-end-column="0" />
+        <state vertical-scroll-proportion="-8.275862" vertical-offset="3960" max-vertical-offset="19290">
+          <caret line="280" column="43" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1066,25 +1112,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
+    <entry file="file://$PROJECT_DIR$/src/CodigoFinal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11632" max-vertical-offset="45615">
-          <caret line="808" column="3" selection-start-line="808" selection-start-column="3" selection-end-line="808" selection-end-column="3" />
-          <folding>
-            <element signature="e#355#386#0" expanded="true" />
-            <element signature="e#28116#28124#0" expanded="true" />
-            <element signature="e#28252#28306#1" expanded="true" />
-            <element signature="e#30332#30340#0" expanded="true" />
-            <element signature="e#35187#35188#0" expanded="true" />
-            <element signature="e#35217#35218#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proyecto.pas">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18703242" vertical-offset="0" max-vertical-offset="401">
-          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.44067797" vertical-offset="463" max-vertical-offset="1980">
+          <caret line="47" column="63" selection-start-line="47" selection-start-column="63" selection-end-line="47" selection-end-column="63" />
           <folding />
         </state>
       </provider>

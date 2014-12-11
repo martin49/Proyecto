@@ -21,8 +21,10 @@ public class EjemploCUP {
     public final static int TABLAD = 3;
     public final static int TABLAF = 4;
     public final static int TABLAFD = 5;
-    public final static int CODIGO = 6;
-    public final static int SALIR = 7;
+    public final static int CODIGO = 8;
+    public final static int CUADRO = 7;
+    public final static int SALIR = 9;
+    public final static int ARBOL = 6;
 
     /**
      * Es un menu para elegir entre generar el analizador lexico y sintactico, o
@@ -40,8 +42,10 @@ public class EjemploCUP {
             System.out.println("3) Tabla Simbolos");
             System.out.println("4) Tabla Simbolos Funsiones");
             System.out.println("5) Tabla Simbolos Funsiones Variables");
-            System.out.println("6) Escribir");
-            System.out.println("7) Salir");
+            System.out.println("6) Arbol Sintactico");
+            System.out.println("7) Codigo Intermedio");
+            System.out.println("8) Codigo Final");
+            System.out.println("9) Salir");
             System.out.print("Opcion: ");
             valor = in.nextInt();
             switch (valor) {
@@ -105,10 +109,19 @@ public class EjemploCUP {
                     TablaSimbolosFunciones.imprimir();
                     break;
                 }
+                case ARBOL:{
+                    GenericTree.Imprimir();
+                    break;
+                }
+                case CUADRO:{
+                    TablaIntermedio.PrintTabla();
+                    break;
+                }    
                 case CODIGO:{
                     CodigoFinal.escribir();
                     break;
-                }    
+                }
+                
                 case SALIR: {
                     System.out.println("Adios!");
                     break;
@@ -118,7 +131,7 @@ public class EjemploCUP {
                     break;
                 }
             }
-        } while (valor != 7);
+        } while (valor != 9);
 
     }
 

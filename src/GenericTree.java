@@ -221,7 +221,7 @@ public class GenericTree {
         return hijos;
 
     }
-    public static String Imprimir(int x){
+    public static String ImprimirHijos(int x){
         String cadena = "";
 
         for (int i=0; i< hijos.get(x).getChildren().size();i++){
@@ -233,8 +233,17 @@ public class GenericTree {
         return cadena;
 
     }
-
-
+    
+    public static void Imprimir(){
+        System.out.println("-------------------------------");
+        for (int i = 0; i < hijos.size(); i++) {
+            System.out.println("Padre:"+hijos.get(i).getData().getNombre());
+            System.out.println();
+            System.out.println("Hijos:"+ImprimirHijos(i));
+            System.out.println("-------------------------------");
+        }
+    }
+    
     public List<GenericTreeNode> buscar(String dataToFind) {
         List<GenericTreeNode> nodos;
         nodos = null;
