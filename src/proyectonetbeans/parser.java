@@ -533,61 +533,120 @@ class CUP$parser$actions {
 
            public void inta(GenericTreeNode padre){
 
-             if (padre.hasChildren()){
+                if (padre.hasChildren()){
+                  System.out.println(padre.getData().getNombre());
+                  System.out.println(padre.getNumberOfChildren());
+
+                  if (padre.getChildren().size() == 2) {
+                    if (padre.getData().getNombre().equals("S") && (padre.getChildren().get(1).getData().getNombre().equals(""))) {
+                      padre.getChildren().remove(1);
+                    }
+                  }
+
+                  if (padre.getChildren().size() == 3) {
+                    if (padre.getData().getNombre().equals("IS") && (padre.getChildren().get(1).getData().getNombre().equals("")) && (padre.getChildren().get(2).getData().getNombre().equals(""))) {
+                      padre.getChildren().remove(1);
+                      padre.getChildren().remove(1);
+                    }
+                  }
+
+                  if (padre.getChildren().size() == 2) {
+                    if (padre.getData().getNombre().equals("IS") && (padre.getChildren().get(1).getData().getNombre().equals(""))) {
+                      padre.getChildren().remove(1);
+                    }
+                  }
+
+                  if (padre.getNumberOfChildren() >= 2){
+
+                    for( int i = 0 ; i < padre.getNumberOfChildren(); i++ ) {
+
+                      if(padre.getChildren().get(i).getData().getNombre().equals("SA")){
+                        vSA(padre.getChildren().get(i));
+
+                      }
+                      else if (padre.getChildren().get(i).getData().getNombre().equals("AR")){
+
+                      }
+                      else if (padre.getChildren().get(i).getData().getNombre().equals("CONDICION")){
+                        vCONDICION(padre.getChildren().get(i));
+                      }
+                      else {
+                        inta(padre.getChildren().get(i));
+                      }
+
+                    }
+                  }
+                  else{
+                    if(padre.getChildren().get(0).getData().getNombre().equals("SA")){
+                      vSA(padre.getChildren().get(0));
+
+                    }
+                    else if (padre.getChildren().get(0).getData().getNombre().equals("AR")){
+
+                    }
+                    else if (padre.getChildren().get(0).getData().getNombre().equals("CONDICION")){
+                      vCONDICION(padre.getChildren().get(0));
+                    }
+                    else {
+                      inta(padre.getChildren().get(0));
+                    }
+
+                  }
+
+                }
+                else {
 
 
-               if (padre.getData().getNombre().equals("S") && (padre.getChildren().get(1).getData().getNombre().equals(""))) {
-                 padre.getChildren().remove(1);
+                }
+
+
+              }
+
+               public void vCONDICION(GenericTreeNode sa){
+
+                 Cuadrupla adios = new Cuadrupla();
+                 Cuadrupla adios2 = new Cuadrupla();
+
+                 for (int i = 0; i < sa.getNumberOfChildren(); i++) {
+                   GenericTreeNode hijo = sacar(sa.getChildren().get(i));
+                   if (hijo.getNumberOfChildren() < 2) {
+                     String temp = "t" + contador;
+                     if (i == 0) {
+                       adios.setOperador(":=");
+                       adios.setResultado(hijo.getData().getNombre());
+                     }
+                     else {
+
+                       adios2.setOperador(":=");
+                       adios2.setResultado(temp);
+                       adios2.setArg1(hijo.getData().getNombre());
+                       adios2.setArg2("1");
+                       tabla.AgregarCuad(adios2);
+                       adios.setArg1(temp);
+                       adios.setArg2("0");
+                       contador++;
+
+                     }
+
+                   }
+                   else{
+                     if (hijo.getData().getNombre().equals("AR")){
+                       String temp = "t" + contador;
+                       String temp1 = vAR(hijo);
+                       adios.setArg1(temp1);
+                       contador++;
+                     }
+                     else if(hijo.getData().getNombre().equals("AM")){
+                       String temp = "t" + contador;
+                       String temp1 = vAM(hijo);
+                       adios.setArg1(temp1);
+                       contador++;
+                     }
+                   }
+                 }
+                 tabla.AgregarCuad(adios);
+
                }
-
-               System.out.println(padre.getData().getNombre());
-               System.out.println(padre.getNumberOfChildren());
-
-               if (padre.getNumberOfChildren() >= 2){
-
-                 for( int i = 0 ; i < padre.getNumberOfChildren(); i++ ) {
-
-                   if(padre.getChildren().get(i).getData().getNombre().equals("SA")){
-                     vSA(padre.getChildren().get(i));
-
-                   }
-                   else if (padre.getChildren().get(i).getData().getNombre().equals("AR")){
-
-                   }
-                   else if (padre.getChildren().get(i).getData().getNombre().equals("AM")){
-
-                   }
-                   else {
-                     inta(padre.getChildren().get(i));
-                   }
-
-                 }
-               }
-               else{
-                 if(padre.getChildren().get(0).getData().getNombre().equals("SA")){
-                   vSA(padre.getChildren().get(0));
-
-                 }
-                 else if (padre.getChildren().get(0).getData().getNombre().equals("AR")){
-
-                 }
-                 else if (padre.getChildren().get(0).getData().getNombre().equals("AM")){
-
-                 }
-                 else {
-                   inta(padre.getChildren().get(0));
-                 }
-
-               }
-
-             }
-             else {
-
-
-             }
-
-
-           }
 
         public String vAR(GenericTreeNode ar){
                   Cuadrupla adios = new Cuadrupla();
@@ -730,8 +789,10 @@ class CUP$parser$actions {
                         adios2.setOperador(":=");
                         adios2.setResultado(temp);
                         adios2.setArg1(hijo.getData().getNombre());
+                        adios2.setArg2("1");
                         tabla.AgregarCuad(adios2);
                         adios.setArg1(temp);
+                        adios.setArg2("0");
 
                       }
 
@@ -2817,6 +2878,9 @@ class CUP$parser$actions {
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int olleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int olright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		String ol = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		int ex2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ex2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex2 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
@@ -2828,7 +2892,7 @@ class CUP$parser$actions {
             System.err.println("Las expresiones que esta tratando de comparar tienen tipos distintos");
             tipo=ex.getData().getTipo();
         }
-        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICION", tipo));
+        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICION"+ol, tipo));
         eb.addChild(ex);
         eb.addChild(ex2);
         RESULT=eb;
@@ -2858,6 +2922,9 @@ class CUP$parser$actions {
 		int oplleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int oplright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		GenericTreeNode opl = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
@@ -2869,7 +2936,7 @@ class CUP$parser$actions {
             System.err.println("Las expresiones que esta tratando de comparar tienen tipos distintos");
             tipo=opl.getData().getTipo();
         }
-        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICIONOPL", tipo));
+        GenericTreeNode eb = new GenericTreeNode(new Tipo("CONDICIONOPL"+op, tipo));
         eb.addChild(opl);
         eb.addChild(ex);
         RESULT=eb;
@@ -2887,7 +2954,7 @@ class CUP$parser$actions {
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-        GenericTreeNode ex = new GenericTreeNode(new Tipo(ar.getData().getNombre(), ar.getData().getTipo()));
+        GenericTreeNode ex = new GenericTreeNode(new Tipo("CONDICIONOPL", ar.getData().getTipo()));
         ex.addChild(ar);
         RESULT=ex;
 

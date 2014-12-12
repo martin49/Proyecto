@@ -45,7 +45,7 @@ public class CodigoFinal {
             bw.append("move $fp,$sp\n");
             
              for (int i = 0; i < TablaIntermedio.tabla.size(); i++) {
-                 switch(TablaIntermedio.tabla.get(i).operador){
+                 /*switch(TablaIntermedio.tabla.get(i).operador){
                      case ":=":{
                          if(TablaIntermedio.tabla.get(i).arg2.equals("1")){
                              if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i).arg1))
@@ -70,7 +70,7 @@ public class CodigoFinal {
                          bw.append("mul $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
                          break;
                      }
-                 }
+                 }*/
              }
              
         } else {
@@ -91,7 +91,7 @@ public class CodigoFinal {
             bw.append("move $fp,$sp\n");
             
              for (int i = 0; i < TablaIntermedio.tabla.size(); i++) {
-                 switch(TablaIntermedio.tabla.get(i).operador){
+                 /*switch(TablaIntermedio.tabla.get(i).operador){
                      case ":=":{
                          if(TablaIntermedio.tabla.get(i).arg2.equals("1")){
                              if(TablaSimbolos.isinteger(TablaIntermedio.tabla.get(i).arg1))
@@ -116,7 +116,7 @@ public class CodigoFinal {
                          bw.append("mul $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i-1).arg1+", "+TablaIntermedio.tabla.get(i).arg1+"\n");
                          break;
                      }
-                 }
+                 }*/
              }
         }
           bw.close();      
