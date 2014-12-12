@@ -11,5 +11,9 @@ begin
 	else
 		c:=4;
 
+	if b = 6 then
+		b:=4+5+6;
+		c:=b+6;
+
 end.
 
