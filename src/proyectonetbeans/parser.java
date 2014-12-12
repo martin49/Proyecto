@@ -686,12 +686,17 @@ class CUP$parser$actions {
                       }
                     }
                     else{
-                      if (hijo.getData().getNombre().equals("AR")) {
+                      if (hijo.getData().getNombre().equals("AR+")) {
                         resultado = vAR(hijo);
+                      }else if (hijo.getData().getNombre().equals("AR-")){
+                        resultado = vARM(hijo);
                       }
 
-                      else if(hijo.getData().getNombre().equals("AM")){
+                      else if(hijo.getData().getNombre().equals("AM*")){
                         resultado = vAM(hijo);
+                        segunda.add(resultado);
+                      }else if(hijo.getData().getNombre().equals("AM/")){
+                        resultado = vAMD(hijo);
                         segunda.add(resultado);
                       }
 
@@ -700,6 +705,87 @@ class CUP$parser$actions {
                     if (segunda.size() == 2){
                       String temp = "t" + contador;
                       adios.setOperador("+");
+                      adios.setArg1(segunda.get(0));
+                      adios.setArg2(segunda.get(1));
+                      adios.setResultado(temp);
+                      tabla.AgregarCuad(adios);
+                      contador++;
+
+                      resultado = temp;
+                    }
+
+                    if (adios.getArg2() == null || adios.getResultado() == null){
+                      String temp = "t" + contador;
+                      adios.setArg2(resultado);
+                      adios.setResultado(temp);
+                      tabla.AgregarCuad(adios);
+                      contador++;
+
+                      resultado = temp;
+
+                    }
+
+                    return resultado;
+
+                }
+        
+        public String vARM(GenericTreeNode ar){
+                  Cuadrupla adios = new Cuadrupla();
+                  String resultado = "";
+                  ArrayList<String> segunda = new ArrayList<String>();
+
+                  for (int i = 0; i < ar.getNumberOfChildren(); i++) {
+
+                    GenericTreeNode hijo = sacar(ar.getChildren().get(i));
+
+                    if (hijo.getNumberOfChildren() < 2) {
+                      String temp = "t" + contador;
+                      if (i == 0) {
+                        adios.setOperador("-");
+                        adios.setArg1(hijo.getData().getNombre());
+
+                      }
+                      else {
+                          if (!resultado.equals("")){
+                            adios.setOperador("-");
+                            adios.setArg1(resultado);
+                            adios.setArg2(hijo.getData().getNombre());
+                            adios.setResultado(temp);
+                            tabla.AgregarCuad(adios);
+                            contador++;
+
+                            resultado = temp;
+                          }
+                          else {
+                            adios.setArg2(hijo.getData().getNombre());
+                            adios.setResultado(temp);
+                            tabla.AgregarCuad(adios);
+                            contador++;
+
+                            resultado = temp;
+                          }
+                      }
+                    }
+                    else{
+                      if (hijo.getData().getNombre().equals("AR+")) {
+                        resultado = vAR(hijo);
+                      }else if (hijo.getData().getNombre().equals("AR-")) {
+                        resultado = vARM(hijo);
+                      }
+
+                      else if(hijo.getData().getNombre().equals("AM*")){
+                        resultado = vAM(hijo);
+                        segunda.add(resultado);
+                      }else if(hijo.getData().getNombre().equals("AM/")){
+                        resultado = vAMD(hijo);
+                        segunda.add(resultado);
+                      }
+
+                    }
+                  }
+                    if (segunda.size() == 2){
+                      String temp = "t" + contador;
+                      adios.setOperador("-");
                       adios.setArg1(segunda.get(0));
                       adios.setArg2(segunda.get(1));
                       adios.setResultado(temp);
@@ -759,9 +845,59 @@ class CUP$parser$actions {
                     }
                   }
                   else{
-                    if (hijo.getData().getNombre().equals("AM")) {
+                    if (hijo.getData().getNombre().equals("AM*")) {
                       resultado = vAM(hijo);
+                    }else if (hijo.getData().getNombre().equals("AM/")) {
+                        resultado = vAMD(hijo);
+                      }
+
+                  }
+                }
+
+                return resultado;
+
+              }
+              
+              public String vAMD(GenericTreeNode ar){
+                Cuadrupla adios = new Cuadrupla();
+                String resultado = "";
+
+                for (int i = 0; i < ar.getNumberOfChildren(); i++) {
+                  GenericTreeNode hijo = sacar(ar.getChildren().get(i));
+                  if (hijo.getNumberOfChildren() < 2) {
+                    String temp = "t" + contador;
+                    if (i == 0) {
+                      adios.setOperador("/");
+                      adios.setArg1(hijo.getData().getNombre());
+
                     }
+                    else {
+                      if (!resultado.equals("")){
+                        adios.setOperador("/");
+                        adios.setArg1(resultado);
+                        adios.setArg2(hijo.getData().getNombre());
+                        adios.setResultado(temp);
+                        tabla.AgregarCuad(adios);
+                        contador++;
+
+                        resultado = temp;
+                      }
+                      else {
+                        adios.setArg2(hijo.getData().getNombre());
+                        adios.setResultado(temp);
+                        tabla.AgregarCuad(adios);
+                        contador++;
+
+                        resultado = temp;
+                      }
+                    }
+                  }
+                  else{
+                    if (hijo.getData().getNombre().equals("AM*")) {
+                      resultado = vAM(hijo);
+                    }else if (hijo.getData().getNombre().equals("AM/")) {
+                        resultado = vAMD(hijo);
+                      }
 
                   }
                 }
@@ -794,19 +930,32 @@ class CUP$parser$actions {
                         adios.setArg1(temp);
                         adios.setArg2("0");
 
+                        contador++;
+
+
                       }
 
                     }
                     else{
-                      if (hijo.getData().getNombre().equals("AR")){
+                      if (hijo.getData().getNombre().equals("AR+")){
                         String temp = "t" + contador;
                         String temp1 = vAR(hijo);
                         adios.setArg1(temp1);
                         contador++;
+                      }else if (hijo.getData().getNombre().equals("AR-")){
+                        String temp = "t" + contador;
+                        String temp1 = vARM(hijo);
+                        adios.setArg1(temp1);
+                        contador++;
                       }
-                      else if(hijo.getData().getNombre().equals("AM")){
+                      else if(hijo.getData().getNombre().equals("AM*")){
                         String temp = "t" + contador;
                         String temp1 = vAM(hijo);
+                        adios.setArg1(temp1);
+                        contador++;
+                      }else if(hijo.getData().getNombre().equals("AM/")){
+                        String temp = "t" + contador;
+                        String temp1 = vAMD(hijo);
                         adios.setArg1(temp1);
                         contador++;
                       }
@@ -814,7 +963,6 @@ class CUP$parser$actions {
                   }
                   tabla.AgregarCuad(adios);
                 }
-
 
   private final parser parser;
 
@@ -1965,6 +2113,9 @@ class CUP$parser$actions {
 		int arleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		int amleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int amright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode am = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
@@ -1976,7 +2127,7 @@ class CUP$parser$actions {
             System.err.println("Solo se pueden sumar o restar Enteros");
             tipo=ar.getData().getTipo();
         }
-        GenericTreeNode a= new GenericTreeNode(new Tipo("AR", tipo));
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AR"+op, tipo));
         a.addChild(ar);
         a.addChild(am);
         RESULT=a;
@@ -2008,6 +2159,9 @@ class CUP$parser$actions {
 		int amleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int amright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		GenericTreeNode am = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		int valleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int valright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode val = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
@@ -2020,7 +2174,7 @@ class CUP$parser$actions {
             tipo=am.getData().getTipo();
         }
 
-        GenericTreeNode a= new GenericTreeNode(new Tipo("AM", tipo));
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AM"+op, tipo));
         a.addChild(am);
         a.addChild(val);
         RESULT=a;
@@ -2908,7 +3062,7 @@ class CUP$parser$actions {
 		int oplleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int oplright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode opl = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode a= new GenericTreeNode(new Tipo(opl.getData().getNombre(), opl.getData().getTipo()));
+		GenericTreeNode a= new GenericTreeNode(new Tipo("CONDICION", opl.getData().getTipo()));
         a.addChild(opl);
         RESULT=a;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CONDICION",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
