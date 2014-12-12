@@ -539,29 +539,9 @@ class CUP$parser$actions {
       public void inta(GenericTreeNode padre){
 
            if (padre.hasChildren()){
-             System.out.println(padre.getData().getNombre());
-             System.out.println(padre.getNumberOfChildren());
+             
 
-             /*if (padre.getChildren().size() == 2) {
-               if (padre.getData().getNombre().equals("S") && (padre.getChildren().get(1).getData().getNombre().equals(""))) {
-                 padre.getChildren().remove(1);
-               }
-             }
-
-             if (padre.getChildren().size() == 3) {
-               if (padre.getData().getNombre().equals("IS") && (padre.getChildren().get(1).getData().getNombre().equals("")) && (padre.getChildren().get(2).getData().getNombre().equals(""))) {
-                 padre.getChildren().remove(1);
-                 padre.getChildren().remove(1);
-               }
-               else if (padre.getData().getNombre().equals("IS") && (padre.getChildren().get(2).getData().getNombre().equals(""))){
-                 padre.getChildren().remove(2);
-               }
-             }
-             else if (padre.getChildren().size() == 2) {
-               if (padre.getData().getNombre().equals("IS") && (padre.getChildren().get(1).getData().getNombre().equals(""))) {
-                 padre.getChildren().remove(1);
-               }
-             }*/
+          
              for (int i = 0; i < padre.getNumberOfChildren(); i++) {
                if (padre.getChildren().get(i).getData().getNombre().equals("S")){
                  //etqList.add(new_etq());
@@ -576,6 +556,10 @@ class CUP$parser$actions {
 
 
                  if(padre.getChildren().get(i).getData().getNombre().equals("SA")){
+                  if(etqList.size()>0){
+                    tabla.Ingresar("GEN", etqList.get(0), " ");
+                    etqList.remove(0);
+                  }
                    vSA(padre.getChildren().get(i));
 
                  }
@@ -654,7 +638,7 @@ class CUP$parser$actions {
             }
             else {
               adios.setArg2(hijo.getData().getNombre());
-              adios.setResultado("GOTO "+etqList.get(0));
+              adios.setResultado("_"+etqList.get(0));
             }
 
           }
@@ -681,7 +665,9 @@ class CUP$parser$actions {
           }
         }
         tabla.AgregarCuad(adios);
-
+        if(etqList.size()>1){
+                tabla.Ingresar("GOTO", etqList.get(1), "");
+              }
 
       }
 
@@ -700,7 +686,7 @@ class CUP$parser$actions {
             }
             else {
               adios.setArg2(hijo.getData().getNombre());
-              adios.setResultado("GOTO "+etqList.get(0));
+              adios.setResultado("_"+etqList.get(0));
             }
 
           }
@@ -727,7 +713,9 @@ class CUP$parser$actions {
           }
         }
         tabla.AgregarCuad(adios);
-
+        if(etqList.size()>1){
+                tabla.Ingresar("GOTO", etqList.get(1), "");
+              }
 
       }
 
@@ -746,7 +734,7 @@ class CUP$parser$actions {
             }
             else {
               adios.setArg2(hijo.getData().getNombre());
-              adios.setResultado("GOTO "+etqList.get(0));
+              adios.setResultado("_"+etqList.get(0));
             }
 
           }
@@ -773,7 +761,9 @@ class CUP$parser$actions {
           }
         }
         tabla.AgregarCuad(adios);
-
+        if(etqList.size()>1){
+                tabla.Ingresar("GOTO", etqList.get(1), "");
+              }
 
       }
 
@@ -792,7 +782,7 @@ class CUP$parser$actions {
             }
             else {
               adios.setArg2(hijo.getData().getNombre());
-              adios.setResultado("GOto "+etqList.get(0));
+              adios.setResultado("_"+etqList.get(0));
             }
 
           }
@@ -819,7 +809,9 @@ class CUP$parser$actions {
           }
         }
         tabla.AgregarCuad(adios);
-
+        if(etqList.size()>1){
+                tabla.Ingresar("GOTO", etqList.get(1), "");
+              }
 
       }
 
@@ -841,7 +833,7 @@ class CUP$parser$actions {
            }
            else {
              adios.setArg2(hijo.getData().getNombre());
-             adios.setResultado(etqList.get(0));
+             adios.setResultado("_"+etqList.get(0));
            }
 
          }
@@ -889,8 +881,7 @@ class CUP$parser$actions {
            }
            else {
              adios.setArg2(hijo.getData().getNombre());
-             String etq = new_etq();
-             adios.setResultado(etq);
+             adios.setResultado("_"+etqList.get(0));
            }
 
          }
@@ -917,6 +908,9 @@ class CUP$parser$actions {
          }
        }
        tabla.AgregarCuad(adios);
+       if(etqList.size()>1){
+                tabla.Ingresar("GOTO", etqList.get(1), "");
+              }
 
      }
 
@@ -1278,8 +1272,8 @@ class CUP$parser$actions {
         tree.setRoot(pro);
         tree.list();
         GenericTreeNode cupo = tree.buscar("CUP").get(0);
-          inta(cupo);
-          tabla.PrintTabla();
+        inta(cupo);
+          
 
 
 
