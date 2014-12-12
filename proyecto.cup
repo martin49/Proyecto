@@ -226,7 +226,6 @@ action code{:
              adios.setResultado(etq);
            }
 
-<<<<<<< HEAD
          }
          else{
            if (hijo.getData().getNombre().equals("CONDICION<")){
@@ -243,59 +242,6 @@ action code{:
        tabla.AgregarCuad(adios);
 
      }
-=======
-        public String vAR(GenericTreeNode ar){
-                  Cuadrupla adios = new Cuadrupla();
-                  String resultado = "";
-                  ArrayList<String> segunda = new ArrayList<String>();
-
-                  for (int i = 0; i < ar.getNumberOfChildren(); i++) {
-
-                    GenericTreeNode hijo = sacar(ar.getChildren().get(i));
-
-                    if (hijo.getNumberOfChildren() < 2) {
-                      String temp = "t" + contador;
-                      if (i == 0) {
-                        adios.setOperador("+");
-                        adios.setArg1(hijo.getData().getNombre());
-
-                      }
-                      else {
-                          if (!resultado.equals("")){
-                            adios.setOperador("+");
-                            adios.setArg1(resultado);
-                            adios.setArg2(hijo.getData().getNombre());
-                            adios.setResultado(temp);
-                            tabla.AgregarCuad(adios);
-                            contador++;
-
-                            resultado = temp;
-                          }
-                          else {
-                            adios.setArg2(hijo.getData().getNombre());
-                            adios.setResultado(temp);
-                            tabla.AgregarCuad(adios);
-                            contador++;
-
-                            resultado = temp;
-                          }
-                      }
-                    }
-                    else{
-                      if (hijo.getData().getNombre().equals("AR+")) {
-                        resultado = vAR(hijo);
-                      }else if (hijo.getData().getNombre().equals("AR-")){
-                        resultado = vARM(hijo);
-                      }
-
-                      else if(hijo.getData().getNombre().equals("AM*")){
-                        resultado = vAM(hijo);
-                        segunda.add(resultado);
-                      }else if(hijo.getData().getNombre().equals("AM/")){
-                        resultado = vAMD(hijo);
-                        segunda.add(resultado);
-                      }
->>>>>>> 83d7b7414751c894aa0438d7b10f86bbd928a4e6
 
      public String vAR(GenericTreeNode ar){
        Cuadrupla adios = new Cuadrupla();
@@ -330,7 +276,6 @@ action code{:
                  tabla.AgregarCuad(adios);
                  contador++;
 
-<<<<<<< HEAD
                  resultado = temp;
                }
            }
@@ -339,90 +284,6 @@ action code{:
            if (hijo.getData().getNombre().equals("AR")) {
              resultado = vAR(hijo);
            }
-=======
-                }
-        
-        public String vARM(GenericTreeNode ar){
-                  Cuadrupla adios = new Cuadrupla();
-                  String resultado = "";
-                  ArrayList<String> segunda = new ArrayList<String>();
-
-                  for (int i = 0; i < ar.getNumberOfChildren(); i++) {
-
-                    GenericTreeNode hijo = sacar(ar.getChildren().get(i));
-
-                    if (hijo.getNumberOfChildren() < 2) {
-                      String temp = "t" + contador;
-                      if (i == 0) {
-                        adios.setOperador("-");
-                        adios.setArg1(hijo.getData().getNombre());
-
-                      }
-                      else {
-                          if (!resultado.equals("")){
-                            adios.setOperador("-");
-                            adios.setArg1(resultado);
-                            adios.setArg2(hijo.getData().getNombre());
-                            adios.setResultado(temp);
-                            tabla.AgregarCuad(adios);
-                            contador++;
-
-                            resultado = temp;
-                          }
-                          else {
-                            adios.setArg2(hijo.getData().getNombre());
-                            adios.setResultado(temp);
-                            tabla.AgregarCuad(adios);
-                            contador++;
-
-                            resultado = temp;
-                          }
-                      }
-                    }
-                    else{
-                      if (hijo.getData().getNombre().equals("AR+")) {
-                        resultado = vAR(hijo);
-                      }else if (hijo.getData().getNombre().equals("AR-")) {
-                        resultado = vARM(hijo);
-                      }
-
-                      else if(hijo.getData().getNombre().equals("AM*")){
-                        resultado = vAM(hijo);
-                        segunda.add(resultado);
-                      }else if(hijo.getData().getNombre().equals("AM/")){
-                        resultado = vAMD(hijo);
-                        segunda.add(resultado);
-                      }
-
-                    }
-                  }
-                    if (segunda.size() == 2){
-                      String temp = "t" + contador;
-                      adios.setOperador("-");
-                      adios.setArg1(segunda.get(0));
-                      adios.setArg2(segunda.get(1));
-                      adios.setResultado(temp);
-                      tabla.AgregarCuad(adios);
-                      contador++;
-
-                      resultado = temp;
-                    }
-
-                    if (adios.getArg2() == null || adios.getResultado() == null){
-                      String temp = "t" + contador;
-                      adios.setArg2(resultado);
-                      adios.setResultado(temp);
-                      tabla.AgregarCuad(adios);
-                      contador++;
-
-                      resultado = temp;
-
-                    }
-
-                    return resultado;
-
-                }
->>>>>>> 83d7b7414751c894aa0438d7b10f86bbd928a4e6
 
            else if(hijo.getData().getNombre().equals("AM")){
              resultado = vAM(hijo);
@@ -440,87 +301,8 @@ action code{:
            tabla.AgregarCuad(adios);
            contador++;
 
-<<<<<<< HEAD
            resultado = temp;
          }
-=======
-                    }
-                    else {
-                      if (!resultado.equals("")){
-                        adios.setOperador("*");
-                        adios.setArg1(resultado);
-                        adios.setArg2(hijo.getData().getNombre());
-                        adios.setResultado(temp);
-                        tabla.AgregarCuad(adios);
-                        contador++;
-
-                        resultado = temp;
-                      }
-                      else {
-                        adios.setArg2(hijo.getData().getNombre());
-                        adios.setResultado(temp);
-                        tabla.AgregarCuad(adios);
-                        contador++;
-
-                        resultado = temp;
-                      }
-                    }
-                  }
-                  else{
-                    if (hijo.getData().getNombre().equals("AM*")) {
-                      resultado = vAM(hijo);
-                    }else if (hijo.getData().getNombre().equals("AM/")) {
-                        resultado = vAMD(hijo);
-                      }
-
-                  }
-                }
-
-                return resultado;
-
-              }
-              
-              public String vAMD(GenericTreeNode ar){
-                Cuadrupla adios = new Cuadrupla();
-                String resultado = "";
-
-                for (int i = 0; i < ar.getNumberOfChildren(); i++) {
-                  GenericTreeNode hijo = sacar(ar.getChildren().get(i));
-                  if (hijo.getNumberOfChildren() < 2) {
-                    String temp = "t" + contador;
-                    if (i == 0) {
-                      adios.setOperador("/");
-                      adios.setArg1(hijo.getData().getNombre());
-
-                    }
-                    else {
-                      if (!resultado.equals("")){
-                        adios.setOperador("/");
-                        adios.setArg1(resultado);
-                        adios.setArg2(hijo.getData().getNombre());
-                        adios.setResultado(temp);
-                        tabla.AgregarCuad(adios);
-                        contador++;
-
-                        resultado = temp;
-                      }
-                      else {
-                        adios.setArg2(hijo.getData().getNombre());
-                        adios.setResultado(temp);
-                        tabla.AgregarCuad(adios);
-                        contador++;
-
-                        resultado = temp;
-                      }
-                    }
-                  }
-                  else{
-                    if (hijo.getData().getNombre().equals("AM*")) {
-                      resultado = vAM(hijo);
-                    }else if (hijo.getData().getNombre().equals("AM/")) {
-                        resultado = vAMD(hijo);
-                      }
->>>>>>> 83d7b7414751c894aa0438d7b10f86bbd928a4e6
 
          if (adios.getArg2() == null || adios.getResultado() == null){
            String temp = "t" + contador;
@@ -567,7 +349,6 @@ action code{:
                tabla.AgregarCuad(adios);
                contador++;
 
-<<<<<<< HEAD
                resultado = temp;
              }
            }
@@ -576,21 +357,10 @@ action code{:
            if (hijo.getData().getNombre().equals("AM")) {
              resultado = vAM(hijo);
            }
-=======
-                        adios2.setOperador(":=");
-                        adios2.setResultado(temp);
-                        adios2.setArg1(hijo.getData().getNombre());
-                        adios2.setArg2("1");
-                        tabla.AgregarCuad(adios2);
-                        adios.setArg1(temp);
-                        adios.setArg2("0");
-                        contador++;
->>>>>>> 83d7b7414751c894aa0438d7b10f86bbd928a4e6
 
          }
        }
 
-<<<<<<< HEAD
        return resultado;
 
      }
@@ -646,36 +416,6 @@ action code{:
        return adios.getResultado();
      }
 
-=======
-                    }
-                    else{
-                      if (hijo.getData().getNombre().equals("AR+")){
-                        String temp = "t" + contador;
-                        String temp1 = vAR(hijo);
-                        adios.setArg1(temp1);
-                        contador++;
-                      }else if (hijo.getData().getNombre().equals("AR-")){
-                        String temp = "t" + contador;
-                        String temp1 = vARM(hijo);
-                        adios.setArg1(temp1);
-                        contador++;
-                      }
-                      else if(hijo.getData().getNombre().equals("AM*")){
-                        String temp = "t" + contador;
-                        String temp1 = vAM(hijo);
-                        adios.setArg1(temp1);
-                        contador++;
-                      }else if(hijo.getData().getNombre().equals("AM/")){
-                        String temp = "t" + contador;
-                        String temp1 = vAMD(hijo);
-                        adios.setArg1(temp1);
-                        contador++;
-                      }
-                    }
-                  }
-                  tabla.AgregarCuad(adios);
-                }
->>>>>>> 83d7b7414751c894aa0438d7b10f86bbd928a4e6
 :};
 
 terminal String ASSIG, DECLARACION, LLAVEIZQ, LLAVEDER, PARIZQ, PARDER, COMA, CORCHETEDER, CORCHETEIZQ, PUNTO;
@@ -757,13 +497,13 @@ DE ::= DEI:dei DE:d {:
         RESULT=de;
 :};
 
-DEI ::= ID:id COMA DEI:de{: 
+DEI ::= ID:id COMA DEI:de{:
         String tipo= "";
         if(Declaracion == true){
             simbolo.crear(id, de.getData().getTipo(),ambito);
             tipo = de.getData().getTipo();
         }else if((Funcion== true)&&(FCParametro==false)){
-            
+
             if(de.getData().getTipo().equals("Integer")){
                 contador = contador + 4;
             }else{
@@ -1105,31 +845,31 @@ SA ::= IDA:id ASSIG AR:ar{:
                String tipo = simbolo.buscarTipo(id.getData().getNombre()).substring(9,simbolo.buscarTipo(id.getData().getNombre()).length()-8);
                     int m = Integer.parseInt(tipo);
                     if(m>=ar.getData().getNombre().length()){
-                       System.out.println("correcto"); 
+                       System.out.println("correcto");
                        tipo1= ar.getData().getTipo();
                     }else{
                         System.err.println("El tamaño del string es mayor al de la variable: "+id);
-                    }  
+                    }
             }else if(tfuncion.buscarTipo(id.getData().getNombre())!=null){
                String tipo = tfuncion.buscarTipo(id.getData().getNombre()).substring(9,tfuncion.buscarTipo(id.getData().getNombre()).length()-8);
                     int m = Integer.parseInt(tipo);
                     if(m>=ar.getData().getNombre().length()){
-                       System.out.println("correcto"); 
+                       System.out.println("correcto");
                        tipo1= ar.getData().getTipo();
                     }else{
                         System.err.println("El tamaño del string es mayor al de la variable: "+id);
-                    }  
+                    }
             }else{
                 System.err.println("No se encuentra: ");
             }
-                       
+
             }else
                 if(id.getData().getTipo().equals(ar.getData().getTipo())){
                     System.out.println("correcto");
                     tipo1= ar.getData().getTipo();
                 }else
                     System.err.println("Esta asignando un tipo distinto a la variable: "+id.getData().getNombre()+","+ " tipo correcto: "+id.getData().getTipo());
-        
+
         GenericTreeNode sa = new GenericTreeNode(new Tipo("SA", tipo1));
         sa.addChild(id);
         sa.addChild(ar);
@@ -1168,7 +908,7 @@ IDA ::= ID:id{:String tipo = "";
             RESULT=ida;
         :};
 
-AR ::= AR:ar OPSUMA:op AM:am{:
+AR ::= AR:ar OPSUMA AM:am{:
         String tipo = "";
         if(ar.getData().getTipo().equals(am.getData().getTipo()) && ar.getData().getTipo().equals("Integer")){
             tipo=ar.getData().getTipo();
@@ -1176,7 +916,7 @@ AR ::= AR:ar OPSUMA:op AM:am{:
             System.err.println("Solo se pueden sumar o restar Enteros");
             tipo=ar.getData().getTipo();
         }
-        GenericTreeNode a= new GenericTreeNode(new Tipo("AR"+op, tipo));
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AR", tipo));
         a.addChild(ar);
         a.addChild(am);
         RESULT=a;
@@ -1187,7 +927,7 @@ AR ::= AR:ar OPSUMA:op AM:am{:
         RESULT=a;
 :};
 
-AM ::= AM:am OP:op F:val {:
+AM ::= AM:am OP F:val {:
         String tipo = "";
         if(am.getData().getTipo().equals(val.getData().getTipo()) && am.getData().getTipo().equals("Integer")){
             tipo=am.getData().getTipo();
@@ -1196,7 +936,7 @@ AM ::= AM:am OP:op F:val {:
             tipo=am.getData().getTipo();
         }
 
-        GenericTreeNode a= new GenericTreeNode(new Tipo("AM"+op, tipo));
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AM", tipo));
         a.addChild(am);
         a.addChild(val);
         RESULT=a;
@@ -1300,12 +1040,12 @@ LA ::= ID:id LLAVEIZQ EXPRESION:ex LLAVEDER{:
                         System.err.println("El array "+id+ " no puede ser llamada en este ambito.");
                         tipo=simbolo.buscarTipo(id).substring(11, simbolo.buscarTipo(id).length()-1);
                     }
-                    
+
                 }else if(tfuncion.buscar(id)!=null){
                     if(tfuncion.prefijo(id, ambito)==true){
                         if(ex.getData().getTipo().equals("Integer")){
                             tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
-                            
+
                         }else{
                             System.err.println("El index de: "+id+" debe ser entero");
                             tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
@@ -1314,7 +1054,7 @@ LA ::= ID:id LLAVEIZQ EXPRESION:ex LLAVEDER{:
                         System.err.println("El array "+id+ " no puede ser llamada en este ambito.");
                         tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
                     }
-                    
+
                 }
         GenericTreeNode la = new GenericTreeNode(new Tipo(id, tipo));
         GenericTreeNode i = new GenericTreeNode(new Tipo(id, id));
@@ -1589,7 +1329,7 @@ CONDICION ::= CONDICION:ex OL:ol CONDICIONOPL:ex2{:
         eb.addChild(ex);
         eb.addChild(ex2);
         RESULT=eb;
-:}| CONDICIONOPL:opl{:GenericTreeNode a= new GenericTreeNode(new Tipo("CONDICION", opl.getData().getTipo()));
+:}| CONDICIONOPL:opl{:GenericTreeNode a= new GenericTreeNode(new Tipo(opl.getData().getNombre(), opl.getData().getTipo()));
         a.addChild(opl);
         RESULT=a;:};
 

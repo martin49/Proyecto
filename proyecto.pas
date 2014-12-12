@@ -2,11 +2,11 @@ program d;
 
 var
 	b,c:Integer;
+	n:Array[1..4] of Integer;
 
 begin
 
-	if b<4 and c>9 then
-		b:=4+5;
+
 
 end.
 
