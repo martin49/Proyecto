@@ -102,7 +102,13 @@ class TablaFunsiones {
     {
         return tablaSimbolos.get(nombre).dominio;
     }
-    
+
+    public static int buscarParametro(String nombre)
+    {
+        return tablaSimbolos.get(nombre).num_parametros;
+    }
+
+
     public String buscarRango(String nombre)
     {
         return tablaSimbolos.get(nombre).rango;

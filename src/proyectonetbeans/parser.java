@@ -539,8 +539,6 @@ class CUP$parser$actions {
       public void inta(GenericTreeNode padre){
 
            if (padre.hasChildren()){
-             System.out.println(padre.getData().getNombre());
-             System.out.println(padre.getNumberOfChildren());
 
              /*if (padre.getChildren().size() == 2) {
                if (padre.getData().getNombre().equals("S") && (padre.getChildren().get(1).getData().getNombre().equals(""))) {
@@ -582,6 +580,9 @@ class CUP$parser$actions {
                  else if (padre.getChildren().get(i).getData().getNombre().equals("CONDICION<")){
                    vCONDICIONm(padre.getChildren().get(i));
                  }
+                 else if(padre.getChildren().get(i).getData().getNombre().equals("PROCEDURE") || padre.getChildren().get(i).getData().getNombre().equals("DF")){
+                                    vProcedure(padre.getChildren().get(i));
+                                  }
                  else if (padre.getChildren().get(i).getData().getNombre().equals("CONDICION>")){
                    vCONDICIONM(padre.getChildren().get(i));
                  }else if (padre.getChildren().get(i).getData().getNombre().equals("CONDICION<>")){
@@ -593,11 +594,15 @@ class CUP$parser$actions {
                  }else if (padre.getChildren().get(i).getData().getNombre().equals("CONDICION<=")){
                    vCONDICIONMNE(padre.getChildren().get(i));
                  }
+                  else if (padre.getNumberOfChildren() >=3 && i==1 && padre.getData().getNombre().equals("RF")){
+                                    String a1 = new_etq();
+                                    String a2 = new_etq();
+                                    tabla.Ingresar("GEN", a1, "");
+                                    String tempi = tabla.getTabla().get(tabla.getTabla().size() - 2).getResultado();
+                                    tabla.Ingresar("if<",  tempi, padre.getChildren().get(1).getData().getNombre(),new_etq());
+                                    tabla.Ingresar("GOTO", a2, "");
+                                  }
 
-                 if (padre.getNumberOfChildren() >=3 && i==1 && padre.getData().getNombre().equals("RF")){
-                   String tempi = tabla.getTabla().get(tabla.getTabla().size() - 1).getResultado();
-                   tabla.Ingresar("if<",  tempi, padre.getChildren().get(1).getData().getNombre(),new_etq());
-                 }
 
                  else {
                    inta(padre.getChildren().get(i));
@@ -638,6 +643,20 @@ class CUP$parser$actions {
 
            }
       }
+
+      public void vProcedure(GenericTreeNode pro){
+
+              Funsiones val = fun.buscar(pro.getChildren().get(1).getData().getNombre());
+
+              System.out.println(val.dominio);
+              System.out.println(val.rango);
+              for (int i = 0; i < val.num_parametros; i++) {
+                //Ingresar parametro ()
+              }
+
+              tabla.Ingresar("call", val.nombre, ""+val.num_parametros);
+
+            }
 
       public void vCONDICIONE(GenericTreeNode sa){
 

@@ -3,17 +3,18 @@ program d;
 var
 	b,c:Integer;
 	n:Array[1..4] of Integer;
-
+	procedure id;
+	var a:Integer;
+	begin
+		a:=90;
+	end.
 begin
 
-	if 3<5 then
-		c:=3;
-	else
-		c:=4;
+	for b:=1 to 3 do
+	begin
+		b:=2;
+	end;
 
-	if b = 6 then
-		b:=4+5+6;
-		c:=b+6;
 
 end.
 
