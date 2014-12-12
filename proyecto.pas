@@ -3,7 +3,8 @@ program d;
 var
 	b,c:Integer;
 	n:Array[1..4] of Integer;
-	procedure p;
+
+	function p(x:Integer;) : Integer;
 		var a:Integer;
 		begin
 
