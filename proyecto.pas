@@ -6,7 +6,10 @@ var
 
 begin
 
-
+	if 3<5 then
+		c:=3;
+	else
+		c:=4;
 
 end.
 

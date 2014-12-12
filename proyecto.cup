@@ -109,7 +109,7 @@ action code{:
              }*/
              for (int i = 0; i < padre.getNumberOfChildren(); i++) {
                if (padre.getChildren().get(i).getData().getNombre().equals("S")){
-                 etqList.add(new_etq());
+                 //etqList.add(new_etq());
                }
              }
 
@@ -211,6 +211,7 @@ action code{:
 
        Cuadrupla adios = new Cuadrupla();
        Cuadrupla adios2 = new Cuadrupla();
+       String act = new_etq();
 
        for (int i = 0; i < sa.getNumberOfChildren(); i++) {
          GenericTreeNode hijo = sacar(sa.getChildren().get(i));
@@ -240,6 +241,7 @@ action code{:
          }
        }
        tabla.AgregarCuad(adios);
+       tabla.Ingresar("Goto", new_etq(), "");
 
      }
 
@@ -1329,7 +1331,7 @@ CONDICION ::= CONDICION:ex OL:ol CONDICIONOPL:ex2{:
         eb.addChild(ex);
         eb.addChild(ex2);
         RESULT=eb;
-:}| CONDICIONOPL:opl{:GenericTreeNode a= new GenericTreeNode(new Tipo(opl.getData().getNombre(), opl.getData().getTipo()));
+:}| CONDICIONOPL:opl{:GenericTreeNode a= new GenericTreeNode(new Tipo("CONDICION", opl.getData().getTipo()));
         a.addChild(opl);
         RESULT=a;:};
 
