@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4be8c687-c9eb-4ba7-a1dd-ba2c5550efd2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/TablaFunsiones.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/TablaFunsiones.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Proyecto/parser$CUP$parser$actions.class" afterPath="$PROJECT_DIR$/out/production/Proyecto/parser$CUP$parser$actions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Funsiones.java" afterPath="$PROJECT_DIR$/src/Funsiones.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/CodigoFinal.class" afterPath="$PROJECT_DIR$/build/classes/CodigoFinal.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/parser$CUP$parser$actions.class" afterPath="$PROJECT_DIR$/build/classes/parser$CUP$parser$actions.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CodigoFinal.java" afterPath="$PROJECT_DIR$/src/CodigoFinal.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/proyectonetbeans/parser.java" afterPath="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proyecto.cup" afterPath="$PROJECT_DIR$/proyecto.cup" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proyecto.pas" afterPath="$PROJECT_DIR$/proyecto.pas" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Proyecto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,31 +33,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="parser.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="parser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.962963" vertical-offset="9082" max-vertical-offset="53325">
-              <caret line="632" column="0" selection-start-line="632" selection-start-column="0" selection-end-line="632" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.60362697" vertical-offset="7807" max-vertical-offset="53250">
+              <caret line="541" column="0" selection-start-line="541" selection-start-column="0" selection-end-line="541" selection-end-column="0" />
               <folding>
-                <element signature="e#0#176383#0" expanded="true" />
+                <element signature="e#0#175928#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#44048#44056#0" expanded="true" />
-                <element signature="e#47135#47143#0" expanded="true" />
-                <element signature="e#55845#55846#0" expanded="true" />
-                <element signature="e#55875#55876#0" expanded="true" />
+                <element signature="e#43614#43622#0" expanded="true" />
+                <element signature="e#46701#46709#0" expanded="true" />
+                <element signature="e#55411#55412#0" expanded="true" />
+                <element signature="e#55441#55442#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="proyecto.pas" pinned="false" current-in-tab="true">
+      <file leaf-file-name="proyecto.pas" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proyecto.pas">
           <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5645161" vertical-offset="0" max-vertical-offset="390">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            <state vertical-scroll-proportion="-4.6666665" vertical-offset="3" max-vertical-offset="375">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -70,8 +69,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.206897" vertical-offset="2691" max-vertical-offset="26865">
-              <caret line="203" column="13" selection-start-line="203" selection-start-column="13" selection-end-line="203" selection-end-column="13" />
+            <state vertical-scroll-proportion="-10.655172" vertical-offset="1776" max-vertical-offset="26790">
+              <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -121,9 +120,9 @@
         <option value="$PROJECT_DIR$/bueno1.pas" />
         <option value="$PROJECT_DIR$/src/CodigoFinal.java" />
         <option value="$PROJECT_DIR$/src/Funsiones.java" />
+        <option value="$PROJECT_DIR$/proyecto.pas" />
         <option value="$PROJECT_DIR$/proyecto.cup" />
         <option value="$PROJECT_DIR$/src/proyectonetbeans/parser.java" />
-        <option value="$PROJECT_DIR$/proyecto.pas" />
       </list>
     </option>
   </component>
@@ -553,7 +552,7 @@
       <workItem from="1418312196209" duration="25038000" />
       <workItem from="1418345204389" duration="15016000" />
       <workItem from="1418375336003" duration="8348000" />
-      <workItem from="1418387929645" duration="2109000" />
+      <workItem from="1418387929645" duration="2213000" />
     </task>
     <task id="LOCAL-00001" summary="arbol">
       <created>1417155780738</created>
@@ -571,7 +570,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="274844000" />
+    <option name="totallyTimeSpent" value="274948000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
@@ -678,12 +677,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="5917" max-vertical-offset="42525">
           <caret line="557" column="0" selection-start-line="557" selection-start-column="0" selection-end-line="557" selection-end-column="18" />
           <folding>
-            <element signature="e#0#176383#0" expanded="true" />
+            <element signature="e#0#175928#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#44048#44056#0" expanded="true" />
-            <element signature="e#47135#47143#0" expanded="true" />
-            <element signature="e#55845#55846#0" expanded="true" />
-            <element signature="e#55875#55876#0" expanded="true" />
+            <element signature="e#43614#43622#0" expanded="true" />
+            <element signature="e#46701#46709#0" expanded="true" />
+            <element signature="e#55411#55412#0" expanded="true" />
+            <element signature="e#55441#55442#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -747,12 +746,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="2850" max-vertical-offset="9945">
           <caret line="219" column="62" selection-start-line="219" selection-start-column="62" selection-end-line="219" selection-end-column="62" />
           <folding>
-            <element signature="e#0#176383#0" expanded="true" />
+            <element signature="e#0#175928#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#44048#44056#0" expanded="true" />
-            <element signature="e#47135#47143#0" expanded="true" />
-            <element signature="e#55845#55846#0" expanded="true" />
-            <element signature="e#55875#55876#0" expanded="true" />
+            <element signature="e#43614#43622#0" expanded="true" />
+            <element signature="e#46701#46709#0" expanded="true" />
+            <element signature="e#55411#55412#0" expanded="true" />
+            <element signature="e#55441#55442#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -831,12 +830,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="5512" max-vertical-offset="6015">
           <caret line="306" column="20" selection-start-line="306" selection-start-column="20" selection-end-line="306" selection-end-column="20" />
           <folding>
-            <element signature="e#0#176383#0" expanded="true" />
+            <element signature="e#0#175928#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#44048#44056#0" expanded="true" />
-            <element signature="e#47135#47143#0" expanded="true" />
-            <element signature="e#55845#55846#0" expanded="true" />
-            <element signature="e#55875#55876#0" expanded="true" />
+            <element signature="e#43614#43622#0" expanded="true" />
+            <element signature="e#46701#46709#0" expanded="true" />
+            <element signature="e#55411#55412#0" expanded="true" />
+            <element signature="e#55441#55442#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -893,12 +892,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="5895" max-vertical-offset="9480">
           <caret line="238" column="36" selection-start-line="238" selection-start-column="36" selection-end-line="238" selection-end-column="36" />
           <folding>
-            <element signature="e#0#176383#0" expanded="true" />
+            <element signature="e#0#175928#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#44048#44056#0" expanded="true" />
-            <element signature="e#47135#47143#0" expanded="true" />
-            <element signature="e#55845#55846#0" expanded="true" />
-            <element signature="e#55875#55876#0" expanded="true" />
+            <element signature="e#43614#43622#0" expanded="true" />
+            <element signature="e#46701#46709#0" expanded="true" />
+            <element signature="e#55411#55412#0" expanded="true" />
+            <element signature="e#55441#55442#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1069,40 +1068,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/proyecto.pas">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.6666665" vertical-offset="3" max-vertical-offset="375">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/proyecto.cup">
       <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.206897" vertical-offset="2691" max-vertical-offset="26865">
-          <caret line="203" column="13" selection-start-line="203" selection-start-column="13" selection-end-line="203" selection-end-column="13" />
+        <state vertical-scroll-proportion="-10.655172" vertical-offset="1776" max-vertical-offset="26790">
+          <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/proyectonetbeans/parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.962963" vertical-offset="9082" max-vertical-offset="53325">
-          <caret line="632" column="0" selection-start-line="632" selection-start-column="0" selection-end-line="632" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.60362697" vertical-offset="7807" max-vertical-offset="53250">
+          <caret line="541" column="0" selection-start-line="541" selection-start-column="0" selection-end-line="541" selection-end-column="0" />
           <folding>
-            <element signature="e#0#176383#0" expanded="true" />
+            <element signature="e#0#175928#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#44048#44056#0" expanded="true" />
-            <element signature="e#47135#47143#0" expanded="true" />
-            <element signature="e#55845#55846#0" expanded="true" />
-            <element signature="e#55875#55876#0" expanded="true" />
+            <element signature="e#43614#43622#0" expanded="true" />
+            <element signature="e#46701#46709#0" expanded="true" />
+            <element signature="e#55411#55412#0" expanded="true" />
+            <element signature="e#55441#55442#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proyecto.pas">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5645161" vertical-offset="0" max-vertical-offset="390">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>

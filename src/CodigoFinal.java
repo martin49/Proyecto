@@ -28,7 +28,7 @@ public class CodigoFinal {
             
             //Cierro el stream
 
-         /*if(archivo.exists()) {
+         if(archivo.exists()) {
              bw.write(".data\n");
              for (Simbolo s : TablaSimbolos.tablaSimbolos.values()) {
             
@@ -141,6 +141,30 @@ public class CodigoFinal {
                                  bw.append("div $"+TablaIntermedio.tabla.get(i).resultado+", $"+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+"\n");
                              }
                          }
+                         break;
+                     }case "if =":{
+                         bw.append("beq _"+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+", "+TablaIntermedio.tabla.get(i).resultado+"\n");
+                         break;
+                     }case "if <":{
+                         bw.append("blt _"+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+", "+TablaIntermedio.tabla.get(i).resultado+"\n");
+                         break;
+                     }case "if <=":{
+                         bw.append("ble _"+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+", "+TablaIntermedio.tabla.get(i).resultado+"\n");
+                         break;
+                     }case "if <>":{
+                         bw.append("bne _"+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+", "+TablaIntermedio.tabla.get(i).resultado+"\n");
+                         break;
+                     }case "if >":{
+                         bw.append("bgt _"+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+", "+TablaIntermedio.tabla.get(i).resultado+"\n");
+                         break;
+                     }case "if >=":{
+                         bw.append("bge _"+TablaIntermedio.tabla.get(i).arg1+", "+TablaIntermedio.tabla.get(i).arg2+", "+TablaIntermedio.tabla.get(i).resultado+"\n");
+                         break;
+                     }case "GEN":{
+                         bw.append("_"+TablaIntermedio.tabla.get(i).arg1+":\n");
+                         break;
+                     }case "GOTO":{
+                         bw.append("b _"+TablaIntermedio.tabla.get(i).arg1+"\n");
                          break;
                      }
                  }
@@ -266,7 +290,7 @@ public class CodigoFinal {
              
              }
         }
-          bw.close();*/
+          bw.close();
         }catch(IOException e){
             System.out.println("Error E/S: "+e);
         }
