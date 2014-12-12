@@ -498,9 +498,11 @@ public class parser extends java_cup.runtime.lr_parser {
     String idMetodo = "";
     String ambitoF = ambito;
     int contador = 0;
+    int contEtq = 0;
     String dominio="";
     String dominioL="";
     int num_parametros=0;
+    ArrayList<String> etqList = new ArrayList<String>();
 
     TablaIntermedio tabla = new TablaIntermedio();
     ArrayList<String> valores = new ArrayList<String>();
@@ -518,390 +520,359 @@ public class parser extends java_cup.runtime.lr_parser {
 class CUP$parser$actions {
 
 
+  public String new_etq(){
+    String etq = "etq"+contEtq;
+    contEtq++;
+    return  etq;
+  }
 
    public GenericTreeNode sacar(GenericTreeNode a){
-                 if (a.hasChildren() && (a.getNumberOfChildren() < 2) ){
+     if (a.hasChildren() && (a.getNumberOfChildren() < 2) ){
+
+       return sacar(a.getChildren().get(0));
+     }
+     else {
+       return a;
+     }
+   }
+
+   public void inta(GenericTreeNode padre){
+
+        if (padre.hasChildren()){
+          System.out.println(padre.getData().getNombre());
+          System.out.println(padre.getNumberOfChildren());
+
+          /*if (padre.getChildren().size() == 2) {
+            if (padre.getData().getNombre().equals("S") && (padre.getChildren().get(1).getData().getNombre().equals(""))) {
+              padre.getChildren().remove(1);
+            }
+          }
+
+          if (padre.getChildren().size() == 3) {
+            if (padre.getData().getNombre().equals("IS") && (padre.getChildren().get(1).getData().getNombre().equals("")) && (padre.getChildren().get(2).getData().getNombre().equals(""))) {
+              padre.getChildren().remove(1);
+              padre.getChildren().remove(1);
+            }
+            else if (padre.getData().getNombre().equals("IS") && (padre.getChildren().get(2).getData().getNombre().equals(""))){
+              padre.getChildren().remove(2);
+            }
+          }
+          else if (padre.getChildren().size() == 2) {
+            if (padre.getData().getNombre().equals("IS") && (padre.getChildren().get(1).getData().getNombre().equals(""))) {
+              padre.getChildren().remove(1);
+            }
+          }*/
+          for (int i = 0; i < padre.getNumberOfChildren(); i++) {
+            if (padre.getChildren().get(i).getData().getNombre().equals("S")){
+              //etqList.add(new_etq());
+            }
+          }
 
 
-                   return sacar(a.getChildren().get(0));
-
-                 }
-                 else {
-                   return a;
-                 }
-               }
-
-           public void inta(GenericTreeNode padre){
-
-             if (padre.hasChildren()){
 
 
-               if (padre.getData().getNombre().equals("S") && (padre.getChildren().get(1).getData().getNombre().equals(""))) {
-                 padre.getChildren().remove(1);
-               }
-
-               System.out.println(padre.getData().getNombre());
-               System.out.println(padre.getNumberOfChildren());
-
-               if (padre.getNumberOfChildren() >= 2){
-
-                 for( int i = 0 ; i < padre.getNumberOfChildren(); i++ ) {
-
-                   if(padre.getChildren().get(i).getData().getNombre().equals("SA")){
-                     vSA(padre.getChildren().get(i));
-
-                   }
-                   else if (padre.getChildren().get(i).getData().getNombre().equals("AR")){
-
-                   }
-                   else if (padre.getChildren().get(i).getData().getNombre().equals("AM")){
-
-                   }
-                   else {
-                     inta(padre.getChildren().get(i));
-                   }
-
-                 }
-               }
-               else{
-                 if(padre.getChildren().get(0).getData().getNombre().equals("SA")){
-                   vSA(padre.getChildren().get(0));
-
-                 }
-                 else if (padre.getChildren().get(0).getData().getNombre().equals("AR")){
-
-                 }
-                 else if (padre.getChildren().get(0).getData().getNombre().equals("AM")){
-
-                 }
-                 else {
-                   inta(padre.getChildren().get(0));
-                 }
-
-               }
-
-             }
-             else {
+          if (padre.getNumberOfChildren() >= 2){
+            for( int i = 0 ; i < padre.getNumberOfChildren(); i++ ) {
 
 
-             }
-
-
-           }
-
-        public String vAR(GenericTreeNode ar){
-                  Cuadrupla adios = new Cuadrupla();
-                  String resultado = "";
-                  ArrayList<String> segunda = new ArrayList<String>();
-
-                  for (int i = 0; i < ar.getNumberOfChildren(); i++) {
-
-                    GenericTreeNode hijo = sacar(ar.getChildren().get(i));
-
-                    if (hijo.getNumberOfChildren() < 2) {
-                      String temp = "t" + contador;
-                      if (i == 0) {
-                        adios.setOperador("+");
-                        adios.setArg1(hijo.getData().getNombre());
-
-                      }
-                      else {
-                          if (!resultado.equals("")){
-                            adios.setOperador("+");
-                            adios.setArg1(resultado);
-                            adios.setArg2(hijo.getData().getNombre());
-                            adios.setResultado(temp);
-                            tabla.AgregarCuad(adios);
-                            contador++;
-
-                            resultado = temp;
-                          }
-                          else {
-                            adios.setArg2(hijo.getData().getNombre());
-                            adios.setResultado(temp);
-                            tabla.AgregarCuad(adios);
-                            contador++;
-
-                            resultado = temp;
-                          }
-                      }
-                    }
-                    else{
-                      if (hijo.getData().getNombre().equals("AR+")) {
-                        resultado = vAR(hijo);
-                      }else if (hijo.getData().getNombre().equals("AR-")){
-                        resultado = vARM(hijo);
-                      }
-
-                      else if(hijo.getData().getNombre().equals("AM*")){
-                        resultado = vAM(hijo);
-                        segunda.add(resultado);
-                      }else if(hijo.getData().getNombre().equals("AM/")){
-                        resultado = vAMD(hijo);
-                        segunda.add(resultado);
-                      }
-
-                    }
-                  }
-                    if (segunda.size() == 2){
-                      String temp = "t" + contador;
-                      adios.setOperador("+");
-                      adios.setArg1(segunda.get(0));
-                      adios.setArg2(segunda.get(1));
-                      adios.setResultado(temp);
-                      tabla.AgregarCuad(adios);
-                      contador++;
-
-                      resultado = temp;
-                    }
-
-                    if (adios.getArg2() == null || adios.getResultado() == null){
-                      String temp = "t" + contador;
-                      adios.setArg2(resultado);
-                      adios.setResultado(temp);
-                      tabla.AgregarCuad(adios);
-                      contador++;
-
-                      resultado = temp;
-
-                    }
-
-                    return resultado;
-
-                }
-        
-        public String vARM(GenericTreeNode ar){
-                  Cuadrupla adios = new Cuadrupla();
-                  String resultado = "";
-                  ArrayList<String> segunda = new ArrayList<String>();
-
-                  for (int i = 0; i < ar.getNumberOfChildren(); i++) {
-
-                    GenericTreeNode hijo = sacar(ar.getChildren().get(i));
-
-                    if (hijo.getNumberOfChildren() < 2) {
-                      String temp = "t" + contador;
-                      if (i == 0) {
-                        adios.setOperador("-");
-                        adios.setArg1(hijo.getData().getNombre());
-
-                      }
-                      else {
-                          if (!resultado.equals("")){
-                            adios.setOperador("-");
-                            adios.setArg1(resultado);
-                            adios.setArg2(hijo.getData().getNombre());
-                            adios.setResultado(temp);
-                            tabla.AgregarCuad(adios);
-                            contador++;
-
-                            resultado = temp;
-                          }
-                          else {
-                            adios.setArg2(hijo.getData().getNombre());
-                            adios.setResultado(temp);
-                            tabla.AgregarCuad(adios);
-                            contador++;
-
-                            resultado = temp;
-                          }
-                      }
-                    }
-                    else{
-                      if (hijo.getData().getNombre().equals("AR+")) {
-                        resultado = vAR(hijo);
-                      }else if (hijo.getData().getNombre().equals("AR-")) {
-                        resultado = vARM(hijo);
-                      }
-
-                      else if(hijo.getData().getNombre().equals("AM*")){
-                        resultado = vAM(hijo);
-                        segunda.add(resultado);
-                      }else if(hijo.getData().getNombre().equals("AM/")){
-                        resultado = vAMD(hijo);
-                        segunda.add(resultado);
-                      }
-
-                    }
-                  }
-                    if (segunda.size() == 2){
-                      String temp = "t" + contador;
-                      adios.setOperador("-");
-                      adios.setArg1(segunda.get(0));
-                      adios.setArg2(segunda.get(1));
-                      adios.setResultado(temp);
-                      tabla.AgregarCuad(adios);
-                      contador++;
-
-                      resultado = temp;
-                    }
-
-                    if (adios.getArg2() == null || adios.getResultado() == null){
-                      String temp = "t" + contador;
-                      adios.setArg2(resultado);
-                      adios.setResultado(temp);
-                      tabla.AgregarCuad(adios);
-                      contador++;
-
-                      resultado = temp;
-
-                    }
-
-                    return resultado;
-
-                }
-
-              public String vAM(GenericTreeNode ar){
-                Cuadrupla adios = new Cuadrupla();
-                String resultado = "";
-
-                for (int i = 0; i < ar.getNumberOfChildren(); i++) {
-                  GenericTreeNode hijo = sacar(ar.getChildren().get(i));
-                  if (hijo.getNumberOfChildren() < 2) {
-                    String temp = "t" + contador;
-                    if (i == 0) {
-                      adios.setOperador("*");
-                      adios.setArg1(hijo.getData().getNombre());
-
-                    }
-                    else {
-                      if (!resultado.equals("")){
-                        adios.setOperador("*");
-                        adios.setArg1(resultado);
-                        adios.setArg2(hijo.getData().getNombre());
-                        adios.setResultado(temp);
-                        tabla.AgregarCuad(adios);
-                        contador++;
-
-                        resultado = temp;
-                      }
-                      else {
-                        adios.setArg2(hijo.getData().getNombre());
-                        adios.setResultado(temp);
-                        tabla.AgregarCuad(adios);
-                        contador++;
-
-                        resultado = temp;
-                      }
-                    }
-                  }
-                  else{
-                    if (hijo.getData().getNombre().equals("AM*")) {
-                      resultado = vAM(hijo);
-                    }else if (hijo.getData().getNombre().equals("AM/")) {
-                        resultado = vAMD(hijo);
-                      }
-
-                  }
-                }
-
-                return resultado;
+              if(padre.getChildren().get(i).getData().getNombre().equals("SA")){
+                vSA(padre.getChildren().get(i));
 
               }
-              
-              public String vAMD(GenericTreeNode ar){
-                Cuadrupla adios = new Cuadrupla();
-                String resultado = "";
+              else if (padre.getChildren().get(i).getData().getNombre().equals("CONDICION<")){
+                vCONDICIONm(padre.getChildren().get(i));
+              }
+              else if (padre.getChildren().get(i).getData().getNombre().equals("CONDICION>")){
+                vCONDICIONM(padre.getChildren().get(i));
+              }
 
-                for (int i = 0; i < ar.getNumberOfChildren(); i++) {
-                  GenericTreeNode hijo = sacar(ar.getChildren().get(i));
-                  if (hijo.getNumberOfChildren() < 2) {
-                    String temp = "t" + contador;
-                    if (i == 0) {
-                      adios.setOperador("/");
-                      adios.setArg1(hijo.getData().getNombre());
+              if (padre.getNumberOfChildren() >=3 && i==1 && padre.getData().getNombre().equals("RF")){
+                String tempi = tabla.getTabla().get(tabla.getTabla().size() - 1).getResultado();
+                tabla.Ingresar("if<",  tempi, padre.getChildren().get(1).getData().getNombre(),new_etq());
+              }
 
-                    }
-                    else {
-                      if (!resultado.equals("")){
-                        adios.setOperador("/");
-                        adios.setArg1(resultado);
-                        adios.setArg2(hijo.getData().getNombre());
-                        adios.setResultado(temp);
-                        tabla.AgregarCuad(adios);
-                        contador++;
+              else {
+                inta(padre.getChildren().get(i));
+              }
 
-                        resultado = temp;
-                      }
-                      else {
-                        adios.setArg2(hijo.getData().getNombre());
-                        adios.setResultado(temp);
-                        tabla.AgregarCuad(adios);
-                        contador++;
+            }
+          }
+          else{
 
-                        resultado = temp;
-                      }
-                    }
-                  }
-                  else{
-                    if (hijo.getData().getNombre().equals("AM*")) {
-                      resultado = vAM(hijo);
-                    }else if (hijo.getData().getNombre().equals("AM/")) {
-                        resultado = vAMD(hijo);
-                      }
 
-                  }
-                }
+              if (padre.getChildren().get(0).getData().getNombre().equals("SA")) {
+                vSA(padre.getChildren().get(0));
 
-                return resultado;
+              } else if (padre.getChildren().get(0).getData().getNombre().equals("CONDICION<")) {
+                vCONDICIONm(padre.getChildren().get(0));
+              } else if (padre.getChildren().get(0).getData().getNombre().equals("CONDICION>")) {
+                vCONDICIONM(padre.getChildren().get(0));
+              } else if (padre.getChildren().get(0).getData().getNombre().equals("")) {
 
               }
 
 
-                public void vSA(GenericTreeNode sa){
+              else {
+                inta(padre.getChildren().get(0));
+              }
 
-                  Cuadrupla adios = new Cuadrupla();
-                  Cuadrupla adios2 = new Cuadrupla();
+          }
 
-                  for (int i = 0; i < sa.getNumberOfChildren(); i++) {
-                    GenericTreeNode hijo = sacar(sa.getChildren().get(i));
-                    if (hijo.getNumberOfChildren() < 2) {
-                      String temp = "t" + contador;
-                      if (i == 0) {
-                        adios.setOperador(":=");
-                        adios.setResultado(hijo.getData().getNombre());
-                      }
-                      else {
+        }
+        else {
 
-                        adios2.setOperador(":=");
-                        adios2.setResultado(temp);
-                        adios2.setArg1(hijo.getData().getNombre());
-                        adios2.setArg2("1");
-                        tabla.AgregarCuad(adios2);
-                        adios.setArg1(temp);
-                        adios.setArg2("0");
-                        contador++;
+        }
+   }
 
-                      }
+   public void vCONDICIONM(GenericTreeNode sa){
 
-                    }
-                    else{
-                      if (hijo.getData().getNombre().equals("AR+")){
-                        String temp = "t" + contador;
-                        String temp1 = vAR(hijo);
-                        adios.setArg1(temp1);
-                        contador++;
-                      }else if (hijo.getData().getNombre().equals("AR-")){
-                        String temp = "t" + contador;
-                        String temp1 = vARM(hijo);
-                        adios.setArg1(temp1);
-                        contador++;
-                      }
-                      else if(hijo.getData().getNombre().equals("AM*")){
-                        String temp = "t" + contador;
-                        String temp1 = vAM(hijo);
-                        adios.setArg1(temp1);
-                        contador++;
-                      }else if(hijo.getData().getNombre().equals("AM/")){
-                        String temp = "t" + contador;
-                        String temp1 = vAMD(hijo);
-                        adios.setArg1(temp1);
-                        contador++;
-                      }
-                    }
-                  }
-                  tabla.AgregarCuad(adios);
-                }
+     Cuadrupla adios = new Cuadrupla();
+     Cuadrupla adios2 = new Cuadrupla();
+
+     for (int i = 0; i < sa.getNumberOfChildren(); i++) {
+       GenericTreeNode hijo = sacar(sa.getChildren().get(i));
+       if (hijo.getNumberOfChildren() < 2) {
+
+         if (i == 0) {
+           adios.setOperador("if >");
+           adios.setArg1(hijo.getData().getNombre());
+         }
+         else {
+           adios.setArg2(hijo.getData().getNombre());
+           adios.setResultado("GOto "+etqList.get(0));
+         }
+
+       }
+       else{
+         if (hijo.getData().getNombre().equals("CONDICIONOPLand")){
+
+         }
+         else if(hijo.getData().getNombre().equals("AM")){
+           String temp = "t" + contador;
+           String temp1 = vAM(hijo);
+           adios.setArg1(temp1);
+           contador++;
+         }
+       }
+     }
+     tabla.AgregarCuad(adios);
+
+
+   }
+
+
+
+  public void vCONDICIONm(GenericTreeNode sa){
+
+    Cuadrupla adios = new Cuadrupla();
+    Cuadrupla adios2 = new Cuadrupla();
+    String act = new_etq();
+
+    for (int i = 0; i < sa.getNumberOfChildren(); i++) {
+      GenericTreeNode hijo = sacar(sa.getChildren().get(i));
+      if (hijo.getNumberOfChildren() < 2) {
+
+        if (i == 0) {
+          adios.setOperador("if <");
+          adios.setArg1(hijo.getData().getNombre());
+        }
+        else {
+          adios.setArg2(hijo.getData().getNombre());
+          String etq = act;
+          adios.setResultado(etq);
+        }
+
+      }
+      else{
+        if (hijo.getData().getNombre().equals("CONDICION<")){
+          vCONDICIONm(hijo);
+        }
+        else if(hijo.getData().getNombre().equals("AM")){
+          String temp = "t" + contador;
+          String temp1 = vAM(hijo);
+          adios.setArg1(temp1);
+          contador++;
+        }
+      }
+    }
+    tabla.AgregarCuad(adios);
+    tabla.Ingresar("Goto", act, "");
+
+  }
+
+  public String vAR(GenericTreeNode ar){
+    Cuadrupla adios = new Cuadrupla();
+    String resultado = "";
+    ArrayList<String> segunda = new ArrayList<String>();
+
+    for (int i = 0; i < ar.getNumberOfChildren(); i++) {
+
+      GenericTreeNode hijo = sacar(ar.getChildren().get(i));
+
+      if (hijo.getNumberOfChildren() < 2) {
+        String temp = "t" + contador;
+        if (i == 0) {
+          adios.setOperador("+");
+          adios.setArg1(hijo.getData().getNombre());
+
+        }
+        else {
+            if (!resultado.equals("")){
+              adios.setOperador("+");
+              adios.setArg1(resultado);
+              adios.setArg2(hijo.getData().getNombre());
+              adios.setResultado(temp);
+              tabla.AgregarCuad(adios);
+              contador++;
+
+              resultado = temp;
+            }
+            else {
+              adios.setArg2(hijo.getData().getNombre());
+              adios.setResultado(temp);
+              tabla.AgregarCuad(adios);
+              contador++;
+
+              resultado = temp;
+            }
+        }
+      }
+      else{
+        if (hijo.getData().getNombre().equals("AR")) {
+          resultado = vAR(hijo);
+        }
+
+        else if(hijo.getData().getNombre().equals("AM")){
+          resultado = vAM(hijo);
+          segunda.add(resultado);
+        }
+
+      }
+    }
+      if (segunda.size() == 2){
+        String temp = "t" + contador;
+        adios.setOperador("+");
+        adios.setArg1(segunda.get(0));
+        adios.setArg2(segunda.get(1));
+        adios.setResultado(temp);
+        tabla.AgregarCuad(adios);
+        contador++;
+
+        resultado = temp;
+      }
+
+      if (adios.getArg2() == null || adios.getResultado() == null){
+        String temp = "t" + contador;
+        adios.setArg2(resultado);
+        adios.setResultado(temp);
+        tabla.AgregarCuad(adios);
+        contador++;
+
+        resultado = temp;
+
+      }
+
+      return resultado;
+
+  }
+
+  public String vAM(GenericTreeNode ar){
+    Cuadrupla adios = new Cuadrupla();
+    String resultado = "";
+
+    for (int i = 0; i < ar.getNumberOfChildren(); i++) {
+      GenericTreeNode hijo = sacar(ar.getChildren().get(i));
+      if (hijo.getNumberOfChildren() < 2) {
+        String temp = "t" + contador;
+        if (i == 0) {
+          adios.setOperador("*");
+          adios.setArg1(hijo.getData().getNombre());
+
+        }
+        else {
+          if (!resultado.equals("")){
+            adios.setOperador("*");
+            adios.setArg1(resultado);
+            adios.setArg2(hijo.getData().getNombre());
+            adios.setResultado(temp);
+            tabla.AgregarCuad(adios);
+            contador++;
+
+            resultado = temp;
+          }
+          else {
+            adios.setArg2(hijo.getData().getNombre());
+            adios.setResultado(temp);
+            tabla.AgregarCuad(adios);
+            contador++;
+
+            resultado = temp;
+          }
+        }
+      }
+      else{
+        if (hijo.getData().getNombre().equals("AM")) {
+          resultado = vAM(hijo);
+        }
+
+      }
+    }
+
+    return resultado;
+
+  }
+
+
+  public String vSA(GenericTreeNode sa){
+
+    Cuadrupla adios = new Cuadrupla();
+    Cuadrupla adios2 = new Cuadrupla();
+
+    System.out.println("SA: " + sa.getNumberOfChildren());
+
+    for (int i = 0; i < sa.getNumberOfChildren(); i++) {
+      GenericTreeNode hijo = sacar(sa.getChildren().get(i));
+      if (hijo.getNumberOfChildren() < 2) {
+        String temp = "t" + contador;
+        if (i == 0) {
+          adios.setOperador(":=");
+          adios.setResultado(hijo.getData().getNombre());
+        }
+        else {
+
+          adios2.setOperador(":=");
+          adios2.setResultado(temp);
+          adios2.setArg1(hijo.getData().getNombre());
+          adios2.setArg2("1");
+
+          tabla.AgregarCuad(adios2);
+          adios.setArg1(temp);
+          adios.setArg2("0");
+          contador++;
+
+        }
+
+      }
+      else{
+        if (hijo.getData().getNombre().equals("AR")){
+          String temp = "t" + contador;
+          String temp1 = vAR(hijo);
+          adios.setArg1(temp1);
+          contador++;
+        }
+        else if(hijo.getData().getNombre().equals("AM")){
+          String temp = "t" + contador;
+          String temp1 = vAM(hijo);
+          adios.setArg1(temp1);
+          contador++;
+        }
+      }
+    }
+
+    tabla.AgregarCuad(adios);
+    return adios.getResultado();
+  }
+
 
   private final parser parser;
 
@@ -925,7 +896,7 @@ class CUP$parser$actions {
       switch (CUP$parser$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // Programa ::= CP ZD CUP 
+          case 0: // Programa ::= CP ZD CUP
             {
               GenericTree RESULT =null;
 		int cpleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -937,7 +908,7 @@ class CUP$parser$actions {
 		int cupleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cupright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode cup = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTree tree= new GenericTree();
         GenericTreeNode pro= new GenericTreeNode(new Tipo("Programa", "Programa"));
         pro.addChild(cp);
@@ -956,7 +927,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // $START ::= Programa EOF 
+          case 1: // $START ::= Programa EOF
             {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -970,7 +941,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // CP ::= PROGRAM ID CIERRE 
+          case 2: // CP ::= PROGRAM ID CIERRE
             {
               GenericTreeNode RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -979,7 +950,7 @@ class CUP$parser$actions {
 		int ileft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String i = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         GenericTreeNode cp= new GenericTreeNode(new Tipo("CP", "CP"));
         GenericTreeNode pr= new GenericTreeNode(new Tipo(p, p));
         GenericTreeNode id= new GenericTreeNode(new Tipo(i, i));
@@ -992,7 +963,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // CP ::= error ZD 
+          case 3: // CP ::= error ZD
             {
               GenericTreeNode RESULT =null;
 
@@ -1001,7 +972,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // ZD ::= ZDV ZDSP 
+          case 4: // ZD ::= ZDV ZDSP
             {
               GenericTreeNode RESULT =null;
 		int zdvleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -1010,7 +981,7 @@ class CUP$parser$actions {
 		int zdspleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int zdspright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode zdsp = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode zd = new GenericTreeNode(new Tipo("ZD","ZD"));
         zd.addChild(zdv);
         zd.addChild(zdsp);
@@ -1021,7 +992,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // ZDV ::= VAR DE 
+          case 5: // ZDV ::= VAR DE
             {
               GenericTreeNode RESULT =null;
 		int varleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -1030,7 +1001,7 @@ class CUP$parser$actions {
 		int deleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int deright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode de = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode zdv= new GenericTreeNode(new Tipo("ZDV", "ZDV"));
         GenericTreeNode v= new GenericTreeNode(new Tipo(var, var));
         zdv.addChild(v);
@@ -1042,7 +1013,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // ZDV ::= error DE 
+          case 6: // ZDV ::= error DE
             {
               GenericTreeNode RESULT =null;
 
@@ -1051,7 +1022,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // DE ::= DEI DE 
+          case 7: // DE ::= DEI DE
             {
               GenericTreeNode RESULT =null;
 		int deileft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -1060,7 +1031,7 @@ class CUP$parser$actions {
 		int dleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode d = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode de= new GenericTreeNode(new Tipo("DE", "DE"));
         de.addChild(dei);
         de.addChild(d);
@@ -1071,13 +1042,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // DE ::= DEI 
+          case 8: // DE ::= DEI
             {
               GenericTreeNode RESULT =null;
 		int deileft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int deiright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode dei = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode de= new GenericTreeNode(new Tipo("DE", "DE"));
         de.addChild(dei);
         RESULT=de;
@@ -1087,7 +1058,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // DEI ::= ID COMA DEI 
+          case 9: // DEI ::= ID COMA DEI
             {
               GenericTreeNode RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1096,13 +1067,13 @@ class CUP$parser$actions {
 		int deleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int deright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode de = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 
+
         String tipo= "";
         if(Declaracion == true){
             simbolo.crear(id, de.getData().getTipo(),ambito);
             tipo = de.getData().getTipo();
         }else if((Funcion== true)&&(FCParametro==false)){
-            
+
             if(de.getData().getTipo().equals("Integer")){
                 contador = contador + 4;
             }else{
@@ -1127,7 +1098,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // DEI ::= ID DECLARACION TD CIERRE 
+          case 10: // DEI ::= ID DECLARACION TD CIERRE
             {
               GenericTreeNode RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -1136,7 +1107,7 @@ class CUP$parser$actions {
 		int tdleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int tdright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode td = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         String tipo="";
         if(Declaracion == true){
             simbolo.crear(id, td.getData().getTipo(),ambito);
@@ -1173,13 +1144,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // TD ::= TS 
+          case 11: // TD ::= TS
             {
               GenericTreeNode RESULT =null;
 		int ssleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ssright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ss = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode td = new GenericTreeNode(new Tipo(ss.getData().getNombre(), ss.getData().getTipo()));
         td.addChild(ss);
         RESULT=td;
@@ -1189,13 +1160,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // TD ::= TE 
+          case 12: // TD ::= TE
             {
               GenericTreeNode RESULT =null;
 		int teleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int teright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode te = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode td = new GenericTreeNode(new Tipo(te.getData().getNombre(), te.getData().getTipo()));
         td.addChild(te);
         RESULT=td;
@@ -1205,7 +1176,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // TD ::= error ZDSP 
+          case 13: // TD ::= error ZDSP
             {
               GenericTreeNode RESULT =null;
 
@@ -1214,13 +1185,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // TS ::= INTEGER 
+          case 14: // TS ::= INTEGER
             {
               GenericTreeNode RESULT =null;
 		int inleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int inright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String in = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode ts= new GenericTreeNode(new Tipo(in, in));
         RESULT= ts;
 
@@ -1229,13 +1200,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // TS ::= CHAR 
+          case 15: // TS ::= CHAR
             {
               GenericTreeNode RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode ts= new GenericTreeNode(new Tipo(c, c));
         RESULT= ts;
 
@@ -1244,13 +1215,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // TS ::= BOOLEAN 
+          case 16: // TS ::= BOOLEAN
             {
               GenericTreeNode RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String b = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode ts= new GenericTreeNode(new Tipo(b, b));
         RESULT= ts;
 
@@ -1259,13 +1230,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // TE ::= TA 
+          case 17: // TE ::= TA
             {
               GenericTreeNode RESULT =null;
 		int taleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int taright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ta = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode te = new GenericTreeNode(new Tipo(ta.getData().getNombre(), ta.getData().getTipo()));
         te.addChild(ta);
         RESULT=te;
@@ -1275,13 +1246,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // TE ::= TST 
+          case 18: // TE ::= TST
             {
               GenericTreeNode RESULT =null;
 		int tstleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int tstright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode tst = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode te = new GenericTreeNode(new Tipo(tst.getData().getNombre(), tst.getData().getTipo()));
         te.addChild(tst);
         RESULT=te;
@@ -1291,7 +1262,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // TA ::= ARRAY LLAVEIZQ NUM PUNTO PUNTO NUM LLAVEDER OF TD 
+          case 19: // TA ::= ARRAY LLAVEIZQ NUM PUNTO PUNTO NUM LLAVEDER OF TD
             {
               GenericTreeNode RESULT =null;
 		int arleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).left;
@@ -1315,7 +1286,7 @@ class CUP$parser$actions {
 		int tdleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int tdright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode td = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String tipo = ar+"("+n+".."+n1+","+td.getData().getTipo()+")";
 
         GenericTreeNode ta = new GenericTreeNode(new Tipo("TA", tipo));
@@ -1335,7 +1306,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // TST ::= STRING LLAVEIZQ NUM LLAVEDER 
+          case 20: // TST ::= STRING LLAVEIZQ NUM LLAVEDER
             {
               GenericTreeNode RESULT =null;
 		int stleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -1350,7 +1321,7 @@ class CUP$parser$actions {
 		int ldleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ldright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String ld = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String tipo = "Array"+"("+1+".."+n+","+"String"+")";
 
         GenericTreeNode tst = new GenericTreeNode(new Tipo("TST", tipo));
@@ -1365,13 +1336,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // ZDSP ::= DSP 
+          case 21: // ZDSP ::= DSP
             {
               GenericTreeNode RESULT =null;
 		int dspleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int dspright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode dsp = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode zdsp = new GenericTreeNode(new Tipo("ZDSP", "ZDSP"));
         zdsp.addChild(dsp);
         RESULT=zdsp;
@@ -1381,10 +1352,10 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // ZDSP ::= 
+          case 22: // ZDSP ::=
             {
               GenericTreeNode RESULT =null;
-		
+
         GenericTreeNode vacio = new GenericTreeNode(new Tipo("", ""));
         RESULT=vacio;
 
@@ -1393,7 +1364,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // DSP ::= DF ZDSP 
+          case 23: // DSP ::= DF ZDSP
             {
               GenericTreeNode RESULT =null;
 		int dfleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -1402,7 +1373,7 @@ class CUP$parser$actions {
 		int zdleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int zdright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode zd = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode dsp = new GenericTreeNode(new Tipo("DSP", "DSP"));
         dsp.addChild(df);
         dsp.addChild(zd);
@@ -1413,7 +1384,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // DSP ::= DP ZDSP 
+          case 24: // DSP ::= DP ZDSP
             {
               GenericTreeNode RESULT =null;
 		int dpleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -1422,7 +1393,7 @@ class CUP$parser$actions {
 		int zdleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int zdright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode zd = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode dsp = new GenericTreeNode(new Tipo("DSP", "DSP"));
         dsp.addChild(dp);
         dsp.addChild(zd);
@@ -1433,7 +1404,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // DF ::= CF ZD CUF 
+          case 25: // DF ::= CF ZD CUF
             {
               GenericTreeNode RESULT =null;
 		int fcleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1445,7 +1416,7 @@ class CUP$parser$actions {
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int scright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode sc = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode df = new GenericTreeNode(new Tipo("DF", "DF"));
         df.addChild(fc);
         df.addChild(zd);
@@ -1457,7 +1428,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // CF ::= FUNCTION ID DECLARACION TEL CIERRE 
+          case 26: // CF ::= FUNCTION ID DECLARACION TEL CIERRE
             {
               GenericTreeNode RESULT =null;
 		int ftleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
@@ -1469,7 +1440,7 @@ class CUP$parser$actions {
 		int telleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int telright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode tel = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         GenericTreeNode proce= new GenericTreeNode(new Tipo("FUNCION", "FUNCION"));
         GenericTreeNode fc= new GenericTreeNode(new Tipo(ft, ft));
         GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
@@ -1493,7 +1464,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // NT$0 ::= 
+          case 27: // NT$0 ::=
             {
               GenericTreeNode RESULT =null;
 		int ftleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1511,7 +1482,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // CF ::= FUNCTION ID PARIZQ NT$0 DE PARDER DECLARACION TEL CIERRE 
+          case 28: // CF ::= FUNCTION ID PARIZQ NT$0 DE PARDER DECLARACION TEL CIERRE
             {
               GenericTreeNode RESULT =null;
               // propagate RESULT from NT$0
@@ -1528,7 +1499,7 @@ class CUP$parser$actions {
 		int telleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int telright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode tel = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         GenericTreeNode proce= new GenericTreeNode(new Tipo("FUNCION", "FUNCION"));
         GenericTreeNode fc= new GenericTreeNode(new Tipo(ft, ft));
         GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
@@ -1554,13 +1525,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // TEL ::= TS 
+          case 29: // TEL ::= TS
             {
               GenericTreeNode RESULT =null;
 		int tsleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int tsright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ts = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode tel = new GenericTreeNode(new Tipo(ts.getData().getNombre(), ts.getData().getTipo()));
         tel.addChild(ts);
         RESULT= tel;
@@ -1570,13 +1541,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // TEL ::= TST 
+          case 30: // TEL ::= TST
             {
               GenericTreeNode RESULT =null;
 		int tstleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int tstright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode tst = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode tel = new GenericTreeNode(new Tipo(tst.getData().getNombre(), tst.getData().getTipo()));
         tel.addChild(tst);
         RESULT= tst;
@@ -1586,13 +1557,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // CUF ::= SC 
+          case 31: // CUF ::= SC
             {
               GenericTreeNode RESULT =null;
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int scright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode sc = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode cup = new GenericTreeNode(new Tipo("CUF", "CUF"));
         cup.addChild(sc);
 
@@ -1605,7 +1576,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 32: // CUF ::= error CUP 
+          case 32: // CUF ::= error CUP
             {
               GenericTreeNode RESULT =null;
 
@@ -1614,7 +1585,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 33: // DP ::= CPR ZD CUPR 
+          case 33: // DP ::= CPR ZD CUPR
             {
               GenericTreeNode RESULT =null;
 		int pcleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1626,7 +1597,7 @@ class CUP$parser$actions {
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int scright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode sc = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode dp = new GenericTreeNode(new Tipo("DP", "DP"));
         dp.addChild(pc);
         dp.addChild(zd);
@@ -1638,7 +1609,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 34: // CPR ::= PROCEDURE ID CIERRE 
+          case 34: // CPR ::= PROCEDURE ID CIERRE
             {
               GenericTreeNode RESULT =null;
 		int pcleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1647,7 +1618,7 @@ class CUP$parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         GenericTreeNode proce= new GenericTreeNode(new Tipo("PROCEDURE", "PROCEDURE"));
         GenericTreeNode p= new GenericTreeNode(new Tipo(pc, pc));
         GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
@@ -1667,7 +1638,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 35: // NT$1 ::= 
+          case 35: // NT$1 ::=
             {
               GenericTreeNode RESULT =null;
 		int pcleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1686,7 +1657,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 36: // CPR ::= PROCEDURE ID PARIZQ NT$1 DE PARDER CIERRE 
+          case 36: // CPR ::= PROCEDURE ID PARIZQ NT$1 DE PARDER CIERRE
             {
               GenericTreeNode RESULT =null;
               // propagate RESULT from NT$1
@@ -1700,7 +1671,7 @@ class CUP$parser$actions {
 		int pfleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int pfright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		GenericTreeNode pf = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
-		
+
         GenericTreeNode proce= new GenericTreeNode(new Tipo("PROCEDURE", "PROCEDURE"));
         GenericTreeNode p= new GenericTreeNode(new Tipo(pc, pc));
         GenericTreeNode i= new GenericTreeNode(new Tipo(id, id));
@@ -1727,13 +1698,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 37: // CUPR ::= SC 
+          case 37: // CUPR ::= SC
             {
               GenericTreeNode RESULT =null;
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int scright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode sc = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode cup = new GenericTreeNode(new Tipo("CUPR", "CUPR"));
         cup.addChild(sc);
 
@@ -1747,7 +1718,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 38: // CUPR ::= error CUP 
+          case 38: // CUPR ::= error CUP
             {
               GenericTreeNode RESULT =null;
 
@@ -1756,13 +1727,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 39: // CUP ::= SC 
+          case 39: // CUP ::= SC
             {
               GenericTreeNode RESULT =null;
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int scright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode sc = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode cup = new GenericTreeNode(new Tipo("CUP", "CUP"));
         cup.addChild(sc);
         RESULT=cup;
@@ -1772,7 +1743,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 40: // SC ::= BEGIN S END PUNTO 
+          case 40: // SC ::= BEGIN S END PUNTO
             {
               GenericTreeNode RESULT =null;
 		int bnleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -1784,7 +1755,7 @@ class CUP$parser$actions {
 		int edleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int edright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String ed = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         GenericTreeNode sc = new GenericTreeNode(new Tipo("SC", "SC"));
         GenericTreeNode bg = new GenericTreeNode(new Tipo(bn, bn));
         GenericTreeNode e = new GenericTreeNode(new Tipo(ed, ed));
@@ -1798,7 +1769,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 41: // SCI ::= BEGIN S END CIERRE 
+          case 41: // SCI ::= BEGIN S END CIERRE
             {
               GenericTreeNode RESULT =null;
 		int bnleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -1810,7 +1781,7 @@ class CUP$parser$actions {
 		int edleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int edright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String ed = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         GenericTreeNode sc = new GenericTreeNode(new Tipo("SC", "SC"));
         GenericTreeNode bg = new GenericTreeNode(new Tipo(bn, bn));
         GenericTreeNode e = new GenericTreeNode(new Tipo(ed, ed));
@@ -1824,7 +1795,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 42: // S ::= SA CIERRE S 
+          case 42: // S ::= SA CIERRE S
             {
               GenericTreeNode RESULT =null;
 		int saleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1833,7 +1804,7 @@ class CUP$parser$actions {
 		int s1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int s1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s1 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode s = new GenericTreeNode(new Tipo("S", "S"));
         s.addChild(sa);
         s.addChild(s1);
@@ -1844,10 +1815,10 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 43: // S ::= 
+          case 43: // S ::=
             {
               GenericTreeNode RESULT =null;
-		
+
         GenericTreeNode vacio= new GenericTreeNode(new Tipo("", ""));
         RESULT=vacio;
 
@@ -1856,7 +1827,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 44: // S ::= SCI S 
+          case 44: // S ::= SCI S
             {
               GenericTreeNode RESULT =null;
 		int scleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -1865,7 +1836,7 @@ class CUP$parser$actions {
 		int s1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int s1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s1 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode s = new GenericTreeNode(new Tipo("S", "S"));
         s.addChild(sc);
         s.addChild(s1);
@@ -1876,7 +1847,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 45: // S ::= LP CIERRE S 
+          case 45: // S ::= LP CIERRE S
             {
               GenericTreeNode RESULT =null;
 		int lpleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1885,7 +1856,7 @@ class CUP$parser$actions {
 		int s1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int s1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s1 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode s = new GenericTreeNode(new Tipo("S", "S"));
         s.addChild(lp);
         s.addChild(s1);
@@ -1896,13 +1867,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 46: // S ::= EC 
+          case 46: // S ::= EC
             {
               GenericTreeNode RESULT =null;
 		int ecleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ecright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ec = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode s = new GenericTreeNode(new Tipo("S", "S"));
         s.addChild(ec);
         RESULT=s;
@@ -1912,7 +1883,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 47: // S ::= MET CIERRE S 
+          case 47: // S ::= MET CIERRE S
             {
               GenericTreeNode RESULT =null;
 		int metleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1921,7 +1892,7 @@ class CUP$parser$actions {
 		int s1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int s1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s1 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode s = new GenericTreeNode(new Tipo("S", "S"));
         s.addChild(met);
         s.addChild(s1);
@@ -1932,7 +1903,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 48: // S ::= error S 
+          case 48: // S ::= error S
             {
               GenericTreeNode RESULT =null;
 
@@ -1941,7 +1912,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 49: // SA ::= IDA ASSIG AR 
+          case 49: // SA ::= IDA ASSIG AR
             {
               GenericTreeNode RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1950,38 +1921,38 @@ class CUP$parser$actions {
 		int arleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String tipo1 = "";
         if(ar.getData().getTipo().equals("VSTRING")){
             if(simbolo.buscarTipo(id.getData().getNombre())!=null){
                String tipo = simbolo.buscarTipo(id.getData().getNombre()).substring(9,simbolo.buscarTipo(id.getData().getNombre()).length()-8);
                     int m = Integer.parseInt(tipo);
                     if(m>=ar.getData().getNombre().length()){
-                       System.out.println("correcto"); 
+                       System.out.println("correcto");
                        tipo1= ar.getData().getTipo();
                     }else{
                         System.err.println("El tamaño del string es mayor al de la variable: "+id);
-                    }  
+                    }
             }else if(tfuncion.buscarTipo(id.getData().getNombre())!=null){
                String tipo = tfuncion.buscarTipo(id.getData().getNombre()).substring(9,tfuncion.buscarTipo(id.getData().getNombre()).length()-8);
                     int m = Integer.parseInt(tipo);
                     if(m>=ar.getData().getNombre().length()){
-                       System.out.println("correcto"); 
+                       System.out.println("correcto");
                        tipo1= ar.getData().getTipo();
                     }else{
                         System.err.println("El tamaño del string es mayor al de la variable: "+id);
-                    }  
+                    }
             }else{
                 System.err.println("No se encuentra: ");
             }
-                       
+
             }else
                 if(id.getData().getTipo().equals(ar.getData().getTipo())){
                     System.out.println("correcto");
                     tipo1= ar.getData().getTipo();
                 }else
                     System.err.println("Esta asignando un tipo distinto a la variable: "+id.getData().getNombre()+","+ " tipo correcto: "+id.getData().getTipo());
-        
+
         GenericTreeNode sa = new GenericTreeNode(new Tipo("SA", tipo1));
         sa.addChild(id);
         sa.addChild(ar);
@@ -1992,7 +1963,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 50: // IDA ::= ID 
+          case 50: // IDA ::= ID
             {
               GenericTreeNode RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -2024,41 +1995,38 @@ class CUP$parser$actions {
         GenericTreeNode i = new GenericTreeNode(new Tipo(id, id));
         ida.addChild(i);
         RESULT=ida;
-        
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("IDA",39, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 51: // IDA ::= LA 
+          case 51: // IDA ::= LA
             {
               GenericTreeNode RESULT =null;
 		int laleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int laright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode la = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
             GenericTreeNode ida = new GenericTreeNode(new Tipo("LA", la.getData().getTipo()));
             ida.addChild(la);
             RESULT=ida;
-        
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("IDA",39, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 52: // AR ::= AR OPSUMA AM 
+          case 52: // AR ::= AR OPSUMA AM
             {
               GenericTreeNode RESULT =null;
 		int arleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
-		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
-		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
-		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		int amleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int amright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode am = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String tipo = "";
         if(ar.getData().getTipo().equals(am.getData().getTipo()) && ar.getData().getTipo().equals("Integer")){
             tipo=ar.getData().getTipo();
@@ -2066,7 +2034,7 @@ class CUP$parser$actions {
             System.err.println("Solo se pueden sumar o restar Enteros");
             tipo=ar.getData().getTipo();
         }
-        GenericTreeNode a= new GenericTreeNode(new Tipo("AR"+op, tipo));
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AR", tipo));
         a.addChild(ar);
         a.addChild(am);
         RESULT=a;
@@ -2076,13 +2044,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 53: // AR ::= AM 
+          case 53: // AR ::= AM
             {
               GenericTreeNode RESULT =null;
 		int amleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int amright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode am = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode a= new GenericTreeNode(new Tipo("AR", am.getData().getTipo()));
         a.addChild(am);
         RESULT=a;
@@ -2092,19 +2060,16 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 54: // AM ::= AM OP F 
+          case 54: // AM ::= AM OP F
             {
               GenericTreeNode RESULT =null;
 		int amleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int amright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		GenericTreeNode am = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
-		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
-		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
-		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		int valleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int valright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode val = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String tipo = "";
         if(am.getData().getTipo().equals(val.getData().getTipo()) && am.getData().getTipo().equals("Integer")){
             tipo=am.getData().getTipo();
@@ -2113,7 +2078,7 @@ class CUP$parser$actions {
             tipo=am.getData().getTipo();
         }
 
-        GenericTreeNode a= new GenericTreeNode(new Tipo("AM"+op, tipo));
+        GenericTreeNode a= new GenericTreeNode(new Tipo("AM", tipo));
         a.addChild(am);
         a.addChild(val);
         RESULT=a;
@@ -2123,13 +2088,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 55: // AM ::= F 
+          case 55: // AM ::= F
             {
               GenericTreeNode RESULT =null;
 		int valleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int valright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode val = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode a= new GenericTreeNode(new Tipo("AM", val.getData().getTipo()));
         a.addChild(val);
         RESULT=a;
@@ -2139,13 +2104,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 56: // F ::= EXPRESION 
+          case 56: // F ::= EXPRESION
             {
               GenericTreeNode RESULT =null;
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode f= new GenericTreeNode(new Tipo(ex.getData().getNombre(), ex.getData().getTipo()));
         f.addChild(ex);
         RESULT=f;
@@ -2155,13 +2120,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 57: // F ::= PARIZQ AR PARDER 
+          case 57: // F ::= PARIZQ AR PARDER
             {
               GenericTreeNode RESULT =null;
 		int arleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int arright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode ar = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         GenericTreeNode f= new GenericTreeNode(new Tipo("AR", ar.getData().getTipo()));
         f.addChild(ar);
         RESULT=f;
@@ -2171,13 +2136,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 58: // OP ::= OPMULT 
+          case 58: // OP ::= OPMULT
             {
               String RESULT =null;
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         RESULT=op;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OP",48, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -2185,13 +2150,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 59: // OP ::= DIV 
+          case 59: // OP ::= DIV
             {
               String RESULT =null;
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         RESULT=op;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OP",48, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -2199,13 +2164,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 60: // OP ::= MOD 
+          case 60: // OP ::= MOD
             {
               String RESULT =null;
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         RESULT=op;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OP",48, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -2213,13 +2178,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 61: // OL ::= OPLOG 
+          case 61: // OL ::= OPLOG
             {
               String RESULT =null;
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         RESULT=op;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OL",49, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -2227,27 +2192,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 62: // OPL ::= OR 
+          case 62: // OPL ::= OR
             {
               String RESULT =null;
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-        RESULT=op;
-    
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPL",50, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 63: // OPL ::= NOT 
-            {
-              String RESULT =null;
-		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
         RESULT=op;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OPL",50, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -2255,13 +2206,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 64: // OPL ::= AND 
+          case 63: // OPL ::= NOT
             {
               String RESULT =null;
 		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         RESULT=op;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OPL",50, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -2269,13 +2220,27 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 65: // EXPRESION ::= LITERAL 
+          case 64: // OPL ::= AND
+            {
+              String RESULT =null;
+		int opleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int opright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String op = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+
+        RESULT=op;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPL",50, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 65: // EXPRESION ::= LITERAL
             {
               GenericTreeNode RESULT =null;
 		int ltleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ltright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode lt = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode ex = new GenericTreeNode(new Tipo(lt.getData().getNombre(), lt.getData().getTipo()));
         ex.addChild(lt);
         RESULT=ex;
@@ -2285,13 +2250,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 66: // EXPRESION ::= ID 
+          case 66: // EXPRESION ::= ID
             {
               GenericTreeNode RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String tipo = "";
         if(simbolo.buscar(id)!=null){
             if(simbolo.prefijo(id, ambito)){
@@ -2325,13 +2290,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 67: // EXPRESION ::= LF 
+          case 67: // EXPRESION ::= LF
             {
               GenericTreeNode RESULT =null;
 		int lfleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int lfright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode lf = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode ex = new GenericTreeNode(new Tipo(lf.getData().getNombre(), lf.getData().getTipo()));
         ex.addChild(lf);
         RESULT=ex;
@@ -2341,13 +2306,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 68: // EXPRESION ::= LA 
+          case 68: // EXPRESION ::= LA
             {
               GenericTreeNode RESULT =null;
 		int laleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int laright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode la = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode ex = new GenericTreeNode(new Tipo("LA", la.getData().getTipo()));
         ex.addChild(la);
         RESULT=ex;
@@ -2357,7 +2322,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 69: // LA ::= ID LLAVEIZQ EXPRESION LLAVEDER 
+          case 69: // LA ::= ID LLAVEIZQ EXPRESION LLAVEDER
             {
               GenericTreeNode RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -2366,7 +2331,7 @@ class CUP$parser$actions {
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         String tipo = "";
                 if(simbolo.buscar(id)!=null){
                     if(simbolo.prefijo(id, ambito)==true){
@@ -2380,12 +2345,12 @@ class CUP$parser$actions {
                         System.err.println("El array "+id+ " no puede ser llamada en este ambito.");
                         tipo=simbolo.buscarTipo(id).substring(11, simbolo.buscarTipo(id).length()-1);
                     }
-                    
+
                 }else if(tfuncion.buscar(id)!=null){
                     if(tfuncion.prefijo(id, ambito)==true){
                         if(ex.getData().getTipo().equals("Integer")){
                             tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
-                            
+
                         }else{
                             System.err.println("El index de: "+id+" debe ser entero");
                             tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
@@ -2394,25 +2359,25 @@ class CUP$parser$actions {
                         System.err.println("El array "+id+ " no puede ser llamada en este ambito.");
                         tipo=tfuncion.buscarTipo(id).substring(11, tfuncion.buscarTipo(id).length()-1);
                     }
-                    
+
                 }
         GenericTreeNode la = new GenericTreeNode(new Tipo(id, tipo));
         GenericTreeNode i = new GenericTreeNode(new Tipo(id, id));
         la.addChild(i);
         la.addChild(ex);
-        RESULT=la; 
+        RESULT=la;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LA",24, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 70: // LITERAL ::= NUM 
+          case 70: // LITERAL ::= NUM
             {
               GenericTreeNode RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Integer n = (Integer)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String num = "";
         num = String.valueOf(n);
         GenericTreeNode lt = new GenericTreeNode(new Tipo(num, "Integer"));
@@ -2423,13 +2388,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 71: // LITERAL ::= VCHAR 
+          case 71: // LITERAL ::= VCHAR
             {
               GenericTreeNode RESULT =null;
 		int vcleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int vcright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String vc = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String cadena = vc.substring(1,vc.length()-1);
         GenericTreeNode lt = new GenericTreeNode(new Tipo(cadena, "char"));
         RESULT=lt;
@@ -2439,13 +2404,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 72: // LITERAL ::= BOOL 
+          case 72: // LITERAL ::= BOOL
             {
               GenericTreeNode RESULT =null;
 		int blleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int blright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String bl = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode lt = new GenericTreeNode(new Tipo(bl, bl));
         RESULT=lt;
 
@@ -2454,13 +2419,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 73: // LITERAL ::= VSTRING 
+          case 73: // LITERAL ::= VSTRING
             {
               GenericTreeNode RESULT =null;
 		int vsleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int vsright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String vs = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String cadena = vs.substring(1,vs.length()-1);
         GenericTreeNode lt = new GenericTreeNode(new Tipo(cadena, "VSTRING"));
         RESULT=lt;
@@ -2470,7 +2435,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 74: // LF ::= ID PARIZQ PAV PARDER 
+          case 74: // LF ::= ID PARIZQ PAV PARDER
             {
               GenericTreeNode RESULT =null;
 		int ileft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -2479,7 +2444,7 @@ class CUP$parser$actions {
 		int pfvleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int pfvright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode pfv = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         String tipo = "";
         if(fun.buscar(i)!=null){
             if(fun.prefijo(i, ambito)==true){
@@ -2510,13 +2475,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 75: // LF ::= ID PARIZQ PARDER 
+          case 75: // LF ::= ID PARIZQ PARDER
             {
               GenericTreeNode RESULT =null;
 		int ileft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		String i = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
-		
+
         String tipo = "";
 
         if(fun.buscar(i)!=null){
@@ -2546,7 +2511,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 76: // PAV ::= PAV COMA EXPRESION 
+          case 76: // PAV ::= PAV COMA EXPRESION
             {
               GenericTreeNode RESULT =null;
 		int paleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -2555,7 +2520,7 @@ class CUP$parser$actions {
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode pav= new GenericTreeNode(new Tipo("PAV", "PAV"));
         pav.addChild(pa);
         pav.addChild(ex);
@@ -2571,13 +2536,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 77: // PAV ::= EXPRESION 
+          case 77: // PAV ::= EXPRESION
             {
               GenericTreeNode RESULT =null;
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int exright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode pav= new GenericTreeNode(new Tipo("PAV", "PAV"));
         if(dominioL.isEmpty() == true){
                 dominioL = ex.getData().getTipo();
@@ -2592,7 +2557,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 78: // LP ::= ID PARIZQ PAV PARDER 
+          case 78: // LP ::= ID PARIZQ PAV PARDER
             {
               GenericTreeNode RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -2601,7 +2566,7 @@ class CUP$parser$actions {
 		int paleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int paright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		GenericTreeNode pa = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		
+
         String tipo = "";
         if(fun.buscar(id)!=null){
             if(fun.prefijo(id, ambito)==true){
@@ -2631,13 +2596,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 79: // LP ::= ID PARIZQ PARDER 
+          case 79: // LP ::= ID PARIZQ PARDER
             {
               GenericTreeNode RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
-		
+
     String tipo = "";
 
         if(fun.buscar(id)!=null){
@@ -2666,13 +2631,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 80: // EC ::= EA 
+          case 80: // EC ::= EA
             {
               GenericTreeNode RESULT =null;
 		int isleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int isright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode is = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode ec = new GenericTreeNode(new Tipo("EC", "EC"));
         ec.addChild(is);
         RESULT=ec;
@@ -2682,13 +2647,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 81: // EC ::= ER 
+          case 81: // EC ::= ER
             {
               GenericTreeNode RESULT =null;
 		int erleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int erright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode er = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode ec = new GenericTreeNode(new Tipo("EC", "EC"));
         ec.addChild(er);
         RESULT=ec;
@@ -2698,13 +2663,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 82: // EA ::= IS 
+          case 82: // EA ::= IS
             {
               GenericTreeNode RESULT =null;
 		int isleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int isright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode is = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode ec = new GenericTreeNode(new Tipo("EA", "EA"));
         ec.addChild(is);
         RESULT=ec;
@@ -2714,7 +2679,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 83: // IS ::= IF CONDICION THEN S ELSE S 
+          case 83: // IS ::= IF CONDICION THEN S ELSE S
             {
               GenericTreeNode RESULT =null;
 		int ifcleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
@@ -2732,7 +2697,7 @@ class CUP$parser$actions {
 		int s1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int s1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s1 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode is = new GenericTreeNode(new Tipo("IS", "IS"));
         //GenericTreeNode fi = new GenericTreeNode(new Tipo(ifc, ifc));
         //GenericTreeNode ten = new GenericTreeNode(new Tipo(tn, tn));
@@ -2748,7 +2713,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 84: // IS ::= IF CONDICION THEN S 
+          case 84: // IS ::= IF CONDICION THEN S
             {
               GenericTreeNode RESULT =null;
 		int cdleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -2765,19 +2730,19 @@ class CUP$parser$actions {
         //is.addChild(ten);
         is.addChild(s);
         //is.addChild(s1);
-        RESULT=is; 
+        RESULT=is;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("IS",25, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 85: // ER ::= RW 
+          case 85: // ER ::= RW
             {
               GenericTreeNode RESULT =null;
 		int rwleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int rwright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode rw = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode er = new GenericTreeNode(new Tipo("ER", "ER"));
         er.addChild(rw);
         RESULT=er;
@@ -2787,13 +2752,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 86: // ER ::= RR 
+          case 86: // ER ::= RR
             {
               GenericTreeNode RESULT =null;
 		int rrleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int rrright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode rr = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode er = new GenericTreeNode(new Tipo("ER", "ER"));
         er.addChild(rr);
         RESULT=er;
@@ -2803,13 +2768,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 87: // ER ::= RF 
+          case 87: // ER ::= RF
             {
               GenericTreeNode RESULT =null;
 		int rfleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int rfright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode rf = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode er = new GenericTreeNode(new Tipo("ER", "ER"));
         er.addChild(rf);
         RESULT=er;
@@ -2819,7 +2784,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 88: // RW ::= WHILE CONDICION DO S 
+          case 88: // RW ::= WHILE CONDICION DO S
             {
               GenericTreeNode RESULT =null;
 		int wlleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -2834,7 +2799,7 @@ class CUP$parser$actions {
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode rw = new GenericTreeNode(new Tipo("RW", "RW"));
         GenericTreeNode f = new GenericTreeNode(new Tipo(wl, wl));
         GenericTreeNode tt = new GenericTreeNode(new Tipo(d, d));
@@ -2849,7 +2814,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 89: // RR ::= REPEAT S UNTIL CONDICION 
+          case 89: // RR ::= REPEAT S UNTIL CONDICION
             {
               GenericTreeNode RESULT =null;
 		int rpleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -2864,7 +2829,7 @@ class CUP$parser$actions {
 		int cdleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cdright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode cd = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         GenericTreeNode rr = new GenericTreeNode(new Tipo("RR", "RR"));
         GenericTreeNode f = new GenericTreeNode(new Tipo(rp, rp));
         GenericTreeNode tt = new GenericTreeNode(new Tipo(ul, ul));
@@ -2879,7 +2844,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 90: // RF ::= FOR SA TO EXPRESION DO S 
+          case 90: // RF ::= FOR SA TO EXPRESION DO S
             {
               GenericTreeNode RESULT =null;
 		int frleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
@@ -2900,7 +2865,7 @@ class CUP$parser$actions {
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String tipo = "";
         if(sa.getData().getTipo().equals("Integer") && ex.getData().getTipo().equals("Integer")){
             tipo = sa.getData().getTipo();
@@ -2922,7 +2887,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 91: // RF ::= FOR SA DOWNTO EXPRESION DO S 
+          case 91: // RF ::= FOR SA DOWNTO EXPRESION DO S
             {
               GenericTreeNode RESULT =null;
 		int frleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
@@ -2943,7 +2908,7 @@ class CUP$parser$actions {
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode s = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String tipo = "";
         if(sa.getData().getTipo().equals("Integer") && ex.getData().getTipo().equals("Integer")){
             tipo = sa.getData().getTipo();
@@ -2965,7 +2930,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 92: // CONDICION ::= CONDICION OL CONDICIONOPL 
+          case 92: // CONDICION ::= CONDICION OL CONDICIONOPL
             {
               GenericTreeNode RESULT =null;
 		int exleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -2977,7 +2942,7 @@ class CUP$parser$actions {
 		int ex2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ex2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode ex2 = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
+
         String tipo="";
         if(ex.getData().getTipo().equals("Integer") && ex2.getData().getTipo().equals("Integer")){
             tipo= ex.getData().getTipo();
@@ -2995,13 +2960,13 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 93: // CONDICION ::= CONDICIONOPL 
+          case 93: // CONDICION ::= CONDICIONOPL
             {
               GenericTreeNode RESULT =null;
 		int oplleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int oplright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		GenericTreeNode opl = (GenericTreeNode)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		GenericTreeNode a= new GenericTreeNode(new Tipo("CONDICION", opl.getData().getTipo()));
+		GenericTreeNode a= new GenericTreeNode(new Tipo(opl.getData().getNombre(), opl.getData().getTipo()));
         a.addChild(opl);
         RESULT=a;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("CONDICION",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
